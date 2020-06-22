@@ -1,0 +1,50 @@
+
+<div class="card">
+  <div class="header">
+    <h2 class="title">Job List</h2>
+  </div>
+  <div class="content">
+    <form #f="ngForm">
+      <a [routerLink]="['../jobs', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="jobList.length > 0">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Start date</th>
+          <th class="border-top-0" scope="col">End date</th>
+          <th class="border-top-0" scope="col">Date added</th>
+          <th class="border-top-0" scope="col">Priority</th>
+          <th class="border-top-0" scope="col">Event</th>
+          <th class="border-top-0" scope="col">Status</th>
+          <th class="border-top-0" scope="col">Tag</th>
+
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of jobList" [class.active]="item === selectedJob">
+        
+          <td>{{item.id}}</td>
+          <td>{{item.dateStart}}</td>
+          <td>{{item.dateEnd}}</td>
+          <td>{{item.dateAdded}}</td>
+          <td>{{item.priority}}</td>
+          <td>{{item.event}}</td>
+          <td>{{translateStatus(item.status)}}</td>
+          <td>{{item.tag}}</td>
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../jobs', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">{{formHeader}}</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="job" [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label>Id</label>
+        {{job.id || 'n/a'}}
+      </div>
+
+      <div class="form-group">
+        <label for="dateStart">Start date</label>
+        {{job.dateStart}}
+      </div>
+      
+      <div class="form-group">
+        <label for="dateEnd">End date</label>
+        {{job.dateEnd}}
+      </div>
+
+      <div class="form-group">
+        <label for="dateAdded">Date added</label>
+        {{job.dateAdded}}
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <input formControlName="priority" class="form-control">
+
+        <div *ngIf="f.priority.invalid && (f.priority.dirty || f.priority.touched)"
+        class="alert alert-danger">
+
+        <div *ngIf="f.priority.errors.required">
+          Priority is required.
+        </div>
+
+      </div>
+    </div>
+
+      <div class="form-group">
+        <label for="event">Event</label>
+        {{job.event}}
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+
+        <select formControlName="status">
+          <option [ngValue]="0" selected>Ready</option>
+          <option [ngValue]="1">Processing</option>
+          <option [ngValue]="2">Done</option>
+          <option [ngValue]="4">Failed</option>
+          <option [ngValue]="5">Hold</option>
+        </select>
+
+        <div *ngIf="f.status.invalid && (f.status.dirty || f.status.touched)"
+        class="alert alert-danger">
+
+        <div *ngIf="f.status.errors.required">
+          Status is required.
+        </div>
+      </div>
+
+
+      </div>
+
+
+      <button type="submit" class="btn btn-primary" [disabled]="!jobForm.valid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

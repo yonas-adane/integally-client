@@ -2,9 +2,9 @@ export class Event {
   id: string;
   name: string;
   description: string;
-  sourceConnector: string;
-  message: string = null;
-  routeLibrary: string;
+  sourceConnector: any;
+  message: any;
+  routeLibrary: any;
   routeName: string;
 }
 

@@ -22,6 +22,9 @@ import { ConnectorEditComponent } from './components/connector/connector-edit.co
 import { EventListComponent } from './components/event/event-list.component';
 import { EventEditComponent } from './components/event/event-edit.component';
 import { EventService } from './services/event.service';
+import { JobService } from './services/job.service';
+import { JobListComponent } from './components/job/job-list.component';
+import { JobEditComponent } from './components/job/job-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { EventService } from './services/event.service';
     ConnectorListComponent,
     ConnectorEditComponent,
     EventListComponent,
-    EventEditComponent 
+    EventEditComponent,
+    JobListComponent,
+    JobEditComponent 
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ import { EventService } from './services/event.service';
     StatsService,
     ConnectorService,
     EventService,
+    JobService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],

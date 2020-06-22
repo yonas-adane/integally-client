@@ -13,6 +13,8 @@ import { ConnectorListComponent } from './components/connector/connector-list.co
 import { ConnectorEditComponent } from './components/connector/connector-edit.component';
 import { EventEditComponent } from './components/event/event-edit.component';
 import { EventListComponent } from './components/event/event-list.component';
+import { JobListComponent } from './components/job/job-list.component';
+import { JobEditComponent } from './components/job/job-edit.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -55,6 +57,14 @@ const routes: Routes = [
   {
     path: 'events/:id',
     component: EventEditComponent
+  },
+  {
+    path: 'jobs',
+    component: JobListComponent
+  },
+  {
+    path: 'jobs/:id',
+    component: JobEditComponent
   }
   
 ];
