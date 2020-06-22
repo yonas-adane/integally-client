@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OktaCallbackComponent } from '@okta/okta-angular';
+import { OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
@@ -28,6 +28,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'callback',
@@ -35,36 +36,44 @@ const routes: Routes = [
   },
   {
     path: 'files',
-    component: FileListComponent
+    component: FileListComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'files/:id',
-    component: FileEditComponent
+    component: FileEditComponent,
+    canActivate: [OktaAuthGuard]
   }
   ,
   {
     path: 'connectors',
-    component: ConnectorListComponent
+    component: ConnectorListComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'connectors/:id',
-    component: ConnectorEditComponent
+    component: ConnectorEditComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'events',
-    component: EventListComponent
+    component: EventListComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'events/:id',
-    component: EventEditComponent
+    component: EventEditComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'jobs',
-    component: JobListComponent
+    component: JobListComponent,
+    canActivate: [OktaAuthGuard]
   },
   {
     path: 'jobs/:id',
-    component: JobEditComponent
+    component: JobEditComponent,
+    canActivate: [OktaAuthGuard]
   }
   
 ];
