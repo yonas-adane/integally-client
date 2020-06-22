@@ -1,0 +1,90 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">{{formHeader}}</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="event" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    
+      <div class="form-group">
+        <label>Id</label>
+        {{event.id || 'n/a'}} 
+      </div>
+    
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" class="form-control">
+
+
+        <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)"
+        class="alert alert-danger">
+    
+      <div *ngIf="f.name.errors.required">
+        Event name is required.
+      </div>
+    </div>
+        
+      </div>
+    
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input formControlName="description" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="sourceConnector">Source connector</label>
+        <input formControlName="sourceConnector" class="form-control">
+
+
+        <div *ngIf="f.sourceConnector.invalid && (f.sourceConnector.dirty || f.sourceConnector.touched)"
+        class="alert alert-danger">
+    
+      <div *ngIf="f.sourceConnector.errors.required">
+        Source connector is required.
+      </div>
+    </div>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="routeLibrary">Route Library</label>
+        <input formControlName="routeLibrary" class="form-control">
+
+
+        <div *ngIf="f.routeLibrary.invalid && (f.routeLibrary.dirty || f.routeLibrary.touched)"
+        class="alert alert-danger">
+    
+      <div *ngIf="f.routeLibrary.errors.required">
+        Route library name is required.
+      </div>
+    </div>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="routeName">Route name</label>
+        <input formControlName="routeName" class="form-control">
+
+
+        <div *ngIf="f.routeName.invalid && (f.routeName.dirty || f.routeName.touched)"
+        class="alert alert-danger">
+    
+      <div *ngIf="f.routeName.errors.required">
+        Route name is required.
+      </div>
+    </div>
+        
+      </div>
+<div>
+
+</div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!eventForm.valid" >Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+
+
+

@@ -1,15 +1,15 @@
 
 <div class="card">
   <div class="header">
-    <h2 class="title">Connector List</h2>
+    <h2 class="title">Event List</h2>
   </div>
   <div class="content">
     <form #f="ngForm">
-      <a [routerLink]="['../connectors', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
+      <a [routerLink]="['../events', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
     </form>
   </div>
 </div>
-<div class="card" *ngIf="connectorList.length > 0">
+<div class="card" *ngIf="eventList.length > 0">
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
     <table class="table table-centered table-hover mb-0" id="datatable">
@@ -18,23 +18,24 @@
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">Name</th>
           <th class="border-top-0" scope="col">Description</th>
-          <th class="border-top-0" scope="col">Setting</th>
+          <th class="border-top-0" scope="col">Source Connector</th>
+          <th class="border-top-0" scope="col">Route Library</th>
+          <th class="border-top-0" scope="col">Route name</th>
+
           <th class="border-top-0" scope="col" style="width:120px"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of connectorList" [class.active]="item === selectedConnector">
+        <tr *ngFor="let item of eventList" [class.active]="item === selectedEvent">
         
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>
-            <div *ngFor="let setting of item.setting; let i = index;">
-              {{i}}:{{translateProfile(setting.profile)}} {{setting.key}} {{setting.value}}
-            </div>
-          </td>
+          <td>{{item.sourceConnector}}</td>
+          <td>{{item.routeLibrary}}</td>
+          <td>{{item.routeName}}</td>
           <td style="white-space: nowrap">
-            <a [routerLink]="['../connectors', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <a [routerLink]="['../events', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
             <button (click)="delete(item)" class="btn btn-danger">Delete</button>
           </td>
         </tr>

@@ -20,21 +20,14 @@ export class ConnectorService  extends ApiBaseService {
     
   }
 
-  load(filter: any): void {
-    this.find(filter).subscribe(result => {
-        this.connectorList = result;
-      }
-    );
-  }
-
-  find(filter: any): Observable<Connector[]> {
-    
-    const params = {
-    };
+  load(): void {
 
     const url = `${this.apiResource}/list/0`;
 
-    return this.http.get<Connector[]>(url, this.httpOptions);
+    this.http.get<Connector[]>(url, this.httpOptions).subscribe(result => {
+      this.connectorList = result;
+    }
+  );
     
   }
 

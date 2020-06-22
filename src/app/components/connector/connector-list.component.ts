@@ -21,12 +21,29 @@ export class ConnectorListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.search();
+    this.load();
   }
 
-  search(): void {
-    this.connectorService.load(null);
+  load(): void {
+    this.connectorService.load();
   }
+
+  translateProfile(id: number): String{
+
+    switch(id) { 
+      case 0: 
+         return "ALL"; 
+      case 1: 
+         return "LOCAL"; 
+      case 2: 
+         return "DEV"; 
+      case 3: 
+         return "PROD"; 
+      default: 
+        return "UNKNOWN";  
+   } 
+
+}
 
   select(selected: Connector): void {
     this.selectedConnector = selected;
@@ -37,7 +54,7 @@ export class ConnectorListComponent implements OnInit {
       this.connectorService.delete(connector).subscribe(() => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
-            this.search();
+            this.load();
           }, 1000);
          }
       );

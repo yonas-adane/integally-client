@@ -19,6 +19,9 @@ import { StatsService } from './services/stats.service';
 import { ConnectorListComponent } from './components/connector/connector-list.component';
 import { ConnectorService } from './services/connector.service';
 import { ConnectorEditComponent } from './components/connector/connector-edit.component';
+import { EventListComponent } from './components/event/event-list.component';
+import { EventEditComponent } from './components/event/event-edit.component';
+import { EventService } from './services/event.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { ConnectorEditComponent } from './components/connector/connector-edit.co
     HomeComponent,
     AlertComponent,
     ConnectorListComponent,
-    ConnectorEditComponent 
+    ConnectorEditComponent,
+    EventListComponent,
+    EventEditComponent 
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,7 @@ import { ConnectorEditComponent } from './components/connector/connector-edit.co
     ErrorHandlerService,
     StatsService,
     ConnectorService,
+    EventService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],

@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { ConnectorListComponent } from './components/connector/connector-list.component';
 import { ConnectorEditComponent } from './components/connector/connector-edit.component';
+import { EventEditComponent } from './components/event/event-edit.component';
+import { EventListComponent } from './components/event/event-list.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -45,6 +47,14 @@ const routes: Routes = [
   {
     path: 'connectors/:id',
     component: ConnectorEditComponent
+  },
+  {
+    path: 'events',
+    component: EventListComponent
+  },
+  {
+    path: 'events/:id',
+    component: EventEditComponent
   }
   
 ];
