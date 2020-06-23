@@ -23,6 +23,7 @@
           <th class="border-top-0" scope="col">Event</th>
           <th class="border-top-0" scope="col">Status</th>
           <th class="border-top-0" scope="col">Tag</th>
+          <th class="border-top-0" scope="col">Trace enabled</th>
 
           <th class="border-top-0" scope="col" style="width:120px"></th>
         </tr>
@@ -38,9 +39,12 @@
           <td>{{item.event}}</td>
           <td>{{translateStatus(item.status)}}</td>
           <td>{{item.tag}}</td>
+          <td>{{item.traceEnabled}}</td>
           <td style="white-space: nowrap">
             <a [routerLink]="['../jobs', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
             <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+            <a [routerLink]="['../traces', item.event.id, item.id ]" class="btn btn-secondary">Trace</a>&nbsp;
+            <button (click)="deleteTrace(item)" class="btn btn-danger">Delete Trace</button>
           </td>
         </tr>
       </tbody>

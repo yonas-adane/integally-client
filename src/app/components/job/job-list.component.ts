@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from 'src/app/services/job.service';
 import { Job } from 'src/app/models/job.model';
+import { TraceService } from 'src/app/services/trace.service';
 
 @Component({
   selector: 'app-job',
@@ -15,7 +16,7 @@ export class JobListComponent implements OnInit {
     return this.jobService.jobList;
   }
 
-  constructor(private jobService: JobService) {
+  constructor(private jobService: JobService, private traceService: TraceService) {
   }
 
   ngOnInit() {
@@ -51,13 +52,36 @@ export class JobListComponent implements OnInit {
 
   delete(job: Job): void {
     if (confirm('Are you sure?')) {
-      this.jobService.delete(job).subscribe(() => {
-          this.feedback = {type: 'success', message: 'Delete was successful!'};
-          setTimeout(() => {
-            this.load();
-          }, 1000);
-         }
-      );
+      this.deleteTraceNoPrompt(job.event.id, job.id);
+      this.deleteJobNoPrompt(job);
     }
   }
+
+  deleteTrace(job: Job): void {
+    if (confirm('Are you sure?')) {
+      this.deleteTraceNoPrompt(job.event.id, job.id);
+    }
+  }
+
+  deleteJobNoPrompt(job: Job): void{
+    this.jobService.delete(job).subscribe(() => {
+      this.feedback = {type: 'success', message: 'Job delete was successful!'};
+      setTimeout(() => {
+        this.load();
+      }, 1000);
+     }
+  );
+  }
+
+  deleteTraceNoPrompt(tagId: string, trackingId: string): void {
+    this.traceService.deleteByTagTracking(tagId, trackingId).subscribe(() => {
+      this.feedback = {type: 'success', message: 'Trace delete was successful!'};
+      setTimeout(() => {
+        this.load();
+      }, 1000);
+     }
+  );
+  }
+
+
 }

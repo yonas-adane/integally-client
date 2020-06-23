@@ -1,0 +1,38 @@
+
+<div class="card">
+  <div class="header">
+    <h2 class="title">Trace</h2>
+  </div>
+</div>
+<div class="card" *ngIf="trace != null">
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Date added</th>
+          <th class="border-top-0" scope="col">Tracking Id</th>
+          <th class="border-top-0" scope="col">Tag Id</th>
+          <th class="border-top-0" scope="col">Tag</th>
+          <th class="border-top-0" scope="col">Tag description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{trace.id}}</td>
+          <td>{{trace.dateAdded}}</td>
+          <td>{{trace.trackingId}}</td>
+          <td>{{trace.tagId}}</td>
+          <td>{{trace.tag}}</td>
+          <td>{{trace.tagDescription}}</td>
+          <td style="white-space: nowrap">
+          </td>
+        </tr>
+        <tr>
+          <td>{{trace.info | json}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

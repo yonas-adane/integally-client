@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event.model';
+import { TraceService } from 'src/app/services/trace.service';
 
 @Component({
   selector: 'app-event',
@@ -15,7 +16,7 @@ export class EventListComponent implements OnInit {
     return this.eventService.eventList;
   }
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private traceService: TraceService) {
   }
 
   ngOnInit() {
@@ -32,13 +33,42 @@ export class EventListComponent implements OnInit {
 
   delete(event: Event): void {
     if (confirm('Are you sure?')) {
-      this.eventService.delete(event).subscribe(() => {
-          this.feedback = {type: 'success', message: 'Delete was successful!'};
-          setTimeout(() => {
-            this.load();
-          }, 1000);
-         }
-      );
+
+      this.deleteTraceNoPrompt(event.id);
+      this.deleteEventNoPrompt(event);
+
     }
   }
+
+  deleteTrace(event: Event): void {
+    if (confirm('Are you sure?')) {
+      this.deleteTraceNoPrompt(event.id);
+    }
+  }
+
+  deleteTraceNoPrompt(tagId: string): void {
+    this.traceService.deleteByTag(tagId).subscribe(() => {
+      this.feedback = {type: 'success', message: 'Trace delete was successful!'};
+      setTimeout(() => {
+        this.load();
+      }, 1000);
+     }
+  );
+  }
+
+  deleteEventNoPrompt(event: Event): void {
+  
+    this.eventService.delete(event).subscribe(() => {
+      this.feedback = {type: 'success', message: 'Event delete was successful!'};
+
+      setTimeout(() => {
+        this.load();
+      }, 1000);
+      
+     }
+  );
+
+  }
+
+
 }

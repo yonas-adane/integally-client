@@ -32,9 +32,16 @@
       </div>
 
       <div class="form-group">
-        <label for="sourceConnector">Source connector</label>
-        <input formControlName="sourceConnector" class="form-control">
 
+        <label for="sourceConnector">Source connector</label>
+
+        <select formControlName="sourceConnector" >
+        <option  *ngFor="let connector of connectorLookup" 
+            [ngValue]="connector" 
+            [attr.selected]="f.sourceConnector.value?.id == connector.id ? true : null">
+          {{connector.name}}
+        </option>
+      </select>
 
         <div *ngIf="f.sourceConnector.invalid && (f.sourceConnector.dirty || f.sourceConnector.touched)"
         class="alert alert-danger">
@@ -48,7 +55,17 @@
 
       <div class="form-group">
         <label for="routeLibrary">Route Library</label>
-        <input formControlName="routeLibrary" class="form-control">
+
+        <select formControlName="routeLibrary" >
+          <option  *ngFor="let file of fileLookup" 
+              [ngValue]="file" 
+              [attr.selected]="
+              f.routeLibrary.value?.id == file.id ? true : null">
+            {{file.filename}} ({{file.uploadDate}})
+          </option>
+        </select>
+
+        {{f.routeLibrary.value?.uploadDate}} 
 
 
         <div *ngIf="f.routeLibrary.invalid && (f.routeLibrary.dirty || f.routeLibrary.touched)"
@@ -75,9 +92,12 @@
     </div>
         
       </div>
-<div>
 
-</div>
+      <div class="form-group">
+        <label for="traceEnabled">Enable trace</label>
+        <input formControlName="traceEnabled" class="form-control">
+      </div>
+
 
       <button type="submit" class="btn btn-primary" [disabled]="!eventForm.valid" >Save</button>
       <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>

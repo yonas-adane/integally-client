@@ -47,11 +47,9 @@ export class EventService  extends ApiBaseService {
   }
 
   delete(entity: Event): Observable<Event> {
-    let params = new HttpParams();
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
-      params = new HttpParams().set('id', entity.id.toString());
       return this.http.delete<Event>(url, this.httpOptions);
     }
     return null;

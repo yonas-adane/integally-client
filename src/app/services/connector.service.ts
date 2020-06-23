@@ -31,6 +31,14 @@ export class ConnectorService  extends ApiBaseService {
     
   }
 
+  lookup(): Observable<Connector[]> {
+
+    const url = `${this.apiResource}/lookup`;
+
+    return this.http.get<Connector[]>(url, this.httpOptions);
+    
+  }
+
   save(entity: Connector, isCreate: boolean): Observable<Connector> {
     
     let params = new HttpParams();
@@ -48,11 +56,9 @@ export class ConnectorService  extends ApiBaseService {
   }
 
   delete(entity: Connector): Observable<Connector> {
-    let params = new HttpParams();
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
-      params = new HttpParams().set('id', entity.id.toString());
       return this.http.delete<Connector>(url, this.httpOptions);
     }
     return null;

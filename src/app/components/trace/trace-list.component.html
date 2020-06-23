@@ -1,0 +1,40 @@
+
+<div class="card">
+  <div class="header">
+    <h2 class="title">Trace list</h2>
+  </div>
+</div>
+<div class="card" *ngIf="traceList.length > 0">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Date added</th>
+          <th class="border-top-0" scope="col">Tracking Id</th>
+          <th class="border-top-0" scope="col">Tag Id</th>
+          <th class="border-top-0" scope="col">Tag</th>
+          <th class="border-top-0" scope="col">Tag description</th>
+
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of traceList" [class.active]="item === selectedTrace">
+        
+          <td>{{item.id}}</td>
+          <td>{{item.dateAdded}}</td>
+          <td>{{item.trackingId}}</td>
+          <td>{{item.tagId}}</td>
+          <td>{{item.tag}}</td>
+          <td>{{item.tagDescription}}</td>
+          <td style="white-space: nowrap">
+          </td>
+          <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

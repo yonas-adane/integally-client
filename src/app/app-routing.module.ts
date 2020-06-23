@@ -15,6 +15,9 @@ import { EventEditComponent } from './components/event/event-edit.component';
 import { EventListComponent } from './components/event/event-list.component';
 import { JobListComponent } from './components/job/job-list.component';
 import { JobEditComponent } from './components/job/job-edit.component';
+import { TraceListComponent } from './components/trace/trace-list.component';
+import { TraceListTrackComponent } from './components/trace/trace-list-track.component';
+import { TraceComponent } from './components/trace/trace.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -73,6 +76,21 @@ const routes: Routes = [
   {
     path: 'jobs/:id',
     component: JobEditComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'traces/:id/',
+    component: TraceComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'traces/:tagId',
+    component: TraceListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'traces/:tagId/:trackingId',
+    component: TraceListTrackComponent,
     canActivate: [OktaAuthGuard]
   }
   

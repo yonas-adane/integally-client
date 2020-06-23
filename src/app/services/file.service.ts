@@ -40,6 +40,15 @@ export class FileService  extends ApiBaseService {
     
   }
 
+  
+  lookup(): Observable<File[]> {
+
+    const url = `${this.apiResource}/lookup`;
+
+    return this.http.get<File[]>(url, this.httpOptions);
+    
+  }
+
   save(formData: FormData): Observable<File> {
     
     let params = new HttpParams();
@@ -51,11 +60,9 @@ export class FileService  extends ApiBaseService {
   }
 
   delete(entity: File): Observable<File> {
-    let params = new HttpParams();
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
-      params = new HttpParams().set('ID', entity.id.toString());
       return this.http.delete<File>(url, this.httpOptions);
     }
     return null;

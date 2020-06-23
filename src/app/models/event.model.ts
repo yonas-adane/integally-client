@@ -1,11 +1,15 @@
+import { Connector } from './connector.model';
+import { File } from './file.model';
+
 export class Event {
   id: string;
   name: string;
   description: string;
-  sourceConnector: any;
+  sourceConnector: Connector;
   message: any;
-  routeLibrary: any;
+  routeLibrary: File;
   routeName: string;
+  traceEnabled: boolean;
 }
 
 
