@@ -26,9 +26,9 @@ import { JobService } from './services/job.service';
 import { JobListComponent } from './components/job/job-list.component';
 import { JobEditComponent } from './components/job/job-edit.component';
 import { TraceService } from './services/trace.service';
-import { TraceListComponent } from './components/trace/trace-list.component';
 import { TraceComponent } from './components/trace/trace.component';
-import { TraceListTrackComponent } from './components/trace/trace-list-track.component';
+import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
+import { TraceListComponent } from './components/trace/trace-list.component';
 
 @NgModule({
   declarations: [
@@ -43,9 +43,9 @@ import { TraceListTrackComponent } from './components/trace/trace-list-track.com
     EventEditComponent,
     JobListComponent,
     JobEditComponent,
-    TraceListComponent,
+    TraceInstanceListComponent,
     TraceComponent,
-    TraceListTrackComponent 
+    TraceListComponent 
   ],
   imports: [
     BrowserModule,

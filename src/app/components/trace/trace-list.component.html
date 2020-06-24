@@ -12,8 +12,8 @@
         <tr>
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">Date added</th>
-          <th class="border-top-0" scope="col">Tracking Id</th>
-          <th class="border-top-0" scope="col">Tag Id</th>
+          <th class="border-top-0" scope="col">Instance Id</th>
+          <th class="border-top-0" scope="col">Event Id</th>
           <th class="border-top-0" scope="col">Tag</th>
           <th class="border-top-0" scope="col">Tag description</th>
 
@@ -25,13 +25,14 @@
         
           <td>{{item.id}}</td>
           <td>{{item.dateAdded}}</td>
-          <td>{{item.trackingId}}</td>
-          <td>{{item.tagId}}</td>
+          <td>{{item.instanceId}}</td>
+          <td>{{item.eventId}}</td>
           <td>{{item.tag}}</td>
           <td>{{item.tagDescription}}</td>
           <td style="white-space: nowrap">
+            <a [routerLink]="['/traces', item.id]" class="btn btn-secondary">Info</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
           </td>
-          <button (click)="delete(item)" class="btn btn-danger">Delete</button>
         </tr>
       </tbody>
     </table>

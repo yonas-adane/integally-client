@@ -9,7 +9,6 @@ export class Job {
   event: Event;
   status: number;
   tag: string;
-  traceEnabled: boolean;
 }
 
 

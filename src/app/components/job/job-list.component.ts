@@ -51,15 +51,15 @@ export class JobListComponent implements OnInit {
   }
 
   delete(job: Job): void {
-    if (confirm('Are you sure?')) {
-      this.deleteTraceNoPrompt(job.event.id, job.id);
+    if (confirm('Are you sure? This will also delete all trace data for this job.')) {
+      this.deleteTraceNoPrompt(job.id);
       this.deleteJobNoPrompt(job);
     }
   }
 
   deleteTrace(job: Job): void {
     if (confirm('Are you sure?')) {
-      this.deleteTraceNoPrompt(job.event.id, job.id);
+      this.deleteTraceNoPrompt(job.id);
     }
   }
 
@@ -73,8 +73,8 @@ export class JobListComponent implements OnInit {
   );
   }
 
-  deleteTraceNoPrompt(tagId: string, trackingId: string): void {
-    this.traceService.deleteByTagTracking(tagId, trackingId).subscribe(() => {
+  deleteTraceNoPrompt(instanceId: string): void {
+    this.traceService.deleteByInstance(instanceId).subscribe(() => {
       this.feedback = {type: 'success', message: 'Trace delete was successful!'};
       setTimeout(() => {
         this.load();

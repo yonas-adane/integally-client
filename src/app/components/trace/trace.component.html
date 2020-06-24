@@ -1,7 +1,7 @@
 
 <div class="card">
   <div class="header">
-    <h2 class="title">Trace</h2>
+    <h2 class="title">Trace info</h2>
   </div>
 </div>
 <div class="card" *ngIf="trace != null">
@@ -11,25 +11,25 @@
         <tr>
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">Date added</th>
-          <th class="border-top-0" scope="col">Tracking Id</th>
-          <th class="border-top-0" scope="col">Tag Id</th>
-          <th class="border-top-0" scope="col">Tag</th>
-          <th class="border-top-0" scope="col">Tag description</th>
+          <th class="border-top-0" scope="col">Instance Id</th>
+          <th class="border-top-0" scope="col">Event Id</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{{trace.id}}</td>
           <td>{{trace.dateAdded}}</td>
-          <td>{{trace.trackingId}}</td>
-          <td>{{trace.tagId}}</td>
-          <td>{{trace.tag}}</td>
-          <td>{{trace.tagDescription}}</td>
-          <td style="white-space: nowrap">
-          </td>
+          <td>{{trace.instanceId}}</td>
+          <td>{{trace.eventId}}</td>
         </tr>
         <tr>
-          <td>{{trace.info | json}}</td>
+          <td colspan="6" >Tag: {{trace.tagDescription}}</td>
+        </tr>
+        <tr>
+          <td colspan="6" >Description: {{trace.tagDescription}}</td>
+        </tr>
+        <tr>
+          <td colspan="6" ><pre>{{trace.info | json}}</pre></td>
         </tr>
       </tbody>
     </table>

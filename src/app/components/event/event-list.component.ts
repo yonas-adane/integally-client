@@ -32,7 +32,7 @@ export class EventListComponent implements OnInit {
   }
 
   delete(event: Event): void {
-    if (confirm('Are you sure?')) {
+    if (confirm('Are you sure? This will also delete all trace data for this event.')) {
 
       this.deleteTraceNoPrompt(event.id);
       this.deleteEventNoPrompt(event);
@@ -41,13 +41,13 @@ export class EventListComponent implements OnInit {
   }
 
   deleteTrace(event: Event): void {
-    if (confirm('Are you sure?')) {
+    if (confirm('Are you sure? ')) {
       this.deleteTraceNoPrompt(event.id);
     }
   }
 
-  deleteTraceNoPrompt(tagId: string): void {
-    this.traceService.deleteByTag(tagId).subscribe(() => {
+  deleteTraceNoPrompt(eventId: string): void {
+    this.traceService.deleteByEvent(eventId).subscribe(() => {
       this.feedback = {type: 'success', message: 'Trace delete was successful!'};
       setTimeout(() => {
         this.load();

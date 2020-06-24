@@ -12,6 +12,7 @@ export class TraceListComponent implements OnInit {
   selectedTrace: Trace;
   feedback: any = {};
   tagId: string;
+  instanceId: string;
 
   get traceList(): Trace[] {
     return this.traceService.traceList;
@@ -22,19 +23,19 @@ export class TraceListComponent implements OnInit {
   }
 
   ngOnInit() {
-   
-    this.tagId = this
+
+    this.instanceId = this
       .route
       .snapshot
       .paramMap
-      .get('tagId');
+      .get('instanceId');
 
-      this.load(this.tagId);
+      this.load(this.instanceId);
     
   }
 
-  load(tagId: string): void {
-    this.traceService.load(tagId);
+  load(instanceId: string): void {
+    this.traceService.loadByInstance(instanceId);
   }
 
   select(selected: Trace): void {
@@ -43,10 +44,10 @@ export class TraceListComponent implements OnInit {
 
   delete(entity: Trace): void {
     if (confirm('Are you sure?')) {
-      this.traceService.deleteByTagTracking(entity.tagId, entity.trackingId).subscribe(() => {
+      this.traceService.deleteTrace(entity).subscribe(() => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
-            this.load(entity.tagId);
+            this.load(entity.instanceId);
           }, 1000);
          }
       );

@@ -13,7 +13,7 @@ export class TraceService  extends ApiBaseService {
 
   private apiResource = this.apiURL.concat("traces");
 
-  findById(id: string): void {
+  loadTrace(id: string): void {
     const url = `${this.apiResource}/${id}`;
     
     this.http.get<Trace>(url, this.httpOptions).subscribe(result => {
@@ -24,20 +24,11 @@ export class TraceService  extends ApiBaseService {
   }
   
 
-  load(tagId: string): void {
+  loadByEvent(eventId: string): void {
 
-    const url = `${this.apiResource}/list/${tagId}/0`;
+    const url = `${this.apiResource}/list/event/${eventId}/0`;
 
-    this.http.get<Trace[]>(url, this.httpOptions).subscribe(result => {
-      this.traceList = result;
-    }
-  );
-    
-  }
-
-  loadByTracking(tagId: string, trackingId: string): void {
-
-    const url = `${this.apiResource}/list/${tagId}/${trackingId}/0`;
+    console.log(url);
 
     this.http.get<Trace[]>(url, this.httpOptions).subscribe(result => {
       this.traceList = result;
@@ -46,8 +37,19 @@ export class TraceService  extends ApiBaseService {
     
   }
 
+  loadByInstance(instanceId: string): void {
 
-  delete(entity: Trace): Observable<Trace> {
+    const url = `${this.apiResource}/list/instance/${instanceId}/0`;
+
+    this.http.get<Trace[]>(url, this.httpOptions).subscribe(result => {
+      this.traceList = result;
+    }
+  );
+    
+  }
+
+
+  deleteTrace(entity: Trace): Observable<Trace> {
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
@@ -56,19 +58,19 @@ export class TraceService  extends ApiBaseService {
     return null;
   }
 
-  deleteByTag(tagId: string): Observable<Trace> {
+  deleteByEvent(eventId: string): Observable<Trace> {
     let url = '';
-    if (tagId) {
-      url = `${this.apiResource}/tag/${tagId}`;
+    if (eventId) {
+      url = `${this.apiResource}/event/${eventId}`;
       return this.http.delete<Trace>(url, this.httpOptions);
     }
     return null;
   }
 
-  deleteByTagTracking(tagId: string, trackingId: string): Observable<Trace> {
+  deleteByInstance(instanceId: string): Observable<Trace> {
     let url = '';
-    if (tagId && trackingId) {
-      url = `${this.apiResource}/tag/${tagId}/${trackingId}`;
+    if (instanceId) {
+      url = `${this.apiResource}/instance/${instanceId}`;
       return this.http.delete<Trace>(url, this.httpOptions);
     }
     return null;

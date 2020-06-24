@@ -4,15 +4,14 @@ import { TraceService } from 'src/app/services/trace.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-trace-list-track',
-  templateUrl: 'trace-list-track.component.html'
+  selector: 'app-trace-instance-list',
+  templateUrl: 'trace-instance-list.component.html'
 })
-export class TraceListTrackComponent implements OnInit {
+export class TraceInstanceListComponent implements OnInit {
 
-  selectedTrace: Trace;
+  selectedInstance: Trace;
   feedback: any = {};
-  tagId: string;
-  trackingId: string;
+  eventId: string;
 
   get traceList(): Trace[] {
     return this.traceService.traceList;
@@ -24,36 +23,30 @@ export class TraceListTrackComponent implements OnInit {
 
   ngOnInit() {
    
-    this.tagId = this
+    this.eventId = this
       .route
       .snapshot
       .paramMap
-      .get('tagId');
+      .get('eventId');
 
-    this.trackingId = this
-      .route
-      .snapshot
-      .paramMap
-      .get('trackingId');
-
-      this.load(this.tagId, this.trackingId);
+      this.load(this.eventId);
     
   }
 
-  load(tagId: string, trackingId: string): void {
-    this.traceService.loadByTracking(tagId, trackingId);
+  load(tagId: string): void {
+    this.traceService.loadByEvent(tagId);
   }
 
   select(selected: Trace): void {
-    this.selectedTrace = selected;
+    this.selectedInstance = selected;
   }
 
   delete(entity: Trace): void {
     if (confirm('Are you sure?')) {
-      this.traceService.delete(entity).subscribe(() => {
+      this.traceService.deleteByInstance(entity.instanceId).subscribe(() => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
-            this.load(entity.tag, entity.trackingId);
+            this.load(entity.eventId);
           }, 1000);
          }
       );

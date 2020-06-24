@@ -27,7 +27,6 @@ export class JobEditComponent implements OnInit {
     event : new FormArray([]),
     status : new FormArray([]),
     tag : new FormArray([]),
-    traceEnabled : new FormArray([]),
   });
 
   constructor(
@@ -48,7 +47,6 @@ export class JobEditComponent implements OnInit {
       event: [''],
       status: ['',[Validators.required]],
       tag: [''],
-      traceEnabled: [''],
     });
 
     this
@@ -83,7 +81,6 @@ export class JobEditComponent implements OnInit {
           this.f.event.setValue(this.job.event);
           this.f.status.setValue(this.job.status);
           this.f.tag.setValue(this.job.tag);
-          this.f.traceEnabled.setValue(this.job.traceEnabled)
 
           this.feedback = {};
         }
@@ -105,8 +102,6 @@ export class JobEditComponent implements OnInit {
     job.event = this.f.event.value;
     job.status = this.f.status.value;
     job.tag = this.f.tag.value;
-    job.traceEnabled = this.f.traceEnabled.value;
-
 
       this.jobService.save(job, this.id == 'new' ? true : false).subscribe(
         connector => {

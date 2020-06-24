@@ -34,7 +34,7 @@ export class TraceComponent implements OnInit {
   }
 
   load(traceId: string): void {
-    this.traceService.findById(traceId);
+    this.traceService.loadTrace(traceId);
   }
 
 }

@@ -1,8 +1,8 @@
 export class Trace {
   id: string;
   dateAdded: Date;
-  trackingId: string;
-  tagId: string;
+  instanceId: string;
+  eventId: string;
   tag: string;
   tagDescription: string;
   info: any;
