@@ -46,6 +46,17 @@ export class JobService  extends ApiBaseService {
 
   }
 
+  
+  start(entity: Job): Observable<Job> {
+    
+    let params = new HttpParams();
+
+    let url = `${this.apiResource}/start`;
+
+    return this.http.post<Job>(url, entity);
+
+  }
+
   delete(entity: Job): Observable<Event> {
     let params = new HttpParams();
     let url = '';
@@ -56,6 +67,7 @@ export class JobService  extends ApiBaseService {
     }
     return null;
   }
+  
   
 }
 

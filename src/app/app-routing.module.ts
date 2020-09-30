@@ -89,6 +89,11 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
+    path: 'traces/job/:jobId',
+    component: TraceInstanceListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
     path: 'traces/instance/:instanceId',
     component: TraceListComponent,
     canActivate: [OktaAuthGuard]

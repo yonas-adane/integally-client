@@ -13,6 +13,8 @@ export class TraceInstanceListComponent implements OnInit {
   feedback: any = {};
   eventId: string;
 
+  header: string;
+
   get traceList(): Trace[] {
     return this.traceService.traceList;
   }
@@ -28,6 +30,20 @@ export class TraceInstanceListComponent implements OnInit {
       .snapshot
       .paramMap
       .get('eventId');
+
+      this.header = "Event";
+
+    if(this.eventId == null){
+
+      this.eventId = this
+      .route
+      .snapshot
+      .paramMap
+      .get('jobId');
+
+      this.header = "Job";
+
+    }
 
       this.load(this.eventId);
     

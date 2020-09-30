@@ -67,6 +67,15 @@ export class TraceService  extends ApiBaseService {
     return null;
   }
 
+  deleteByJob(jobId: string): Observable<Trace> {
+    let url = '';
+    if (jobId) {
+      url = `${this.apiResource}/job/${jobId}`;
+      return this.http.delete<Trace>(url, this.httpOptions);
+    }
+    return null;
+  }
+
   deleteByInstance(instanceId: string): Observable<Trace> {
     let url = '';
     if (instanceId) {
