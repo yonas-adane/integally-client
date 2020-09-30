@@ -1,0 +1,48 @@
+
+<div class="card">
+  <div class="header">
+    <h2 class="title">Mapping template List</h2>
+  </div>
+  <div class="content">
+    <form #f="ngForm">
+      <a [routerLink]="['../events', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="mappingTemplateList?.length > 0">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Name</th>
+          <th class="border-top-0" scope="col">Description</th>
+          <th class="border-top-0" scope="col">Source Template</th>
+          <th class="border-top-0" scope="col">Target Template</th>
+          <th class="border-top-0" scope="col">Maps</th>
+
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mappingTemplateList" [class.active]="item === selectedMappingTemplate">
+        
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.sourceTemplate}}</td>
+          <td>{{item.targetTemplate}}</td>
+          <td>{{item.maps}}</td>
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../events', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
+            <a [routerLink]="['../traces/event', item.id ]" class="btn btn-secondary">Trace</a>&nbsp;
+            <button (click)="deleteTrace(item)" class="btn btn-danger">Delete Trace</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

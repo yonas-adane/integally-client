@@ -18,6 +18,9 @@ import { JobEditComponent } from './components/job/job-edit.component';
 import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
 import { TraceListComponent } from './components/trace/trace-list.component';
+import { LookupListComponent } from './components/lookup/lookup-list.component';
+import { MappingTemplateListComponent } from './components/mapping-template/mapping-template-list.component';
+import { MessageTemplateListComponent } from './components/message-template/message-template-list.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -51,6 +54,21 @@ const routes: Routes = [
   {
     path: 'connectors',
     component: ConnectorListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'lookups',
+    component: LookupListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'mappingtemplates',
+    component: MappingTemplateListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'messagetemplates',
+    component:  MessageTemplateListComponent,
     canActivate: [OktaAuthGuard]
   },
   {

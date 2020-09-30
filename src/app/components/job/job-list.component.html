@@ -34,7 +34,7 @@
           <td>{{item.dateEnd}}</td>
           <td>{{item.dateAdded}}</td>
           <td>{{item.priority}}</td>
-          <td>{{item.event}}</td>
+          <td> <textarea class="form-control">{{item.event | json}}</textarea></td>
           <td>{{translateStatus(item.status)}}</td>
           <td>{{item.tag}}</td>
           <td style="white-space: nowrap">

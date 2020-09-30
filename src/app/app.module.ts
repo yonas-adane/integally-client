@@ -29,6 +29,12 @@ import { TraceService } from './services/trace.service';
 import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
 import { TraceListComponent } from './components/trace/trace-list.component';
+import { LookupListComponent } from './components/lookup/lookup-list.component';
+import { MappingTemplateListComponent } from './components/mapping-template/mapping-template-list.component';
+import { MessageTemplateListComponent } from './components/message-template/message-template-list.component';
+import { LookupService } from './services/lookup.service';
+import { MappingTemplateService } from './services/mapping-template.service';
+import { MessageTemplateService } from './services/message-template.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,10 @@ import { TraceListComponent } from './components/trace/trace-list.component';
     JobEditComponent,
     TraceInstanceListComponent,
     TraceComponent,
-    TraceListComponent 
+    TraceListComponent,
+    LookupListComponent, 
+    MappingTemplateListComponent, 
+    MessageTemplateListComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +71,9 @@ import { TraceListComponent } from './components/trace/trace-list.component';
     EventService,
     JobService,
     TraceService,
+    LookupService,
+    MappingTemplateService,
+    MessageTemplateService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],
