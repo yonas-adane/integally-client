@@ -31,14 +31,41 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.sourceTemplate}}</td>
-          <td>{{item.targetTemplate}}</td>
-          <td>{{item.maps}}</td>
+          <td>{{item.sourceTemplate.name}}</td>
+          <td>{{item.targetTemplate.name}}</td>
+          <td> 
+            <table>
+              <tr *ngFor="let map of item.maps">
+                <td >{{ map.id }}</td>
+                <td >
+                  <ul>
+                    <li *ngFor="let source of map.source">
+                      <ul>
+                        <li>{{ source.name}}</li>
+                        <li>{{ source.dataType}}</li>
+                        <li>{{ source.value}}</li>
+                        <li>{{ source.defaultValue}}</li>
+                        <li>{{ source.depth}}</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </td>
+                <td >{{ map.function }}</td>
+                <td >
+                  <ul>
+                    <li>{{ map.target.name}}</li>
+                    <li>{{ map.target.dataType}}</li>
+                    <li>{{ map.target.value}}</li>
+                    <li>{{ map.target.defaultValue}}</li>
+                    <li>{{ map.target.depth}}</li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
+        </td>
           <td style="white-space: nowrap">
             <a [routerLink]="['../events', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
             <button (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
-            <a [routerLink]="['../traces/event', item.id ]" class="btn btn-secondary">Trace</a>&nbsp;
-            <button (click)="deleteTrace(item)" class="btn btn-danger">Delete Trace</button>
           </td>
         </tr>
       </tbody>

@@ -26,6 +26,7 @@ export class LookupService  extends ApiBaseService {
 
     this.http.get<Lookup[]>(url, this.httpOptions).subscribe(result => {
       this.lookupList = result;
+      console.log(this.lookupList);
     }
   );
     

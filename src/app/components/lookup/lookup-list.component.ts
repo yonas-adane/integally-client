@@ -15,6 +15,7 @@ export class LookupListComponent implements OnInit {
   feedback: any = {};
 
   get lookupList(): Lookup[] {
+    
     return this.lookupService.lookupList;
   }
 
@@ -27,6 +28,7 @@ export class LookupListComponent implements OnInit {
 
   load(): void {
     this.lookupService.load();
+    
   }
 
   select(selected: Lookup): void {

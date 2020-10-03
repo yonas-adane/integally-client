@@ -29,12 +29,22 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.attributes}}</td>
+          <td>
+            <ul>
+              <li *ngFor="let attribute of item.attributes">
+                <ul>
+                  <li>{{attribute.name}}</li>
+                  <li>{{attribute.dataType}}</li>
+                  <li>{{attribute.value | json}}</li>
+                  <li>{{attribute.defaultValue | json}}</li>
+                  <li>{{attribute.depth}}</li>
+                </ul>
+              </li>
+            </ul>
+          </td>
           <td style="white-space: nowrap">
             <a [routerLink]="['../events', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
-            <button (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
-            <a [routerLink]="['../traces/event', item.id ]" class="btn btn-secondary">Trace</a>&nbsp;
-            <button (click)="deleteTrace(item)" class="btn btn-danger">Delete Trace</button>
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
           </td>
         </tr>
       </tbody>
