@@ -7,8 +7,9 @@ export class Job {
   dateAdded: Date;
   priority: number;
   event: Event;
-  status: number;
+  status: string;
   tag: string;
+  size: number;
 }
 
 

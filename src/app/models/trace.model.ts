@@ -6,6 +6,10 @@ export class Trace {
   tag: string;
   tagDescription: string;
   info: any;
+  count: string;
+  startTime: Date;
+  endTime: Date;
+  exitTag: string;
 }
 
 

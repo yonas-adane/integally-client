@@ -51,9 +51,19 @@ export class JobService  extends ApiBaseService {
     
     let params = new HttpParams();
 
-    let url = `${this.apiResource}/start`;
+    let url = `${this.apiResource}/start/${entity.id.toString()}`;
 
     return this.http.post<Job>(url, entity);
+
+  }
+
+  startQueue(): Observable<Job> {
+    
+    let params = new HttpParams();
+
+    let url = `${this.apiResource}/start`;
+
+    return this.http.post<Job>(url, null);
 
   }
 

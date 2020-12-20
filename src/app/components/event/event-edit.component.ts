@@ -36,6 +36,7 @@ export class EventEditComponent implements OnInit {
     routeLibrary : new FormArray([]),
     routeName : new FormArray([]),
     traceEnabled : new FormArray([]),
+    routeDefinition : new FormArray([]),
   });
 
   constructor(
@@ -57,6 +58,7 @@ export class EventEditComponent implements OnInit {
       routeLibrary: [null,[Validators.required]],
       routeName: ['',[Validators.required]],
       traceEnabled: [false],
+      routeDefinition: ['',[Validators.required]],
     });
 
 
@@ -105,6 +107,7 @@ export class EventEditComponent implements OnInit {
           this.f.routeLibrary.setValue(this.event.routeLibrary);
           this.f.routeName.setValue(this.event.routeName);
           this.f.traceEnabled.setValue(this.event.traceEnabled);
+          this.f.routeDefinition.setValue(this.event.routeDefinition);
 
           this.feedback = {};
         }
@@ -125,6 +128,7 @@ export class EventEditComponent implements OnInit {
     event.routeLibrary = this.f.routeLibrary.value;
     event.routeName = this.f.routeName.value;
     event.traceEnabled = this.f.traceEnabled.value;
+    event.routeDefinition =  this.f.routeDefinition.value;
 
       this.eventService.save(event, this.id == 'new' ? true : false).subscribe(
         connector => {

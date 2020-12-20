@@ -21,6 +21,8 @@ import { TraceListComponent } from './components/trace/trace-list.component';
 import { LookupListComponent } from './components/lookup/lookup-list.component';
 import { MappingTemplateListComponent } from './components/mapping-template/mapping-template-list.component';
 import { MessageTemplateListComponent } from './components/message-template/message-template-list.component';
+import { MappingTemplateEditComponent } from './components/mapping-template/mapping-template-edit.component';
+import { LookupEditComponent } from './components/lookup/lookup-edit.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -62,8 +64,18 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
+    path: 'lookups/:id',
+    component: LookupEditComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
     path: 'mappingtemplates',
     component: MappingTemplateListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'mappingtemplates/:id',
+    component: MappingTemplateEditComponent,
     canActivate: [OktaAuthGuard]
   },
   {

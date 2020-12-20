@@ -20,6 +20,7 @@
           <th class="border-top-0" scope="col">Description</th>
           <th class="border-top-0" scope="col">Source Template</th>
           <th class="border-top-0" scope="col">Target Template</th>
+          <th class="border-top-0" scope="col">Transform Script</th>
           <th class="border-top-0" scope="col">Maps</th>
 
           <th class="border-top-0" scope="col" style="width:120px"></th>
@@ -33,10 +34,12 @@
           <td>{{item.description}}</td>
           <td>{{item.sourceTemplate.name}}</td>
           <td>{{item.targetTemplate.name}}</td>
+          <td>{{item.transformScript}}</td>
           <td> 
             <table>
               <tr *ngFor="let map of item.maps">
-                <td >{{ map.id }}</td>
+                <td >Id: {{ map.id }}</td>
+                <td >Inactive? {{ map.inactive ? 'true' : 'false' }}</td>
                 <td >
                   <ul>
                     <li *ngFor="let source of map.source">
@@ -50,7 +53,12 @@
                     </li>
                   </ul>
                 </td>
-                <td >{{ map.function }}</td>
+                <td >
+                  <ul>
+                    <li>{{ map.function }}</li>
+                    <li>{{ map.clientFunction }}</li>
+                  </ul>
+                </td>
                 <td >
                   <ul>
                     <li>{{ map.target.name}}</li>
@@ -64,7 +72,7 @@
             </table>
         </td>
           <td style="white-space: nowrap">
-            <a [routerLink]="['../events', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <a [routerLink]="['../mappingtemplates', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
             <button (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
           </td>
         </tr>

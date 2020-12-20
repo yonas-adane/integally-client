@@ -35,6 +35,8 @@ import { MessageTemplateListComponent } from './components/message-template/mess
 import { LookupService } from './services/lookup.service';
 import { MappingTemplateService } from './services/mapping-template.service';
 import { MessageTemplateService } from './services/message-template.service';
+import { MappingTemplateEditComponent } from './components/mapping-template/mapping-template-edit.component';
+import { LookupEditComponent } from './components/lookup/lookup-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { MessageTemplateService } from './services/message-template.service';
     TraceComponent,
     TraceListComponent,
     LookupListComponent, 
-    MappingTemplateListComponent, 
+    LookupEditComponent,
+    MappingTemplateListComponent,
+    MappingTemplateEditComponent,
     MessageTemplateListComponent
   ],
   imports: [

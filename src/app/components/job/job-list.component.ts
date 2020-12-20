@@ -31,30 +31,25 @@ export class JobListComponent implements OnInit {
     this.selectedJob = selected;
   }
 
-  translateStatus(id: number): String{
-
-    switch(id) { 
-      case 0: 
-         return "Ready"; 
-      case 1: 
-         return "Processing"; 
-      case 2: 
-         return "Done"; 
-      case 3: 
-         return "Failed"; 
-      case 4: 
-         return "Hold"; 
-      default: 
-        return "UNKNOWN";  
-   } 
-
-  }
-
-  start(job: Job): void {
+   start(job: Job): void {
     if (confirm('Are you sure?')) {
 
       this.jobService.start(job).subscribe(() => {
         this.feedback = {type: 'success', message: 'Job run request submitted'};
+        setTimeout(() => {
+          this.load();
+        }, 1000);
+       }
+    );
+
+    }
+  }
+
+  startQueue(): void {
+    if (confirm('Are you sure?')) {
+
+      this.jobService.startQueue().subscribe(() => {
+        this.feedback = {type: 'success', message: 'Job queue run request submitted'};
         setTimeout(() => {
           this.load();
         }, 1000);
@@ -95,6 +90,12 @@ export class JobListComponent implements OnInit {
       }, 1000);
      }
   );
+  }
+
+  getDateDiff(startDate, endDate) {
+
+    return this.traceService.getDateDiff(startDate, endDate);
+
   }
 
 

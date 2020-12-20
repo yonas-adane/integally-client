@@ -10,6 +10,8 @@ export class Event {
   routeLibrary: File;
   routeName: string;
   traceEnabled: boolean;
+  triggerCount: number;
+  routeDefinition: string;
 }
 
 

@@ -57,6 +57,12 @@ export class TraceInstanceListComponent implements OnInit {
     this.selectedInstance = selected;
   }
 
+  getDateDiff(startDate, endDate) {
+
+    return this.traceService.getDateDiff(startDate, endDate);
+
+  }
+
   delete(entity: Trace): void {
     if (confirm('Are you sure?')) {
       this.traceService.deleteByInstance(entity.instanceId).subscribe(() => {

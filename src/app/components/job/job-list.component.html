@@ -6,6 +6,7 @@
   <div class="content">
     <form #f="ngForm">
       <a [routerLink]="['../jobs', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
+      <button (click)="startQueue()" class="btn btn-outline-danger">Start Queue</button>&nbsp;
     </form>
   </div>
 </div>
@@ -19,8 +20,9 @@
           <th class="border-top-0" scope="col">Start date</th>
           <th class="border-top-0" scope="col">End date</th>
           <th class="border-top-0" scope="col">Date added</th>
-          <th class="border-top-0" scope="col">Priority</th>
-          <th class="border-top-0" scope="col">Event</th>
+          <th class="border-top-0" scope="col">Size</th>
+          <th class="border-top-0" scope="col">TCount</th>
+          <th class="border-top-0" scope="col">Duration</th>
           <th class="border-top-0" scope="col">Status</th>
           <th class="border-top-0" scope="col">Tag</th>
           <th class="border-top-0" scope="col" style="width:120px"></th>
@@ -33,9 +35,10 @@
           <td>{{item.dateStart}}</td>
           <td>{{item.dateEnd}}</td>
           <td>{{item.dateAdded}}</td>
-          <td>{{item.priority}}</td>
-          <td> <textarea class="form-control">{{item.event | json}}</textarea></td>
-          <td>{{translateStatus(item.status)}}</td>
+          <td>{{item.size}}</td>
+          <td>{{item.event.triggerCount}}</td>
+          <td>{{getDateDiff(item.dateStart, item.dateEnd)}}</td>
+          <td>{{item.status}}</td>
           <td>{{item.tag}}</td>
           <td style="white-space: nowrap">
             <button (click)="start(item)" class="btn btn-outline-danger">Start</button>&nbsp;

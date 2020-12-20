@@ -38,23 +38,47 @@
         </div>
 
       </div>
+
     </div>
 
-      <div class="form-group">
-        <label for="event">Event</label>
-        {{job.event}}
+    <div class="form-group">
+      <label for="event">Event </label>
+
+      <!-- <select formControlName="event">
+        <option *ngFor="let event of events;" 
+          [ngValue]="event" 
+          [attr.selected]="f.event.value?.id == event.id ? true : null">
+          {{ event.name }}
+        </option>
+      </select> -->
+
+      <textarea formControlName="event" class="form-control">{{ job.event | json}}</textarea>
+
+      <div *ngIf="f.event.invalid && (f.event.dirty || f.event.touched)"
+      class="alert alert-danger">
+  
+    <div *ngIf="f.event.errors.required">
+      Event is required.
+    </div>
       </div>
+    </div>
 
       <div class="form-group">
         <label for="status">Status</label>
 
         <select formControlName="status">
-          <option [ngValue]="0" selected>Ready</option>
-          <option [ngValue]="1">Processing</option>
-          <option [ngValue]="2">Done</option>
-          <option [ngValue]="4">Failed</option>
-          <option [ngValue]="5">Hold</option>
+          <option value="INACTIVE" selected>INACTIVE</option>
+          <option value="READY">READY</option>
+          <option value="STARTED">STARTED</option>
+          <option value="DONE">DONE</option>
+          <option value="HOLD">HOLD</option>
         </select>
+
+        <div class="form-group">
+          <label for="tag">Tag</label>
+          <input formControlName="tag" class="form-control">
+ 
+        </div>
 
         <div *ngIf="f.status.invalid && (f.status.dirty || f.status.touched)"
         class="alert alert-danger">
