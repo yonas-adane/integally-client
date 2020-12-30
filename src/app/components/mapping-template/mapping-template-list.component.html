@@ -5,7 +5,7 @@
   </div>
   <div class="content">
     <form #f="ngForm">
-      <a [routerLink]="['../events', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
+      <a [routerLink]="['../mappingtemplates', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
     </form>
   </div>
 </div>
@@ -18,8 +18,6 @@
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">Name</th>
           <th class="border-top-0" scope="col">Description</th>
-          <th class="border-top-0" scope="col">Source Template</th>
-          <th class="border-top-0" scope="col">Target Template</th>
           <th class="border-top-0" scope="col">Transform Script</th>
           <th class="border-top-0" scope="col">Maps</th>
 
@@ -32,8 +30,6 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.sourceTemplate.name}}</td>
-          <td>{{item.targetTemplate.name}}</td>
           <td>{{item.transformScript}}</td>
           <td> 
             <table>

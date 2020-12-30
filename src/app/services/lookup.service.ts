@@ -26,46 +26,45 @@ export class LookupService  extends ApiBaseService {
 
     this.http.get<Lookup[]>(url, this.httpOptions).subscribe(result => {
       this.lookupList = result;
-      console.log(this.lookupList);
     }
   );
     
   }
 
-  save(entity: Job, isCreate: boolean): Observable<Job> {
+  save(entity: Lookup, isCreate: boolean): Observable<Lookup> {
     
     let params = new HttpParams();
 
     let url = `${this.apiResource}`;
 
     if(isCreate){
-      return this.http.post<Job>(url, entity);
+      return this.http.post<Lookup>(url, entity);
     }
     else{
-      return this.http.put<Job>(url, entity);
+      return this.http.put<Lookup>(url, entity);
     }
 
 
   }
 
   
-  start(entity: Job): Observable<Job> {
+  start(entity: Lookup): Observable<Lookup> {
     
     let params = new HttpParams();
 
     let url = `${this.apiResource}/start`;
 
-    return this.http.post<Job>(url, entity);
+    return this.http.post<Lookup>(url, entity);
 
   }
 
-  delete(entity: Job): Observable<Event> {
+  delete(entity: Lookup): Observable<Lookup> {
     let params = new HttpParams();
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
       params = new HttpParams().set('id', entity.id.toString());
-      return this.http.delete<Event>(url, this.httpOptions);
+      return this.http.delete<Lookup>(url, this.httpOptions);
     }
     return null;
   }

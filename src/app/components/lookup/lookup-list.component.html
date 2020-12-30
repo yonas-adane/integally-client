@@ -5,7 +5,7 @@
   </div>
   <div class="content">
     <form #f="ngForm">
-      <a [routerLink]="['../events', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
+      <a [routerLink]="['../lookups', 'new' ]" class="btn btn-primary active" role="button" >New</a> 
     </form>
   </div>
 </div>
@@ -41,7 +41,7 @@
 
           </td>
           <td style="white-space: nowrap">
-            <a [routerLink]="['../events', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <a [routerLink]="['../lookups', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
             <button (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
           </td>
         </tr>

@@ -1,13 +1,19 @@
-export class Connector {
+import { Audit } from "./audit.model";
+
+export class Connector extends Audit {
   id: string;
   name: string;
   description: string;
-  setting: Setting[];
+  packageFileName: string;
+  packageFile: string;
 }
 
-export class Setting{
+export class ConnectorSetting extends Audit{
+  id: string;
+  connectorId: string;
   profile: string;
   key: string;
   value: string;
+  secret: boolean;
 }
 

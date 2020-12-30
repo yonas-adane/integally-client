@@ -4,28 +4,32 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { File } from '../models/file.model';
 import { ApiBaseService } from './api-base.service';
 import { Connector } from '../models/connector.model';
+import { Page } from '../models/page.model';
 
 
 @Injectable()
 export class ConnectorService  extends ApiBaseService {
 
-  connectorList: Connector[] = [];
+  connectorsPageable: Page<Connector>;
 
   private apiResource = this.apiURL.concat("connectors");
 
   findById(id: string): Observable<Connector> {
     const url = `${this.apiResource}/${id}`;
     
-    return this.http.get<Connector>(url, this.httpOptions);
-    
+    let result = this.http.get<Connector>(url, this.httpOptions);
+
+    return result;
   }
 
   load(): void {
 
     const url = `${this.apiResource}/list/0`;
 
-    this.http.get<Connector[]>(url, this.httpOptions).subscribe(result => {
-      this.connectorList = result;
+    this.http.get<Page<Connector>>(url, this.httpOptions).subscribe(result => {
+
+      this.connectorsPageable = result;
+
     }
   );
     
@@ -39,21 +43,38 @@ export class ConnectorService  extends ApiBaseService {
     
   }
 
-  save(entity: Connector, isCreate: boolean): Observable<Connector> {
-    
-    let params = new HttpParams();
+  save(formData: FormData, id: String): Observable<Connector> {
 
-    let url = `${this.apiResource}`;
+  let url = `${this.apiResource}`;
 
-    if(isCreate){
-      return this.http.post<Connector>(url, entity);
-    }
-    else{
-      return this.http.put<Connector>(url, entity);
-    }
 
+  // Display the key/value pairs
+  // formData.forEach((value,key) => {
+  //   console.log(key+" "+value)
+  // });
+
+  if(id.length == 0)
+    return this.http.post<Connector>(url, formData);
+  else
+    return this.http.put<Connector>(url, formData);
 
   }
+
+  // save(entity: Connector, isCreate: boolean): Observable<Connector> {
+    
+  //   let params = new HttpParams();
+
+  //   let url = `${this.apiResource}`;
+
+  //   if(isCreate){
+  //     return this.http.post<Connector>(url, entity);
+  //   }
+  //   else{
+  //     return this.http.put<Connector>(url, entity);
+  //   }
+
+
+  // }
 
   delete(entity: Connector): Observable<Connector> {
     let url = '';

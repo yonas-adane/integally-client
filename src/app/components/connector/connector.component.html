@@ -1,0 +1,92 @@
+
+<div class="card">
+  <div class="header">
+    <h2 class="title">Connector</h2>
+  </div>
+</div>
+<div class="card" *ngIf="connectorsPageable != null">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+
+    Total: {{connectorsPageable.totalElements}} Current:{{connectorsPageable.numberOfElements}}
+    <form *ngIf="connector" [formGroup]="connectorForm" (ngSubmit)="onSubmit()">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Name</th>
+          <th class="border-top-0" scope="col">Description</th>
+          <th class="border-top-0" scope="col">Package file name</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{f.id.value || 'n/a'}} 
+
+          </td>
+          <td>
+            
+            <div class="form-group">
+              <input formControlName="name" class="form-control">
+      
+      
+              <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)"
+              class="alert alert-danger">
+          
+            <div *ngIf="f.name.errors.required">
+              Name is required.
+            </div>
+          </div>
+              
+            </div>
+
+          </td>
+          <td>
+            
+            <div class="form-group">
+              <input formControlName="description" class="form-control"  >
+      
+          </div>
+
+          </td>
+          <td>
+            
+            <div class="form-group">
+              <input type="file"  name="packageFile" class="form-control" (change)="onFileSelect($event)">
+        
+        
+              <div *ngIf="f.packageFile.invalid && (f.packageFile.dirty || f.packageFile.touched)"
+              class="alert alert-danger">
+          
+            <div *ngIf="f.packageFile.errors.required">
+              File is required.
+            </div>                   
+          
+          </div>
+            </div>
+
+          </td>
+          <td>
+            <button type="submit" class="btn btn-secondary" [disabled]="!connectorForm.valid" >Save</button>&nbsp;
+            <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+          </td>
+        </tr>
+        <tr *ngFor="let item of connectorsPageable.content" [class.active]="item === selectedConnector">
+        
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.packageFileName}}</td>
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../connectorsettings', item.id ]" class="btn btn-secondary">Settings</a>&nbsp;
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </form>
+  </div>
+</div>
+

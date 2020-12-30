@@ -16,9 +16,8 @@ import { ErrorHandlerService } from './services/error-handler.service';
 import { AlertComponent } from './shared/alert.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StatsService } from './services/stats.service';
-import { ConnectorListComponent } from './components/connector/connector-list.component';
+import { ConnectorListComponent } from './components/connector/connector.component';
 import { ConnectorService } from './services/connector.service';
-import { ConnectorEditComponent } from './components/connector/connector-edit.component';
 import { EventListComponent } from './components/event/event-list.component';
 import { EventEditComponent } from './components/event/event-edit.component';
 import { EventService } from './services/event.service';
@@ -37,6 +36,10 @@ import { MappingTemplateService } from './services/mapping-template.service';
 import { MessageTemplateService } from './services/message-template.service';
 import { MappingTemplateEditComponent } from './components/mapping-template/mapping-template-edit.component';
 import { LookupEditComponent } from './components/lookup/lookup-edit.component';
+import { AboutService } from './services/about.service';
+import { AboutComponent } from './components/about/about.component';
+import { ConnectorSettingComponent } from './components/connector/connector-setting.component';
+import { ConnectorSettingService } from './services/connector-setting.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,6 @@ import { LookupEditComponent } from './components/lookup/lookup-edit.component';
     HomeComponent,
     AlertComponent,
     ConnectorListComponent,
-    ConnectorEditComponent,
     EventListComponent,
     EventEditComponent,
     JobListComponent,
@@ -58,7 +60,9 @@ import { LookupEditComponent } from './components/lookup/lookup-edit.component';
     LookupEditComponent,
     MappingTemplateListComponent,
     MappingTemplateEditComponent,
-    MessageTemplateListComponent
+    MessageTemplateListComponent,
+    AboutComponent,
+    ConnectorSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,8 @@ import { LookupEditComponent } from './components/lookup/lookup-edit.component';
     LookupService,
     MappingTemplateService,
     MessageTemplateService,
+    AboutService,
+    ConnectorSettingService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],

@@ -4,11 +4,11 @@
   </div>
   <div class="content">
     <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
-    <form *ngIf="connector" [formGroup]="connectorForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="lookup" [formGroup]="lookupForm" (ngSubmit)="onSubmit()">
     
       <div class="form-group">
         <label>Id</label>
-        {{connector.id || 'n/a'}} 
+        {{lookup.id || 'n/a'}} 
       </div>
     
       <div class="form-group">
@@ -20,7 +20,7 @@
         class="alert alert-danger">
     
       <div *ngIf="f.name.errors.required">
-        Connector name is required.
+        Lookup name is required.
       </div>
     </div>
         
@@ -32,31 +32,25 @@
 
     </div>
 <div>
-  Settings
-<div formArrayName="settings" *ngFor="let item of settingForms.controls; let i = index;">
+  Lookups
+<div formArrayName="lookups" *ngFor="let item of lookupsForms.controls; let i = index;">
   
   <div [formGroupName]="i">
 
+    <input formControlName="defKey" placeholder="Default Key">
+    <input formControlName="val" placeholder="Value">
+    <input formControlName="altKey" placeholder="Alternate Key">
     
-    <select formControlName="profile">
-      <option [ngValue]="0" selected>All</option>
-      <option [ngValue]="1">Local</option>
-      <option [ngValue]="2">Development</option>
-      <option [ngValue]="3">Production</option>
-    </select>
-
-    <input formControlName="key" placeholder="Key">
-    <input formControlName="value" placeholder="Value">
     <button (click)="deleteSetting(i)" class="btn btn-danger" >Delete</button>
   </div>
 
 </div>
 
-<button type="button" class="btn btn-primary" [disabled]="!connectorForm.valid" (click)="addDefaultSetting()" >Add</button>
+<button type="button" class="btn btn-primary" [disabled]="!lookupForm.valid" (click)="addDefaultSetting()" >Add</button>
 
 </div>
 
-      <button type="submit" class="btn btn-primary" [disabled]="!connectorForm.valid" >Save</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!lookupForm.valid" >Save</button>
       <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
     </form>
   </div>

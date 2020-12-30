@@ -1,0 +1,101 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">Connector Settings</h2>
+  </div>
+</div>
+<div class="card" *ngIf="connectorSettingsPageable != null">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+
+    Total: {{connectorSettingsPageable.totalElements}} Current:{{connectorSettingsPageable.numberOfElements}}
+
+    <form  [formGroup]="connectorSettingForm" (ngSubmit)="onSubmit()">
+
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Profile</th>
+          <th class="border-top-0" scope="col">Key</th>
+          <th class="border-top-0" scope="col">Value</th>
+          <th class="border-top-0" scope="col">Secret?</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+
+      </thead>
+      <tbody>
+
+        <tr>
+
+          <td>
+            {{f.id.value || 'n/a'}} 
+          </td>
+          <td >
+            <div class="form-group">
+            <select formControlName="profile" class="form-control">
+              <option *ngFor="let profile of profiles" [ngValue]="profile">{{profile}}</option>
+            </select>
+            <div *ngIf="f.profile.invalid && (f.profile.dirty || f.profile.touched)" class="alert alert-danger">
+              <div *ngIf="f.profile.errors.required">
+                Profile is required.
+              </div> 
+            </div>
+          </div>
+          </td>
+          <td>
+
+            <div class="form-group">
+              <input formControlName="key" class="form-control">
+              <div *ngIf="f.key.invalid && (f.key.dirty || f.key.touched)" class="alert alert-danger">
+                <div *ngIf="f.key.errors.required">
+                  Key is required.
+                </div> 
+              </div>
+            </div>
+
+          </td>
+          <td >
+            <div class="form-group">
+              <input formControlName="value" class="form-control">
+              <div *ngIf="f.value.invalid && (f.value.dirty || f.value.touched)" class="alert alert-danger">
+                <div *ngIf="f.value.errors.required">
+                  Value is required.
+                </div> 
+              </div>
+            </div>
+          </td>
+          <td >
+            
+            <div class="form-group">
+              <input type="checkbox" formControlName="secret" class="form-control" >
+            </div>
+
+          </td>
+          <td>
+      <button type="submit" class="btn btn-secondary" [disabled]="!connectorSettingForm.valid" >Save</button>&nbsp;
+      <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+
+          </td>
+
+   
+    </tr>
+
+        <tr *ngFor="let item of connectorSettingsPageable.content" [class.active]="item === selectedConnectorSetting">
+
+          <td>{{item.id}}</td>
+          <td>{{item.profile}}</td>
+          <td>{{item.key}}</td>
+          <td>{{item.value}}</td>
+          <td>{{item.secret}}</td>
+          <td style="white-space: nowrap">
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </form>
+
+  </div>
+</div>

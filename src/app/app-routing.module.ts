@@ -9,8 +9,7 @@ import { FileListComponent } from './components/file/file-list.component';
 import { FileEditComponent } from './components/file/file-edit.component';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
-import { ConnectorListComponent } from './components/connector/connector-list.component';
-import { ConnectorEditComponent } from './components/connector/connector-edit.component';
+import { ConnectorListComponent } from './components/connector/connector.component';
 import { EventEditComponent } from './components/event/event-edit.component';
 import { EventListComponent } from './components/event/event-list.component';
 import { JobListComponent } from './components/job/job-list.component';
@@ -23,6 +22,8 @@ import { MappingTemplateListComponent } from './components/mapping-template/mapp
 import { MessageTemplateListComponent } from './components/message-template/message-template-list.component';
 import { MappingTemplateEditComponent } from './components/mapping-template/mapping-template-edit.component';
 import { LookupEditComponent } from './components/lookup/lookup-edit.component';
+import { AboutComponent } from './components/about/about.component';
+import { ConnectorSettingComponent } from './components/connector/connector-setting.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -59,6 +60,11 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
+    path: 'connectorsettings/:connectorId',
+    component: ConnectorSettingComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
     path: 'lookups',
     component: LookupListComponent,
     canActivate: [OktaAuthGuard]
@@ -83,12 +89,7 @@ const routes: Routes = [
     component:  MessageTemplateListComponent,
     canActivate: [OktaAuthGuard]
   },
-  {
-    path: 'connectors/:id',
-    component: ConnectorEditComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
+   {
     path: 'events',
     component: EventListComponent,
     canActivate: [OktaAuthGuard]
@@ -126,6 +127,11 @@ const routes: Routes = [
   {
     path: 'traces/instance/:instanceId',
     component: TraceListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
     canActivate: [OktaAuthGuard]
   }
   

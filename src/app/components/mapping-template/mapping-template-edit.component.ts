@@ -39,14 +39,14 @@ export class MappingTemplateEditComponent implements OnInit {
         sourceTemplate: new FormControl(''),
         targetTemplate: new FormControl(''),
         transformScript: new FormControl(''),
-        mapping : new FormArray([]),
+        maps : new FormArray([]),
       });
 
   }
 
 
   get mappigForm(): FormArray {
-    return this.mappingTemplateForm.get('mapping') as FormArray
+    return this.mappingTemplateForm.get('maps') as FormArray
   }
 
 
@@ -144,10 +144,11 @@ export class MappingTemplateEditComponent implements OnInit {
   ngOnInit() {
 
     this.mappingTemplateForm = this.formBuilder.group({
+      id: [''],
       name: ['',[Validators.required]],
       description: [''],
       transformScript: ['',[Validators.required]],
-      mapping:this.formBuilder.array([])
+      maps:this.formBuilder.array([])
     });
 
     this
@@ -175,6 +176,7 @@ export class MappingTemplateEditComponent implements OnInit {
         
           this.mappingTemplate = mappingTemplate;
 
+          this.mappingTemplateForm.get('id').setValue(this.mappingTemplate.id);
           this.mappingTemplateForm.get('name').setValue(this.mappingTemplate.name);
           this.mappingTemplateForm.get('description').setValue(this.mappingTemplate.description);
           this.mappingTemplateForm.get('transformScript').setValue(this.mappingTemplate.transformScript);
@@ -195,26 +197,22 @@ export class MappingTemplateEditComponent implements OnInit {
 
   onSubmit() {
 
-    // const connnector = new Connector();
 
-    // connnector.id = this.id =='new' ? null : this.id;
-    // connnector.name = this.connectorForm.get('name').value;
-    // connnector.description = this.connectorForm.get('description').value;
-    // connnector.setting = this.connectorForm.get('settings').value;
+    let template: MappingTemplate = this.mappingTemplateForm.value;
 
-    //   this.connectorService.save(connnector, this.id == 'new' ? true : false).subscribe(
-    //     connector => {
-    //       this.connector = connector;
-    //       this.feedback = {type: 'success', message: 'Save was successful!'};
-    //       setTimeout(() => {
-    //         this.router.navigate(['/connectors']);
-    //       }, 1000);
-    //     }
-    //   );
+    this.mappingTemplateService.save(template, this.id == 'new' ? true : false).subscribe(
+        mappingTemplate => {
+          this.mappingTemplate = mappingTemplate;
+          this.feedback = {type: 'success', message: 'Save was successful!'};
+          setTimeout(() => {
+            this.router.navigate(['/mappingtemplates']);
+          }, 1000);
+        }
+      );
 
   }
 
   cancel() {
-    this.router.navigate(['/mappingTemplate']);
+    this.router.navigate(['/mappingtemplates']);
   }
 }

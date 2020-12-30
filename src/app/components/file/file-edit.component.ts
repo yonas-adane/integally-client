@@ -77,6 +77,8 @@ export class FileEditComponent implements OnInit {
     formData.append('filename', this.fileUploadForm.get('filename').value);
     formData.append('file', this.fileUploadForm.get('file').value);
 
+    console.log(formData);
+
     this.fileService.save(formData).subscribe(
       file => {
         this.file = file;

@@ -6,6 +6,8 @@ import { of } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Connector } from 'src/app/models/connector.model';
 import { ConnectorService } from 'src/app/services/connector.service';
+import { Lookup } from 'src/app/models/lookup.model';
+import { LookupService } from 'src/app/services/lookup.service';
 
 @Component({
   selector: 'app-lookup-edit',
@@ -14,61 +16,60 @@ import { ConnectorService } from 'src/app/services/connector.service';
 export class LookupEditComponent implements OnInit {
 
   id: string ;
-  connector: Connector;
+  lookup: Lookup;
   feedback: any = {};
   formHeader: string;
 
-  settings = new FormArray([]);
 
-  connectorForm = new FormGroup({
+  lookupForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl(''),
     description: new FormControl(''),
-    settings : new FormArray([]),
+    lookups : new FormArray([]),
   });
 
   constructor(
     private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
     private router: Router,
-    private connectorService: ConnectorService) {
+    private lookupService: LookupService) {
   }
 
 
-  get settingForms() {
-    return this.connectorForm.get('settings') as FormArray
+  get lookupsForms() {
+    return this.lookupForm.get('lookups') as FormArray
   }
 
   addDefaultSetting(){
-    this.addSetting(null, null, null);
+    this.addLookup(null, null, null);
   }
 
-  addSetting(profile :string, key: string, value: string): void {
+  addLookup(defaultKey :string, val: string, alternateKey: string): void {
 
-    const setting = this.formBuilder.group({ 
-      profile: [profile],
-      key: [key],
-      value: [value],
+    const lookup = this.formBuilder.group({ 
+      defKey: [defaultKey],
+      val: [val],
+      altKey: [alternateKey],
     })
   
-    this.settingForms.push(setting);
+    this.lookupsForms.push(lookup);
     
   }
 
   deleteSetting(i) {
     
     if (confirm('Are you sure?')) {
-      this.settingForms.removeAt(i);
+      this.lookupsForms.removeAt(i);
     }
 
   }
 
   ngOnInit() {
 
-    this.connectorForm = this.formBuilder.group({
+    this.lookupForm = this.formBuilder.group({
       name: ['',[Validators.required]],
       description: [''],
-      settings:this.formBuilder.array([])
+      lookups:this.formBuilder.array([])
     });
 
     this
@@ -79,29 +80,29 @@ export class LookupEditComponent implements OnInit {
         switchMap(id => {
           
           if (id === 'new') { 
-            this.formHeader = "New connector";
+            this.formHeader = "New lookup";
             this.id = id;
-            return of(new Connector()); 
+            return of(new Lookup()); 
           }
 
-          this.formHeader = "Edit connector";
+          this.formHeader = "Edit lookup";
 
           this.id = id;
 
-          return this.connectorService.findById(id);
+          return this.lookupService.findById(id);
 
         })
       )
-      .subscribe(connector => {
+      .subscribe(lookup => {
         
-          this.connector = connector;
+          this.lookup = lookup;
 
-          this.connectorForm.get('name').setValue(this.connector.name);
-          this.connectorForm.get('description').setValue(this.connector.description);
+          this.lookupForm.get('name').setValue(this.lookup.name);
+          this.lookupForm.get('description').setValue(this.lookup.description);
 
-          if(this.connector.setting != null){
-            for (let setting of this.connector.setting) {
-              this.addSetting(setting.profile, setting.key, setting.value);
+          if(this.lookup.lookups != null){
+            for (let lookup of this.lookup.lookups) {
+              this.addLookup(lookup.defKey, lookup.val, lookup.altKey);
             }
           }
           this.feedback = {};
@@ -109,24 +110,17 @@ export class LookupEditComponent implements OnInit {
       );
   }
 
-  get f() { return this.connectorForm.controls; }
+  get f() { return this.lookupForm.controls; }
 
 
   onSubmit() {
 
-    const connnector = new Connector();
-
-    connnector.id = this.id =='new' ? null : this.id;
-    connnector.name = this.connectorForm.get('name').value;
-    connnector.description = this.connectorForm.get('description').value;
-    connnector.setting = this.connectorForm.get('settings').value;
-
-      this.connectorService.save(connnector, this.id == 'new' ? true : false).subscribe(
-        connector => {
-          this.connector = connector;
+      this.lookupService.save(this.lookupForm.value, this.id == 'new' ? true : false).subscribe(
+        lookup => {
+          this.lookup = lookup;
           this.feedback = {type: 'success', message: 'Save was successful!'};
           setTimeout(() => {
-            this.router.navigate(['/connectors']);
+            this.router.navigate(['/lookups']);
           }, 1000);
         }
       );
@@ -134,6 +128,6 @@ export class LookupEditComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/connectors']);
+    this.router.navigate(['/lookups']);
   }
 }

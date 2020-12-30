@@ -33,11 +33,10 @@
             <ul>
               <li *ngFor="let attribute of item.attributes">
                 <ul>
-                  <li>{{attribute.name}}</li>
-                  <li>{{attribute.dataType}}</li>
-                  <li>{{attribute.value | json}}</li>
-                  <li>{{attribute.defaultValue | json}}</li>
-                  <li>{{attribute.depth}}</li>
+                  <li>Name: {{attribute.name}}</li>
+                  <li>Data type: {{attribute.dataType}}</li>
+                  <li>Default value: {{attribute.defaultValue | json}}</li>
+                  <li>Depth: {{attribute.depth}}</li>
                 </ul>
               </li>
             </ul>
