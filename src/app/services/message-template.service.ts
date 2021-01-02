@@ -2,69 +2,59 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { ApiBaseService } from './api-base.service';
-import { Job } from '../models/job.model';
+import { LookupGroup } from '../models/lookupGroup.model';
+import { Page } from '../models/page.model';
 import { MessageTemplate } from '../models/message-template.model';
 
 
 @Injectable()
 export class MessageTemplateService  extends ApiBaseService {
 
-  messageTemplateList: MessageTemplate[] = [];
+  messageTemplatePageable: Page<MessageTemplate>;
 
   private apiResource = this.apiURL.concat("messagetemplates");
 
   findById(id: string): Observable<MessageTemplate> {
     const url = `${this.apiResource}/${id}`;
-    
     return this.http.get<MessageTemplate>(url, this.httpOptions);
-    
   }
 
   load(): void {
-
     const url = `${this.apiResource}/list/0`;
-
-    this.http.get<MessageTemplate[]>(url, this.httpOptions).subscribe(result => {
-      this.messageTemplateList = result;
+    this.http.get<Page<MessageTemplate>>(url, this.httpOptions).subscribe(result => {
+      this.messageTemplatePageable = result;
     }
   );
     
   }
 
-  save(entity: Job, isCreate: boolean): Observable<Job> {
-    
-    let params = new HttpParams();
+  lookup(): Observable<MessageTemplate[]>{
+    const url = `${this.apiResource}/lookup`;
+    return this.http.get<MessageTemplate[]>(url, this.httpOptions);
+  }
 
+  save(entity: MessageTemplate, isCreate: boolean): Observable<MessageTemplate> {
+    
     let url = `${this.apiResource}`;
 
     if(isCreate){
-      return this.http.post<Job>(url, entity);
+      return this.http.post<MessageTemplate>(url, entity);
     }
     else{
-      return this.http.put<Job>(url, entity);
+      return this.http.put<MessageTemplate>(url, entity);
     }
 
 
   }
 
-  
-  start(entity: Job): Observable<Job> {
-    
-    let params = new HttpParams();
 
-    let url = `${this.apiResource}/start`;
-
-    return this.http.post<Job>(url, entity);
-
-  }
-
-  delete(entity: Job): Observable<Event> {
+  delete(entity: MessageTemplate): Observable<MessageTemplate> {
     let params = new HttpParams();
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
       params = new HttpParams().set('id', entity.id.toString());
-      return this.http.delete<Event>(url, this.httpOptions);
+      return this.http.delete<MessageTemplate>(url, this.httpOptions);
     }
     return null;
   }

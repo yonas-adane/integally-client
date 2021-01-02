@@ -1,0 +1,126 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">Message attributes</h2>
+  </div>
+</div>
+<div class="card" *ngIf="messageAttributesPageable != null">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+
+    <div *ngIf="messageTemplate">
+
+      <ul class="list-unstyled">
+        <li>
+          Id: {{messageTemplate.id}}
+        </li>
+        <li>
+          Name: {{messageTemplate.name}}
+        </li>
+        <li>
+          Description: {{messageTemplate.description}}
+        </li>
+     </ul>
+
+  </div>
+
+    Total: {{messageAttributesPageable.totalElements}} Current:{{messageAttributesPageable.numberOfElements}}
+
+    <form  [formGroup]="messageAttributeForm" (ngSubmit)="onSubmit()">
+
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">name</th>
+          <th class="border-top-0" scope="col">dataType</th>
+          <th class="border-top-0" scope="col">defaultValue</th>
+          <th class="border-top-0" scope="col">depth</th>
+          <th class="border-top-0" scope="col"></th>
+        </tr>
+
+      </thead>
+      <tbody>
+
+        <tr>
+
+          <td>
+            {{f.id.value || 'n/a'}} 
+          </td>
+          <td >
+      <div class="form-group">
+        <input formControlName="name" placeholder="Name">
+
+
+        <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)"
+        class="alert alert-danger">
+    
+      <div *ngIf="f.name.errors.required">
+        Name is required
+      </div>
+    </div>
+      </div>
+
+          </td>
+          <td>
+
+            <div class="form-group">
+              <select formControlName="dataType" class="form-control">
+                <option *ngFor="let dataType of dataTypes" [ngValue]="dataType">{{dataType}}</option>
+              </select>
+              <div *ngIf="f.dataType.invalid && (f.dataType.dirty || f.dataType.touched)" class="alert alert-danger">
+                <div *ngIf="f.dataType.errors.required">
+                  Data type is required.
+                </div> 
+              </div>
+            </div>
+
+          </td>
+          <td >
+
+              <textarea formControlName="defaultValue" class="form-control"></textarea>
+            
+          </td>
+          <td >
+
+            <div class="form-group">
+              <input formControlName="depth" placeholder="Depth">
+      
+      
+              <div *ngIf="f.depth.invalid && (f.depth.dirty || f.depth.touched)"
+              class="alert alert-danger">
+          
+            <div *ngIf="f.depth.errors.required">
+              Depth is required
+            </div>
+          </div>
+          </div>
+
+        </td>
+            <td>
+      <button type="submit" class="btn btn-secondary" [disabled]="!messageAttributeForm.valid" >Save</button>&nbsp;
+      <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+
+          </td>
+
+   
+    </tr>
+
+        <tr *ngFor="let item of messageAttributesPageable.content" >
+
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.dataType}}</td>
+          <td>{{item.defaultValue}}</td>
+          <td>{{item.depth}}</td>
+          <td style="white-space: nowrap">
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </form>
+
+  </div>
+</div>

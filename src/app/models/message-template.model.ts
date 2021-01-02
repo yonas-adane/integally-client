@@ -1,10 +1,22 @@
-import { Attribute } from './mapping-template.model';
+import { Audit } from './audit.model';
 
-export class MessageTemplate {
+export class MessageTemplate extends Audit {
   id: string;
   name: string;
   description: string;
-  attributes: Attribute[];
 }
+
+export class MessageAttribute extends Audit{
+
+  id: string;
+  messageTemplateId: string;
+  name: string;
+  dataType: string;
+  defaultValue: any;
+  depth: number;
+
+}
+
+
 
 

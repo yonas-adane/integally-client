@@ -5,8 +5,6 @@ import { OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { FileListComponent } from './components/file/file-list.component';
-import { FileEditComponent } from './components/file/file-edit.component';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { ConnectorListComponent } from './components/connector/connector.component';
@@ -17,13 +15,14 @@ import { JobEditComponent } from './components/job/job-edit.component';
 import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
 import { TraceListComponent } from './components/trace/trace-list.component';
-import { LookupListComponent } from './components/lookup/lookup-list.component';
-import { MappingTemplateListComponent } from './components/mapping-template/mapping-template-list.component';
-import { MessageTemplateListComponent } from './components/message-template/message-template-list.component';
-import { MappingTemplateEditComponent } from './components/mapping-template/mapping-template-edit.component';
-import { LookupEditComponent } from './components/lookup/lookup-edit.component';
+import { LookupGroupComponent } from './components/lookup/lookup-group.component';
 import { AboutComponent } from './components/about/about.component';
 import { ConnectorSettingComponent } from './components/connector/connector-setting.component';
+import { LookupComponent } from './components/lookup/lookup.component';
+import { MessageAttributeComponent } from './components/message-template/message-attribute.component';
+import { MessageTemplateMapComponent } from './components/mapping-template/message-template-map.component';
+import { MessageTemplateComponent } from './components/message-template/message-template.component';
+import { MessageAttributeMapComponent } from './components/mapping-template/message-attribute-map.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -42,16 +41,6 @@ const routes: Routes = [
   {
     path: 'callback',
     component: OktaCallbackComponent
-  },
-  {
-    path: 'files',
-    component: FileListComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
-    path: 'files/:id',
-    component: FileEditComponent,
-    canActivate: [OktaAuthGuard]
   }
   ,
   {
@@ -65,28 +54,33 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
-    path: 'lookups',
-    component: LookupListComponent,
+    path: 'lookupgroups',
+    component: LookupGroupComponent,
     canActivate: [OktaAuthGuard]
   },
   {
-    path: 'lookups/:id',
-    component: LookupEditComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
-    path: 'mappingtemplates',
-    component: MappingTemplateListComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
-    path: 'mappingtemplates/:id',
-    component: MappingTemplateEditComponent,
+    path: 'lookups/:lookupGroupId',
+    component: LookupComponent,
     canActivate: [OktaAuthGuard]
   },
   {
     path: 'messagetemplates',
-    component:  MessageTemplateListComponent,
+    component:  MessageTemplateComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'messagetemplatemaps',
+    component:  MessageTemplateMapComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'messageattributes/:messageTemplateId',
+    component:  MessageAttributeComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'messageattributemaps/:messageTemplateMapId',
+    component:  MessageAttributeMapComponent,
     canActivate: [OktaAuthGuard]
   },
    {

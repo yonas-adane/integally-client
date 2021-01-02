@@ -28,18 +28,22 @@ import { TraceService } from './services/trace.service';
 import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
 import { TraceListComponent } from './components/trace/trace-list.component';
-import { LookupListComponent } from './components/lookup/lookup-list.component';
-import { MappingTemplateListComponent } from './components/mapping-template/mapping-template-list.component';
-import { MessageTemplateListComponent } from './components/message-template/message-template-list.component';
-import { LookupService } from './services/lookup.service';
-import { MappingTemplateService } from './services/mapping-template.service';
+import { LookupGroupComponent } from './components/lookup/lookup-group.component';
+import { LookupGroupService } from './services/lookup-group.service';
 import { MessageTemplateService } from './services/message-template.service';
-import { MappingTemplateEditComponent } from './components/mapping-template/mapping-template-edit.component';
-import { LookupEditComponent } from './components/lookup/lookup-edit.component';
 import { AboutService } from './services/about.service';
 import { AboutComponent } from './components/about/about.component';
 import { ConnectorSettingComponent } from './components/connector/connector-setting.component';
 import { ConnectorSettingService } from './services/connector-setting.service';
+import { LookupComponent } from './components/lookup/lookup.component';
+import { LookupService } from './services/lookup.service';
+import { MessageTemplateComponent } from './components/message-template/message-template.component';
+import { MessageAttributeService } from './services/message-attribute.service';
+import { MessageAttributeComponent } from './components/message-template/message-attribute.component';
+import { MessageTemplateMapComponent } from './components/mapping-template/message-template-map.component';
+import { MessageTemplateMapService } from './services/message-template-map.service';
+import { MessageAttributeMapComponent } from './components/mapping-template/message-attribute-map.component';
+import { MessageAttributeMapService } from './services/message-attribute-map.service';
 
 @NgModule({
   declarations: [
@@ -56,13 +60,14 @@ import { ConnectorSettingService } from './services/connector-setting.service';
     TraceInstanceListComponent,
     TraceComponent,
     TraceListComponent,
-    LookupListComponent, 
-    LookupEditComponent,
-    MappingTemplateListComponent,
-    MappingTemplateEditComponent,
-    MessageTemplateListComponent,
+    LookupGroupComponent, 
+    MessageTemplateComponent,
     AboutComponent,
-    ConnectorSettingComponent
+    ConnectorSettingComponent,
+    LookupComponent,
+    MessageAttributeComponent,
+    MessageTemplateMapComponent,
+    MessageAttributeMapComponent
   ],
   imports: [
     BrowserModule,
@@ -79,11 +84,14 @@ import { ConnectorSettingService } from './services/connector-setting.service';
     EventService,
     JobService,
     TraceService,
-    LookupService,
-    MappingTemplateService,
+    LookupGroupService,
     MessageTemplateService,
     AboutService,
     ConnectorSettingService,
+    LookupService,
+    MessageAttributeService,
+    MessageTemplateMapService,
+    MessageAttributeMapService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],

@@ -7,6 +7,25 @@
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
 
+    <div *ngIf="connector">
+
+      <ul class="list-unstyled">
+        <li>
+          Id: {{connector.id}}
+        </li>
+        <li>
+          Name: {{connector.name}}
+        </li>
+        <li>
+          Description: {{connector.description}}
+        </li>
+        <li>
+          Package file name: {{connector.packageFileName}}
+        </li>
+     </ul>
+
+  </div>
+
     Total: {{connectorSettingsPageable.totalElements}} Current:{{connectorSettingsPageable.numberOfElements}}
 
     <form  [formGroup]="connectorSettingForm" (ngSubmit)="onSubmit()">

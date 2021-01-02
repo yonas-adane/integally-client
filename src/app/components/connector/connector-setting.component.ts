@@ -16,6 +16,7 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class ConnectorSettingComponent implements OnInit {
 
+  connector: Connector;
   selectedConnectorSetting: ConnectorSetting;
   connectorSetting: ConnectorSetting;
   feedback: any = {};
@@ -38,7 +39,9 @@ export class ConnectorSettingComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
     private router: Router, 
-    private connectorSettingService: ConnectorSettingService) {
+    private connectorSettingService: ConnectorSettingService,
+    private connectorService: ConnectorService
+    ) {
 
     
     }
@@ -86,8 +89,14 @@ validateValueField(){
       map(p => p.connectorId),
       switchMap(id => {
         
-          this.connectorId = id;
+        this.connectorId = id;
 
+        this.connectorService.findById(this.connectorId).subscribe(
+          result => {
+            this.connector = result;
+          }
+        );
+         
         this.load(this.connectorId);
 
         return of(new ConnectorSetting());

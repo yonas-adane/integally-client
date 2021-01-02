@@ -1,0 +1,110 @@
+
+<div class="card">
+  <div class="header">
+    <h2 class="title">Message template maps</h2>
+  </div>
+</div>
+<div class="card" *ngIf="messageTemplateMapsPageable != null">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+
+    Total: {{messageTemplateMapsPageable.totalElements}} Current:{{messageTemplateMapsPageable.numberOfElements}}
+
+    <form  [formGroup]="messageTemplateMapForm" (ngSubmit)="onSubmit()">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">Name</th>
+          <th class="border-top-0" scope="col">Description</th>
+          <th class="border-top-0" scope="col">sourceMessageTemplate </th>
+          <th class="border-top-0" scope="col">targetMessageTemplate</th>
+          <th class="border-top-0" scope="col">clientScript</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>
+              {{f.id.value || 'n/a'}} 
+          </td>
+          <td>
+            <div class="form-group">
+              <input formControlName="name" class="form-control">
+      
+      
+              <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)"
+              class="alert alert-danger">
+          
+            <div *ngIf="f.name.errors.required">
+              Name is required.
+            </div>
+          </div>
+              
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <input formControlName="description" class="form-control">
+      
+          </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <select formControlName="sourceMessageTemplateId" class="form-control">
+                <option *ngFor="let template of messageTemplates" [ngValue]="template.id">{{template.name}}</option>
+              </select>
+              <div *ngIf="f.sourceMessageTemplateId.invalid && (f.sourceMessageTemplateId.dirty || f.sourceMessageTemplateId.touched)" class="alert alert-danger">
+                <div *ngIf="f.sourceMessageTemplateId.errors.required">
+                  Source message template is required.
+                </div> 
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <select formControlName="targetMessageTemplateId" class="form-control">
+                <option *ngFor="let template of messageTemplates" [ngValue]="template.id">{{template.name}}</option>
+              </select>
+              <div *ngIf="f.targetMessageTemplateId.invalid && (f.targetMessageTemplateId.dirty || f.targetMessageTemplateId.touched)" class="alert alert-danger">
+                <div *ngIf="f.targetMessageTemplateId.errors.required">
+                  Target message template is required.
+                </div> 
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <textarea formControlName="clientScript" class="form-control"></textarea>
+          </div>
+          </td>
+
+          <td style="white-space: nowrap">
+
+            <button type="submit" class="btn btn-secondary" [disabled]="!messageTemplateMapForm.valid" >Save</button>&nbsp;
+            <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+
+          </td>
+        </tr>
+
+        <tr *ngFor="let item of messageTemplateMapsPageable.content" >
+        
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.sourceMessageTemplateId}}</td>
+          <td>{{item.targetMessageTemplateId}}</td>
+          <td>{{item.clientScript}}</td>
+
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../messageattributemaps', item.id ]" class="btn btn-secondary">Attributes</a>&nbsp;
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </form>
+  </div>
+</div>
+
