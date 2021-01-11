@@ -4,19 +4,20 @@ import { ApiBaseService } from './api-base.service';
 import { Page } from '../models/page.model';
 import { HttpParams } from '@angular/common/http';
 import { MessageAttributeMap } from '../models/message-template-map.model';
+import { MessageAttributeMapSource } from '../models/message-template.model';
 
 
 @Injectable()
-export class MessageAttributeMapService  extends ApiBaseService {
+export class MessageAttributeMapSourceService extends ApiBaseService {
 
-  messageAttributeMapPageable: Page<MessageAttributeMap>;
+  messageAttributeMapSourcePageable: Page<MessageAttributeMapSource>;
 
-  private apiResource = this.apiURL.concat("messageattributes");
+  private apiResource = this.apiURL.concat("messageattributesourcemaps");
 
-  findById(id: string): Observable<MessageAttributeMap> {
+  findById(id: string): Observable<MessageAttributeMapSource> {
     const url = `${this.apiResource}/${id}`;
-    
-    let result = this.http.get<MessageAttributeMap>(url, this.httpOptions);
+
+    let result = this.http.get<MessageAttributeMapSource>(url, this.httpOptions);
 
     return result;
   }
@@ -25,36 +26,45 @@ export class MessageAttributeMapService  extends ApiBaseService {
 
     const url = `${this.apiResource}/list/${templateId}/0`;
 
-    this.http.get<Page<MessageAttributeMap>>(url, this.httpOptions).subscribe(result => {
+    this.http.get<Page<MessageAttributeMapSource>>(url, this.httpOptions).subscribe(result => {
 
-      this.messageAttributeMapPageable = result;
+      this.messageAttributeMapSourcePageable = result;
 
     }
-  );
-    
+    );
+
   }
 
- 
-  save(entity: MessageAttributeMap): Observable<MessageAttributeMap> {
-    
+  lookup(attributeMapId: String): Observable<MessageAttributeMapSource[]> {
+
+    const url = `${this.apiResource}/lookup/${attributeMapId}`;
+
+    return this.http.get<MessageAttributeMapSource[]>(url, this.httpOptions);
+
+
+  }
+
+
+  save(entity: MessageAttributeMapSource): Observable<MessageAttributeMapSource> {
+
     let params = new HttpParams();
 
     let url = `${this.apiResource}`;
 
-    if(entity.id == null)
-      return this.http.post<MessageAttributeMap>(url, entity);
+    if (entity.id == null)
+      return this.http.post<MessageAttributeMapSource>(url, entity);
     else
-      return this.http.put<MessageAttributeMap>(url, entity);
+      return this.http.put<MessageAttributeMapSource>(url, entity);
 
   }
 
 
 
-  delete(entity: MessageAttributeMap): Observable<MessageAttributeMap> {
+  delete(entity: MessageAttributeMapSource): Observable<MessageAttributeMapSource> {
     let url = '';
     if (entity.id) {
       url = `${this.apiResource}/${entity.id.toString()}`;
-      return this.http.delete<MessageAttributeMap>(url, this.httpOptions);
+      return this.http.delete<MessageAttributeMapSource>(url, this.httpOptions);
     }
     return null;
   }

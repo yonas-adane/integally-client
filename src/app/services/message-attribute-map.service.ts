@@ -11,7 +11,7 @@ export class MessageAttributeMapService  extends ApiBaseService {
 
   messageAttributeMapPageable: Page<MessageAttributeMap>;
 
-  private apiResource = this.apiURL.concat("messageattributes");
+  private apiResource = this.apiURL.concat("messageattributemaps");
 
   findById(id: string): Observable<MessageAttributeMap> {
     const url = `${this.apiResource}/${id}`;

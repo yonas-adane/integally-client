@@ -57,7 +57,7 @@ export class MessageAttributeComponent implements OnInit {
     id: [null],
     messageTemplateId: [null],
     name: ['',[Validators.required]],
-    dataType: ['',[Validators.required]],
+    dataType: ['', [Validators.required]],
     defaultValue: [null],
     depth: [0,[Validators.required]]
   });

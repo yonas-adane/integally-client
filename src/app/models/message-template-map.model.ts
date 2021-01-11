@@ -13,7 +13,7 @@ export class MessageAttributeMap extends Audit{
 
   id: string;
   messageTemplateMapId: string;
-  sourceMessageAttributeIds: MessageAttributeMapSource[];
+  sourceMessageAttributes: MessageAttributeMapSource[];
   function: string;
   clientFunction: string;
   targetMessageAttributeId: any;

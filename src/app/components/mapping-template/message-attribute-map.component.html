@@ -36,7 +36,6 @@
 
     <form  [formGroup]="messageAttributeMapForm" (ngSubmit)="onSubmit()">
 
-      
     <table class="table table-centered table-hover mb-0" id="datatable">
       <thead>
         <tr>
@@ -65,7 +64,7 @@
                   <div [formGroupName]="sourceAttributeIndex" class="form-group">
                     <div class="form-inline">
                       <select formControlName="sourceMessageAttributeId" class="form-control">
-                        <option *ngFor="let attribute of messageAttributes" [ngValue]="attribute.id">{{attribute.name}}</option>
+                        <option *ngFor="let attribute of sourceMessageAttributeLookup" [ngValue]="attribute.id">{{attribute.name}}</option>
                       </select>
 
                   <button type="button" class="btn btn-danger" (click)="removeSourceMessageAttribute(sourceAttributeIndex)">X</button>
@@ -119,7 +118,7 @@
 
             <div class="form-group">
               <select formControlName="targetMessageAttributeId" class="form-control">
-                <option *ngFor="let attribute of messageAttributes" [ngValue]="attribute.id">{{attribute.name}}</option>
+                <option *ngFor="let attribute of targetMessageAttributeLookup" [ngValue]="attribute.id">{{attribute.name}}</option>
               </select>
               <div *ngIf="f.targetMessageAttributeId.invalid && (f.targetMessageAttributeId.dirty || f.targetMessageAttributeId.touched)" class="alert alert-danger">
                 <div *ngIf="f.targetMessageAttributeId.errors.required">
@@ -147,7 +146,13 @@
         <tr *ngFor="let item of messageAttributeMapsPageable.content" >
 
           <td>{{item.id}}</td>
-          <td></td>
+          <td>
+            <ul>
+              <li *ngFor="let source of item.sourceMessageAttributes">
+                {{source.sourceMessageAttributeId}}
+              </li>
+            </ul>
+          </td>
           <td>{{item.function}}</td>
           <td>{{item.clientFunction}}</td>
           <td>{{item.targetMessageAttributeId}}</td>

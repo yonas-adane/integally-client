@@ -1,0 +1,141 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">Jobs</h2>
+  </div>
+</div>
+<div class="card" *ngIf="jobsPageable != null">
+  <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  
+    Total: {{jobsPageable.totalElements}} Current:{{jobsPageable.numberOfElements}}
+
+    <form  [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+      
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Id</th>
+          <th class="border-top-0" scope="col">dateStart</th>
+          <th class="border-top-0" scope="col">dateEnd</th>
+          <th class="border-top-0" scope="col">duration</th>
+          <th class="border-top-0" scope="col">priority</th>
+          <th class="border-top-0" scope="col">eventId</th>
+          <th class="border-top-0" scope="col">message</th>
+          <th class="border-top-0" scope="col">status</th>
+          <th class="border-top-0" scope="col">tag</th>
+          <th class="border-top-0" scope="col">triggerCount</th>
+          <th class="border-top-0" scope="col">size</th>
+          <th class="border-top-0" scope="col"></th>
+        </tr>
+
+      </thead>
+      <tbody>
+
+        <tr>
+
+          <td>
+            {{f.id.value || 'n/a'}} 
+          </td>
+          <td>
+              dateStart
+          </td>
+            <td>
+      dateEnd
+            </td>
+            <td>
+              duration
+            </td>
+          <td >
+
+            priority
+
+          </td>
+                      <td>
+                        <div class="form-group">
+                          <select formControlName="eventId" class="form-control">
+                            <option *ngFor="let event of events" [ngValue]="event.id">{{event.name}}</option>
+                          </select>
+                      
+                          <div *ngIf="f.eventId.invalid && (f.eventId.dirty || f.eventId.touched)" class="alert alert-danger">
+                      
+                            <div *ngIf="f.eventId.errors.required">
+                              eventId is required
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea formControlName="message" placeholder="message"></textarea>
+                      
+                      
+                          <div *ngIf="f.message.invalid && (f.message.dirty || f.message.touched)"
+                            class="alert alert-danger">
+                      
+                            <div *ngIf="f.message.errors.required">
+                              message is required
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+<td>
+  <div class="form-group">
+    <select formControlName="status" class="form-control">
+      <option *ngFor="let status of statuses" >{{status}}</option>
+    </select>
+
+    <div *ngIf="f.status.invalid && (f.status.dirty || f.status.touched)" class="alert alert-danger">
+
+      <div *ngIf="f.status.errors.required">
+        status required
+      </div>
+    </div>
+  </div>
+</td>
+            
+
+    <td>
+    
+      tag
+    
+    </td>
+
+    <td>
+    
+      triggerCount
+    
+    </td>
+    <td>
+    
+      size
+    
+    </td>
+            <td>  
+      <button type="submit" class="btn btn-secondary" [disabled]="!jobForm.valid" >Save</button>&nbsp;
+      <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+
+          </td>
+    </tr>
+
+        <tr *ngFor="let item of jobsPageable.content" >
+          <td>{{item.Id}}</td>
+          <td>{{item.dateStart}}</td>
+          <td>{{item.dateEnd}}</td>
+          <td>{{item.duration}}</td>
+          <td>{{item.priority}}</td>
+          <td>{{item.eventId}}</td>
+          <td>{{item.message}}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.tag}}</td>
+          <td>{{item.triggerCount}}</td>
+          <td>{{item.size}}</td>
+          <td style="white-space: nowrap">
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </form>
+
+  </div>

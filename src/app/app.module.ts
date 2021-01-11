@@ -18,12 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StatsService } from './services/stats.service';
 import { ConnectorListComponent } from './components/connector/connector.component';
 import { ConnectorService } from './services/connector.service';
-import { EventListComponent } from './components/event/event-list.component';
-import { EventEditComponent } from './components/event/event-edit.component';
-import { EventService } from './services/event.service';
 import { JobService } from './services/job.service';
-import { JobListComponent } from './components/job/job-list.component';
-import { JobEditComponent } from './components/job/job-edit.component';
 import { TraceService } from './services/trace.service';
 import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
@@ -44,6 +39,11 @@ import { MessageTemplateMapComponent } from './components/mapping-template/messa
 import { MessageTemplateMapService } from './services/message-template-map.service';
 import { MessageAttributeMapComponent } from './components/mapping-template/message-attribute-map.component';
 import { MessageAttributeMapService } from './services/message-attribute-map.service';
+import { EventTemplateComponent } from './components/event/event-template.component';
+import { EventTemplateService } from './services/event-template.service';
+import { JobComponent } from './components/job/job.component';
+import { EventMessageComponent } from './components/event/event-message.component';
+import { EventMessageService } from './services/event-message.service';
 
 @NgModule({
   declarations: [
@@ -53,10 +53,6 @@ import { MessageAttributeMapService } from './services/message-attribute-map.ser
     HomeComponent,
     AlertComponent,
     ConnectorListComponent,
-    EventListComponent,
-    EventEditComponent,
-    JobListComponent,
-    JobEditComponent,
     TraceInstanceListComponent,
     TraceComponent,
     TraceListComponent,
@@ -67,7 +63,10 @@ import { MessageAttributeMapService } from './services/message-attribute-map.ser
     LookupComponent,
     MessageAttributeComponent,
     MessageTemplateMapComponent,
-    MessageAttributeMapComponent
+    MessageAttributeMapComponent,
+    EventTemplateComponent,
+    JobComponent,
+    EventMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +80,6 @@ import { MessageAttributeMapService } from './services/message-attribute-map.ser
     ErrorHandlerService,
     StatsService,
     ConnectorService,
-    EventService,
     JobService,
     TraceService,
     LookupGroupService,
@@ -92,6 +90,9 @@ import { MessageAttributeMapService } from './services/message-attribute-map.ser
     MessageAttributeService,
     MessageTemplateMapService,
     MessageAttributeMapService,
+    EventTemplateService,
+    JobService,
+    EventMessageService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],

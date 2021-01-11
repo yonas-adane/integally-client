@@ -8,10 +8,6 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { ConnectorListComponent } from './components/connector/connector.component';
-import { EventEditComponent } from './components/event/event-edit.component';
-import { EventListComponent } from './components/event/event-list.component';
-import { JobListComponent } from './components/job/job-list.component';
-import { JobEditComponent } from './components/job/job-edit.component';
 import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
 import { TraceListComponent } from './components/trace/trace-list.component';
@@ -23,6 +19,9 @@ import { MessageAttributeComponent } from './components/message-template/message
 import { MessageTemplateMapComponent } from './components/mapping-template/message-template-map.component';
 import { MessageTemplateComponent } from './components/message-template/message-template.component';
 import { MessageAttributeMapComponent } from './components/mapping-template/message-attribute-map.component';
+import { EventTemplateComponent } from './components/event/event-template.component';
+import { JobComponent } from './components/job/job.component';
+import { EventMessageComponent } from './components/event/event-message.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -84,26 +83,21 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
    {
-    path: 'events',
-    component: EventListComponent,
+     path: 'eventtemplates',
+    component: EventTemplateComponent,
     canActivate: [OktaAuthGuard]
   },
   {
-    path: 'events/:id',
-    component: EventEditComponent,
+    path: 'eventmessages',
+    component: EventMessageComponent,
     canActivate: [OktaAuthGuard]
   },
   {
     path: 'jobs',
-    component: JobListComponent,
+    component: JobComponent,
     canActivate: [OktaAuthGuard]
   },
-  {
-    path: 'jobs/:id',
-    component: JobEditComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
+   {
     path: 'traces/:id',
     component: TraceComponent,
     canActivate: [OktaAuthGuard]

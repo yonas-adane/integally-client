@@ -1,18 +1,15 @@
-import { Event } from 'src/app/models/event.model';
+import { Audit } from './audit.model';
 
-export class Job {
+export class Job extends Audit {
   id: string;
   dateStart: Date;
   dateEnd: Date;
-  dateAdded: Date;
   priority: number;
-  event: Event;
+  eventId: string;
+  message: string;
   status: string;
   tag: string;
+  triggerCount: number;
   size: number;
 }
-
-
-
-
 

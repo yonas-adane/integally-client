@@ -20,7 +20,8 @@ export class MessageAttributeMapComponent implements OnInit {
   messageTemplateMap: MessageTemplateMap;
   messageAttributeMap: MessageAttributeMap;
 
-  messageAttributes: MessageAttribute[];
+  sourceMessageAttributeLookup: MessageAttribute[];
+  targetMessageAttributeLookup: MessageAttribute[];
 
   feedback: any = {};
 
@@ -48,7 +49,7 @@ export class MessageAttributeMapComponent implements OnInit {
   this.messageAttributeMapForm = this.formBuilder.group({
     id: [null],
     sourceMessageAttributes: this.formBuilder.array([
-      this.newSourceMessageAttribute()
+      this.newSourceMessageAttribute(this.messageTemplateMapId)
     ]),
     messageTemplateMapId: [null],
     function: ['',[Validators.required]],
@@ -64,16 +65,16 @@ export class MessageAttributeMapComponent implements OnInit {
     return this.messageAttributeMapForm.get("sourceMessageAttributes") as FormArray
   }
 
-  newSourceMessageAttribute(): FormGroup {
+  newSourceMessageAttribute(messageTemplateMapId: String): FormGroup {
     return this.formBuilder.group({
-      id: [''],
-      messageAttributeMapId: [''],
+      id: [null],
+      messageAttributeMapId: [messageTemplateMapId],
       sourceMessageAttributeId: [null, [Validators.required]],
     })
   }
 
   addSourceMessageAttribute() {
-    this.sourceMessageAttributes().push(this.newSourceMessageAttribute());
+    this.sourceMessageAttributes().push(this.newSourceMessageAttribute(this.messageTemplateMapId));
   }
 
   removeSourceMessageAttribute(index: number) {
@@ -83,7 +84,6 @@ export class MessageAttributeMapComponent implements OnInit {
 
   ngOnInit() {
 
-    this.initalizeForm();
 
     this
     .route
@@ -94,13 +94,21 @@ export class MessageAttributeMapComponent implements OnInit {
         
         this.messageTemplateMapId = id;
 
+        this.initalizeForm();
+
         this.messageTemplateMapService.findById(this.messageTemplateMapId).subscribe(
           result => {
             this.messageTemplateMap = result;
 
+            this.messageAttributeService.lookup(this.messageTemplateMap.sourceMessageTemplateId).subscribe(
+              result => {
+                this.sourceMessageAttributeLookup = result;
+              }
+            );
+
             this.messageAttributeService.lookup(this.messageTemplateMap.targetMessageTemplateId).subscribe(
               result => {
-                this.messageAttributes = result;
+                this.targetMessageAttributeLookup = result;
               }
             );
 
@@ -132,7 +140,7 @@ export class MessageAttributeMapComponent implements OnInit {
 
   onSubmit() {
 
-    this.messageAttributeMapForm.get('messageTemplateId').setValue(this.messageTemplateMapId);
+    this.messageAttributeMapForm.get('messageTemplateMapId').setValue(this.messageTemplateMapId);
 
     this.messageAttributeMapService.save(this.messageAttributeMapForm.value).subscribe(
       result => {
@@ -169,6 +177,20 @@ export class MessageAttributeMapComponent implements OnInit {
       this.messageAttributeMapForm.get('id').setValue(messageAttributeMap.id);
       this.messageAttributeMapForm.get('messageTemplateMapId').setValue(this.messageTemplateMapId);
       this.messageAttributeMapForm.get('function').setValue(messageAttributeMap.function);
+
+      this.sourceMessageAttributes().clear();
+
+      messageAttributeMap.sourceMessageAttributes.forEach(element => {
+        
+        let sourceAttributes = this.formBuilder.group({
+          id: [element.id],
+          messageAttributeMapId: [this.messageTemplateMapId],
+          sourceMessageAttributeId: [element.sourceMessageAttributeId],
+        });
+
+        this.sourceMessageAttributes().push(sourceAttributes);
+      });
+
       this.messageAttributeMapForm.get('clientFunction').setValue(messageAttributeMap.clientFunction);
       this.messageAttributeMapForm.get('targetMessageAttributeId').setValue(messageAttributeMap.targetMessageAttributeId);
       this.messageAttributeMapForm.get('inactive').setValue(messageAttributeMap.inactive);
