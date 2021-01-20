@@ -21,4 +21,5 @@ export class EventTemplateConnector extends Audit{
   id: string;
   eventId: string;
   connectorId: string;
+  primaryConnector: Boolean;
 }

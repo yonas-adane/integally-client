@@ -10,6 +10,7 @@ import { EventTemplateService } from 'src/app/services/event-template.service';
 import { EventTemplate } from 'src/app/models/event-template.model';
 import { ConnectorService } from 'src/app/services/connector.service';
 import { EventMessageService } from 'src/app/services/event-message.service';
+import { TraceService } from 'src/app/services/trace.service';
 
 @Component({
   selector: 'app-event-template',
@@ -37,7 +38,8 @@ export class EventTemplateComponent implements OnInit {
     private router: Router, 
     private eventTemplateService: EventTemplateService,
     private connectorService: ConnectorService,
-    private eventMessageService: EventMessageService
+    private eventMessageService: EventMessageService,
+    private traceLogService: TraceService
     ) {
 
     
@@ -73,6 +75,7 @@ export class EventTemplateComponent implements OnInit {
       id: [''],
       eventId: [''],
       connectorId: [null, [Validators.required]],
+      primaryConnector: [false]
     })
   }
 
@@ -110,7 +113,7 @@ export class EventTemplateComponent implements OnInit {
 
         this.eventMessageService.lookup().subscribe(
           result => { 
-            this.queueNameLookup = result;
+            this.queueNameLookup = result
           }
         );
 
@@ -163,6 +166,20 @@ export class EventTemplateComponent implements OnInit {
     }
   }
 
+  deleteTrace(entity: EventTemplate) {
+    if (confirm('Are you sure?')) {
+      this.traceLogService.deleteByEvent(this.eventId).subscribe(() => {
+        this.feedback = { type: 'success', message: 'Trace delete was successful!' };
+        setTimeout(() => {
+          this.load();
+        }, 1000);
+      }
+      );
+      
+    }
+  }
+
+
   setForEdit(eventTemplate: EventTemplate){
     if (confirm('Are you sure?')) {
 
@@ -178,6 +195,7 @@ export class EventTemplateComponent implements OnInit {
           id: [element.id],
           eventId: [element.eventId],
           connectorId: [element.connectorId],
+          primaryConnector: [element.primaryConnector],
         });
 
         this.eventTemplateConnectors().push(connector);
@@ -186,6 +204,7 @@ export class EventTemplateComponent implements OnInit {
 
       this.f['message'].setValue(eventTemplate.message);
       this.f['className'].setValue(eventTemplate.className);
+      this.f['queueName'].setValue(eventTemplate.queueName);
       this.f['traceEnabled'].setValue(eventTemplate.traceEnabled);
       this.f['inactive'].setValue(eventTemplate.inactive);
       this.f['routeDefinition'].setValue(eventTemplate.routeDefinition);

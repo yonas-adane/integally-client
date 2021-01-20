@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Trace } from 'src/app/models/trace.model';
 import { TraceService } from 'src/app/services/trace.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Page } from 'src/app/models/page.model';
 
 @Component({
   selector: 'app-trace-list',
@@ -14,8 +15,8 @@ export class TraceListComponent implements OnInit {
   tagId: string;
   instanceId: string;
 
-  get traceList(): Trace[] {
-    return this.traceService.traceList;
+  get tracePageable(): Page<Trace> {
+    return this.traceService.tracePageable;
   }
 
   constructor(private traceService: TraceService,
@@ -48,6 +49,7 @@ export class TraceListComponent implements OnInit {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
             this.load(entity.instanceId);
+            this.feedback = null;
           }, 1000);
          }
       );

@@ -1,4 +1,6 @@
-export class Trace {
+import { Audit } from "./audit.model";
+
+export class Trace extends Audit {
   id: string;
   dateAdded: Date;
   instanceId: string;

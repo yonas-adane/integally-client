@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiBaseService } from './api-base.service';
 import { Trace } from '../models/trace.model';
+import { Page } from '../models/page.model';
 
 
 @Injectable()
 export class TraceService  extends ApiBaseService {
 
-  traceList: Trace[] = [];
+  //traceList: Trace[] = [];
   trace: Trace;
 
+  tracePageable: Page<Trace>;
 
-  private apiResource = this.apiURL.concat("traces");
+
+  private apiResource = this.apiURL.concat("tracelogs");
 
   loadTrace(id: string): void {
     const url = `${this.apiResource}/${id}`;
@@ -28,10 +31,8 @@ export class TraceService  extends ApiBaseService {
 
     const url = `${this.apiResource}/list/event/${eventId}/0`;
 
-    console.log(url);
-
-    this.http.get<Trace[]>(url, this.httpOptions).subscribe(result => {
-      this.traceList = result;
+    this.http.get<Page<Trace>>(url, this.httpOptions).subscribe(result => {
+      this.tracePageable = result;
     }
   );
     
@@ -41,8 +42,8 @@ export class TraceService  extends ApiBaseService {
 
     const url = `${this.apiResource}/list/instance/${instanceId}/0`;
 
-    this.http.get<Trace[]>(url, this.httpOptions).subscribe(result => {
-      this.traceList = result;
+    this.http.get<Page<Trace>>(url, this.httpOptions).subscribe(result => {
+      this.tracePageable = result;
     }
   );
     
@@ -56,7 +57,7 @@ export class TraceService  extends ApiBaseService {
       return this.http.delete<Trace>(url, this.httpOptions);
     }
     return null;
-  }
+  } 
 
   deleteByEvent(eventId: string): Observable<Trace> {
     let url = '';

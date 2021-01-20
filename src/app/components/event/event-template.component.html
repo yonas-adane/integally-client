@@ -16,7 +16,7 @@
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">name</th>
           <th class="border-top-0" scope="col">description</th>
-          <th class="border-top-0" scope="col">connectors</th>
+          <th class="border-top-0" scope="col">connector</th>
           <th class="border-top-0" scope="col">className</th>
           <th class="border-top-0" scope="col">queueName</th>
           <th class="border-top-0" scope="col">routeDefinition</th>
@@ -70,6 +70,10 @@
                       <select formControlName="connectorId" class="form-control">
                         <option *ngFor="let connector of connectorLookup" [ngValue]="connector.id">{{connector.name}}</option>
                       </select>
+
+                      <div class="form-group">
+                        <input type="checkbox" formControlName="primaryConnector" class="form-control">
+                      </div>
 
                   <button type="button" class="btn btn-danger" (click)="removeEventTemplateConnector(connectorIndex)">X</button>
                     </div>
@@ -184,19 +188,23 @@
             <td>
               <ul>
                 <li *ngFor="let connector of item.eventTemplateConnectors">
-                  {{connector.connectorId}}
+                  {{connector.connectorId}} -- 
+                  {{connector.primaryConnector}}
                 </li>
               </ul>
             </td>
 
             <td>{{item.className }} </td>
+            <td>{{item.queueName }} </td>
             <td>{{item.routeDefinition }} </td>
             <td>{{item.message }} </td>
             <td>{{item.traceEnabled }} </td>
             <td>{{item.inactive }} </td>
           <td style="white-space: nowrap">
             <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
-            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
+            <a [routerLink]="['../traces/event', item.id ]" class="btn btn-secondary">Trace</a>&nbsp;
+            <button type="button" (click)="deleteTrace(item)" class="btn btn-danger">Delete Trace</button>
           </td>
         </tr>
       </tbody>

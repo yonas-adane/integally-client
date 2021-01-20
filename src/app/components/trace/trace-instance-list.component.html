@@ -4,9 +4,11 @@
     <h2 class="title">{{header}} trace instances</h2>
   </div>
 </div>
-<div class="card" *ngIf="traceList.length > 0">
+<div class="card" *ngIf="tracePageable != null">
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
+    Total: {{tracePageable.totalElements}} Current:{{tracePageable.numberOfElements}}
+
     <table class="table table-centered table-hover mb-0" id="datatable">
       <thead>
         <tr>
@@ -20,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of traceList" [class.active]="item === selectedInstance">
+        <tr *ngFor="let item of tracePageable.content" [class.active]="item === selectedInstance">
         
           <td>{{item.instanceId}}</td>
           <td>{{item.startTime}}</td>
