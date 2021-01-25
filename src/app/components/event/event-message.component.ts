@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventMessage } from 'src/app/models/event-message.model';
@@ -6,16 +6,25 @@ import { EventTemplate } from 'src/app/models/event-template.model';
 import { Page } from 'src/app/models/page.model';
 import { EventMessageService } from 'src/app/services/event-message.service';
 import { EventTemplateService } from 'src/app/services/event-template.service';
+import { Observable, Subscription, timer } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-event-message',
   templateUrl: 'event-message.component.html'
 })
-export class EventMessageComponent implements OnInit {
+export class EventMessageComponent implements OnInit, OnDestroy {
 
   selectedEventMessage: EventMessage;
   eventMessage: EventMessage;
   eventLookup: EventTemplate[];
+
+  subscription: Subscription;
+  autoLoadInterval: Observable<number> = timer(0, environment.autoLoadInterval);
+
+ngOnDestroy() {
+  this.subscription.unsubscribe();
+}
 
   feedback: any = {};
 
@@ -39,6 +48,11 @@ export class EventMessageComponent implements OnInit {
   get f() { return this.eventMessageForm.controls; }
 
   ngOnInit() {
+
+
+    this.subscription = this.autoLoadInterval.subscribe(() => {
+      this.load();
+    });
 
     this.eventMessageForm = this.formBuilder.group({
       id: [''],
@@ -111,4 +125,8 @@ export class EventMessageComponent implements OnInit {
   
 
 }
+
+
+
+
 

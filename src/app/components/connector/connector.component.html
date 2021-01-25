@@ -9,6 +9,7 @@
   <div class="table-responsive">
 
     Total: {{connectorsPageable.totalElements}} Current:{{connectorsPageable.numberOfElements}}
+
     <form *ngIf="connector" [formGroup]="connectorForm" (ngSubmit)="onSubmit()">
     <table class="table table-centered table-hover mb-0" id="datatable">
       <thead>
@@ -16,8 +17,10 @@
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">Name</th>
           <th class="border-top-0" scope="col">Description</th>
-          <th class="border-top-0" scope="col">Package file</th>
-          <th class="border-top-0" scope="col" style="width:120px"></th>
+          <th class="border-top-0" scope="col">Library</th>
+          <th class="border-top-0" scope="col" style="width:120px">
+            
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -52,24 +55,23 @@
           </td>
           <td>
             
-            <div class="form-group">
-              <input type="file"  name="packageFile" class="form-control" (change)="onFileSelect($event)">
-        
-        
-              <div *ngIf="f.packageFile.invalid && (f.packageFile.dirty || f.packageFile.touched)"
-              class="alert alert-danger">
-          
-            <div *ngIf="f.packageFile.errors.required">
-              File is required.
-            </div>                   
-          
-          </div>
-            </div>
+              <div class="form-group">
+                <select formControlName="connectorLibraryId" class="form-control">
+                  <option *ngFor="let library of connectorLibraryLookup" [ngValue]="library.id">{{library.name}}</option>
+                </select>
+                <div *ngIf="f.connectorLibraryId.invalid && (f.connectorLibraryId.dirty || f.connectorLibraryId.touched)" class="alert alert-danger">
+                  <div *ngIf="f.connectorLibraryId.errors.required">
+                    Connector library is required.
+                  </div>
+                </div>
+              </div>
 
           </td>
+         
           <td>
             <button type="submit" class="btn btn-secondary" [disabled]="!connectorForm.valid" >Save</button>&nbsp;
-            <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+            <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>&nbsp;
+            <a [routerLink]="['../connectorlibraries']" class="btn btn-secondary">Library</a>
           </td>
         </tr>
         <tr *ngFor="let item of connectorsPageable.content" [class.active]="item === selectedConnector">
@@ -77,7 +79,8 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.packageFileName}}</td>
+          <td>{{item.connectorLibraryId}} </td>
+
           <td style="white-space: nowrap">
             <a [routerLink]="['../connectorsettings', item.id ]" class="btn btn-secondary">Settings</a>&nbsp;
             <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;

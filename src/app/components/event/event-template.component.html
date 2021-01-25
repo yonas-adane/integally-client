@@ -196,7 +196,7 @@
 
             <td>{{item.className }} </td>
             <td>{{item.queueName }} </td>
-            <td>{{item.routeDefinition }} </td>
+            <td>{{item.routeDefinition!= null ? item.routeDefinition.substring(0,50)+'...' : null  }} </td>
             <td>{{item.message }} </td>
             <td>{{item.traceEnabled }} </td>
             <td>{{item.inactive }} </td>

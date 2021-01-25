@@ -44,6 +44,8 @@ import { EventTemplateService } from './services/event-template.service';
 import { JobComponent } from './components/job/job.component';
 import { EventMessageComponent } from './components/event/event-message.component';
 import { EventMessageService } from './services/event-message.service';
+import { ConnectorLibraryComponent } from './components/connector/connector-library.component';
+import { ConnectorLibraryService } from './services/connector-library.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { EventMessageService } from './services/event-message.service';
     MessageAttributeMapComponent,
     EventTemplateComponent,
     JobComponent,
-    EventMessageComponent
+    EventMessageComponent,
+    ConnectorLibraryComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +96,7 @@ import { EventMessageService } from './services/event-message.service';
     EventTemplateService,
     JobService,
     EventMessageService,
+    ConnectorLibraryService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],

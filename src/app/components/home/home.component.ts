@@ -18,7 +18,7 @@ summary: any;
 
   async ngOnInit() {
     
-    this.summary = this.statsService.load();
+    //this.summary = this.statsService.load();
 
     
   }

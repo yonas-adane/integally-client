@@ -43,38 +43,22 @@ export class ConnectorService  extends ApiBaseService {
     
   }
 
-  save(formData: FormData, id: String): Observable<Connector> {
+  
+  save(entity: Connector, isCreate: boolean): Observable<Connector> {
+    
+    let params = new HttpParams();
 
-  let url = `${this.apiResource}`;
+    let url = `${this.apiResource}`;
 
+    if(isCreate){
+      return this.http.post<Connector>(url, entity);
+    }
+    else{
+      return this.http.put<Connector>(url, entity);
+    }
 
-  // Display the key/value pairs
-  // formData.forEach((value,key) => {
-  //   console.log(key+" "+value)
-  // });
-
-  if(id.length == 0)
-    return this.http.post<Connector>(url, formData);
-  else
-    return this.http.put<Connector>(url, formData);
 
   }
-
-  // save(entity: Connector, isCreate: boolean): Observable<Connector> {
-    
-  //   let params = new HttpParams();
-
-  //   let url = `${this.apiResource}`;
-
-  //   if(isCreate){
-  //     return this.http.post<Connector>(url, entity);
-  //   }
-  //   else{
-  //     return this.http.put<Connector>(url, entity);
-  //   }
-
-
-  // }
 
   delete(entity: Connector): Observable<Connector> {
     let url = '';

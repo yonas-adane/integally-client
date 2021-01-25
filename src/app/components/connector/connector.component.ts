@@ -6,6 +6,8 @@ import { Connector } from 'src/app/models/connector.model';
 import { Page } from 'src/app/models/page.model';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConnectorLibraryService } from 'src/app/services/connector-library.service';
+import { ConnectorLibrary } from 'src/app/models/connector-library.model';
 
 @Component({
   selector: 'app-connector',
@@ -17,11 +19,13 @@ export class ConnectorListComponent implements OnInit {
   selectedConnector: Connector;
   feedback: any = {};
 
+  connectorLibraryLookup: ConnectorLibrary[];
+
   connectorForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl(''),
     description: new FormControl(''),
-    packageFile: new FormControl('')
+    connectorLibraryId: new FormControl('')
   });
 
   get connectorsPageable(): Page<Connector> {
@@ -30,7 +34,9 @@ export class ConnectorListComponent implements OnInit {
 
   constructor(  private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
-    private router: Router, private connectorService: ConnectorService) {
+    private router: Router,
+    private connectorService: ConnectorService,
+    private connectorLibraryService: ConnectorLibraryService) {
   }
 
   ngOnInit() {
@@ -41,13 +47,19 @@ export class ConnectorListComponent implements OnInit {
       id: [''],
       name: ['',[Validators.required]],
       description: [''],
-      packageFile: [null]
+      connectorLibraryId: [null, [Validators.required]]
     });
     
     this.load();
   }
 
   load(): void {
+    this.connectorLibraryService.lookup().subscribe(result => { 
+
+      this.connectorLibraryLookup = result;
+
+    });
+
     this.connectorService.load();
   }
 
@@ -70,7 +82,7 @@ export class ConnectorListComponent implements OnInit {
       this.f['id'].setValue(connector.id);
       this.f['name'].setValue(connector.name);
       this.f['description'].setValue(connector.description);
-      this.f['packageFile'].setValue(connector.packageFile);
+      this.f['connectorLibraryId'].setValue(connector.connectorLibraryId);
 
     }
 
@@ -92,29 +104,23 @@ export class ConnectorListComponent implements OnInit {
 
   onSubmit() {
 
-    const formData = new FormData();
     const id = this.connectorForm.get('id').value;
 
-    formData.append('id', id);
-    formData.append('name', this.connectorForm.get('name').value);
-    formData.append('description', this.connectorForm.get('description').value);
-    formData.append('packageFile', this.connectorForm.get('packageFile').value);
+    const isCreate = id == null || id.length == 0 ? true : false;
 
-      this.connectorService.save(formData, id ).subscribe(
+    this.connectorService.save(this.connectorForm.value, isCreate).subscribe(
       connector => {
         this.connector = connector;
+        this.feedback = { type: 'success', message: 'Save was successful!' };
         this.connectorForm.reset();
-        this.feedback = {type: 'success', message: 'Save was successful!'};
+        this.load();
         setTimeout(() => {
-          this.load();
           this.feedback = null;
         }, 1000);
       }
     );
 
-
-
-}
+  }
 
 
 onFileSelect(event) {

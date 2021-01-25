@@ -22,6 +22,7 @@
           <th class="border-top-0" scope="col">Start date</th>
           <th class="border-top-0" scope="col">End date</th>
           <th class="border-top-0" scope="col">Duration</th>
+          <th class="border-top-0" scope="col">dequeueCount</th>
           <th class="border-top-0" scope="col">Status</th>
           <th class="border-top-0" scope="col">Description</th>
           <th class="border-top-0" scope="col" style="width:120px"></th>
@@ -67,6 +68,9 @@
           <td>
           
           </td>
+            <td>
+            
+            </td>
           <td>
           
           </td>
@@ -92,18 +96,19 @@
           <td>{{item.id}}</td>
           <td>{{item.queueName}}</td>
           <td>{{item.eventId}}</td>
-          <td>{{item.message}}</td>
+          <td>{{item.message != null ? item.message.substring(0,50)+'...' : null}}</td>
           <td>{{item.size}}</td>
           <td>{{item.startDate}}</td>
 
           <td>{{item.endDate}}</td>
 
           <td>{{item.duration}}µs</td>
+          <td>{{item.dequeueCount}}</td>
 
           <td>{{item.status}}</td>
           <td>{{item.statusDescription}}</td>
           <td style="white-space: nowrap">
-            <a [routerLink]="['../lookups', item.id ]" class="btn btn-secondary">Lookups</a>&nbsp;
+            <a *ngIf="item.traceInstanceId" [routerLink]="['/traces/instance', item.traceInstanceId ]" class="btn btn-secondary">Trace</a>&nbsp;
             <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
             <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
           </td>
@@ -113,4 +118,3 @@
     </form>
   </div>
 </div>
-

@@ -11,5 +11,7 @@ export class EventMessage extends Audit {
   endDate: Date;
   size: number;
   duration: number;
+  dequeueCount: number;
+  traceInstanceId: string;
 }
 

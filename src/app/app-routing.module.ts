@@ -22,6 +22,7 @@ import { MessageAttributeMapComponent } from './components/mapping-template/mess
 import { EventTemplateComponent } from './components/event/event-template.component';
 import { JobComponent } from './components/job/job.component';
 import { EventMessageComponent } from './components/event/event-message.component';
+import { ConnectorLibraryComponent } from './components/connector/connector-library.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'connectors',
     component: ConnectorListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'connectorlibraries',
+    component: ConnectorLibraryComponent,
     canActivate: [OktaAuthGuard]
   },
   {
