@@ -7,7 +7,6 @@ export class EventTemplate extends Audit {
   description: string;
   eventTemplateConnectors: EventTemplateConnector[];
   message: any;
-  className: string;
   traceEnabled: string;
   inactive: boolean;
   triggerCount: number;
@@ -22,4 +21,5 @@ export class EventTemplateConnector extends Audit{
   eventId: string;
   connectorId: string;
   primaryConnector: Boolean;
+  className: string;
 }

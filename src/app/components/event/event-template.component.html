@@ -17,7 +17,6 @@
           <th class="border-top-0" scope="col">name</th>
           <th class="border-top-0" scope="col">description</th>
           <th class="border-top-0" scope="col">connector</th>
-          <th class="border-top-0" scope="col">className</th>
           <th class="border-top-0" scope="col">queueName</th>
           <th class="border-top-0" scope="col">routeDefinition</th>
           <th class="border-top-0" scope="col">message</th>
@@ -72,6 +71,10 @@
                       </select>
 
                       <div class="form-group">
+                        <input formControlName="className" placeholder="class name">
+                      </div>
+
+                      <div class="form-group">
                         <input type="checkbox" formControlName="primaryConnector" class="form-control">
                       </div>
 
@@ -102,19 +105,7 @@
               </div>
 
           </td>
-                      <td>
-                        <div class="form-group">
-                          <input formControlName="className" placeholder="class name">
                       
-                      
-                          <div *ngIf="f.className.invalid && (f.className.dirty || f.className.touched)" class="alert alert-danger">
-                      
-                            <div *ngIf="f.className.errors.required">
-                              className is required
-                            </div>
-                          </div>
-                        </div>
-                      </td>
                       <td>
 
                           <div class="form-group">
@@ -186,15 +177,15 @@
             <td>{{item.description }} </td>
 
             <td>
-              <ul>
-                <li *ngFor="let connector of item.eventTemplateConnectors">
-                  {{connector.connectorId}} -- 
-                  {{connector.primaryConnector}}
-                </li>
-              </ul>
+              <table>
+                  <tr *ngFor="let connector of item.eventTemplateConnectors">
+                    <td>{{connector.connectorId}}</td>
+                    <td>{{connector.className}}</td>
+                    <td>{{connector.primaryConnector}}</td>
+                  </tr>
+              </table>
             </td>
 
-            <td>{{item.className }} </td>
             <td>{{item.queueName }} </td>
             <td>{{item.routeDefinition!= null ? item.routeDefinition.substring(0,50)+'...' : null  }} </td>
             <td>{{item.message }} </td>

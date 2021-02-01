@@ -57,7 +57,6 @@ export class EventTemplateComponent implements OnInit {
         this.newEventTemplateConnectorForm()
       ]),
       message: [null, Validators.required],
-      className: ['', Validators.required],
       traceEnabled: [true],
       inactive: [false],
       routeDefinition: [null, Validators.required],
@@ -75,6 +74,7 @@ export class EventTemplateComponent implements OnInit {
       id: [''],
       eventId: [''],
       connectorId: [null, [Validators.required]],
+      className: ['', Validators.required],
       primaryConnector: [false]
     })
   }
@@ -194,6 +194,7 @@ export class EventTemplateComponent implements OnInit {
         let connector = this.formBuilder.group({
           id: [element.id],
           eventId: [element.eventId],
+          className: [element.className],
           connectorId: [element.connectorId],
           primaryConnector: [element.primaryConnector],
         });
@@ -203,7 +204,6 @@ export class EventTemplateComponent implements OnInit {
 
 
       this.f['message'].setValue(eventTemplate.message);
-      this.f['className'].setValue(eventTemplate.className);
       this.f['queueName'].setValue(eventTemplate.queueName);
       this.f['traceEnabled'].setValue(eventTemplate.traceEnabled);
       this.f['inactive'].setValue(eventTemplate.inactive);
