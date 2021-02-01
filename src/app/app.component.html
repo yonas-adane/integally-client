@@ -43,8 +43,8 @@
                 <a class="nav-link disabled" href="#"> {{name|| ''}} </a>
             </li>
             <li>
-                <button class="btn btn-outline-primary" *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">Login</button>
-                <button class="btn btn-outline-warning" *ngIf="isAuthenticated" (click)="oktaAuth.logout()">Logout</button>
+                <!-- <button class="btn btn-outline-primary" *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">Login</button> -->
+                <button class="btn btn-outline-warning" *ngIf="isAuthenticated" (click)="oktaAuth.signOut()">Logout</button>
             </li>
         </ul>
 
