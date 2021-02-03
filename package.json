@@ -25,6 +25,8 @@
     "@okta/okta-angular": "3.0.1",
     "@oktadev/schematics": "^3.3.0",
     "bootstrap": "^4.6.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "~6.6.3",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.3"
