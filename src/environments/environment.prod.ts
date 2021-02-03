@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiBaseURL: 'http://localhost:8080/api/',
-  allowedOrigins:'http://localhost',
+  apiBaseURL: 'https://integally-api.herokuapp.com/api/',
+  allowedOrigins:'https://integally-api.herokuapp.com',
   issuer: 'https://dev-268636.okta.com/oauth2/default',
   redirectUri: window.location.origin + '/callback',
   clientId: '0oabodyv4BX7TqDtc4x6',
