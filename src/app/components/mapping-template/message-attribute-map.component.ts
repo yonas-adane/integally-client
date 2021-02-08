@@ -52,7 +52,7 @@ export class MessageAttributeMapComponent implements OnInit {
       this.newSourceMessageAttribute(this.messageTemplateMapId)
     ]),
     messageTemplateMapId: [null],
-    function: ['',[Validators.required]],
+    function: [''],
     clientFunction: [''],
     targetMessageAttributeId: [null,[Validators.required]],
     inactive: [false]

@@ -8,6 +8,7 @@ import { EventMessageService } from 'src/app/services/event-message.service';
 import { EventTemplateService } from 'src/app/services/event-template.service';
 import { Observable, Subscription, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-event-message',
@@ -19,11 +20,14 @@ export class EventMessageComponent implements OnInit, OnDestroy {
   eventMessage: EventMessage;
   eventLookup: EventTemplate[];
 
-  subscription: Subscription;
+  subscriptionAutoLoad: Subscription;
+
+  subscriptionAlertService: Subscription;
+
   autoLoadInterval: Observable<number> = timer(0, environment.autoLoadInterval);
 
 ngOnDestroy() {
-  this.subscription.unsubscribe();
+  this.subscriptionAutoLoad.unsubscribe();
 }
 
   feedback: any = {};
@@ -36,8 +40,11 @@ ngOnDestroy() {
     private route: ActivatedRoute,
     private router: Router,
     private eventMessageService: EventMessageService,
-    private eventTemplateService: EventTemplateService) {
+    private eventTemplateService: EventTemplateService,
+    private alertService: AlertService) {
   }
+
+
 
   eventMessageForm = new FormGroup({
     id: new FormControl(''),
@@ -50,7 +57,16 @@ ngOnDestroy() {
   ngOnInit() {
 
 
-    this.subscription = this.autoLoadInterval.subscribe(() => {
+    this.subscriptionAlertService = this.alertService.alert.subscribe(message => {
+
+      //if we have any alert, stop auto refresh.
+      if (message) {
+        this.subscriptionAutoLoad.unsubscribe();
+      } 
+  
+    });
+
+    this.subscriptionAutoLoad = this.autoLoadInterval.subscribe(() => {
       this.load();
     });
 
