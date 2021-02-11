@@ -26,6 +26,9 @@ export class EventMessageComponent implements OnInit, OnDestroy {
 
   autoLoadInterval: Observable<number> = timer(0, environment.autoLoadInterval);
 
+  status = null;
+  keyword = null;
+
 ngOnDestroy() {
   this.subscriptionAutoLoad.unsubscribe();
 }
@@ -86,7 +89,17 @@ ngOnDestroy() {
   }
 
   load(): void {
-    this.eventMessageService.load(null, null);
+    this.eventMessageService.load(this.status, this.keyword);
+  }
+
+  search(){
+    this.eventMessageService.load(this.status, this.keyword);
+  }
+
+  clearSearch(){
+    this.status = null;
+    this.keyword = null;
+    this.eventMessageService.load(this.status, this.keyword);
   }
 
   delete(entity: EventMessage): void {

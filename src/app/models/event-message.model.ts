@@ -4,6 +4,7 @@ export class EventMessage extends Audit {
   id: string;
   queueName: string;
   eventId: string;
+  eventName: string;
   message: string;
   status: string;
   statusDescription: string;

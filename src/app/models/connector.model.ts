@@ -5,6 +5,7 @@ export class Connector extends Audit {
   name: string;
   description: string;
   connectorLibraryId: string;
+  connectorLibraryName: string;
 }
 
 export class ConnectorSetting extends Audit{

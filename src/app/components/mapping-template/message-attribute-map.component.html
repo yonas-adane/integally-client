@@ -11,22 +11,19 @@
 
       <ul class="list-unstyled">
         <li>
-          Id: {{messageTemplateMap.id}}
-        </li>
-        <li>
           Name: {{messageTemplateMap.name}}
         </li>
         <li>
           Description: {{messageTemplateMap.description}}
         </li>
         <li>
-          sourceMessageTemplateId: {{messageTemplateMap.sourceMessageTemplateId}}
+          sourceMessageTemplate: {{messageTemplateMap.sourceMessageTemplateName}}
         </li>
         <li>
-          targetMessageTemplateId: {{messageTemplateMap.targetMessageTemplateId}}
+          targetMessageTemplate: {{messageTemplateMap.targetMessageTemplateName}}
         </li>
         <li>
-          clientScript: {{messageTemplateMap.clientScript}}
+          clientScript: {{messageTemplateMap.clientScript != null ? messageTemplateMap.clientScript.substring(0,40)+'...' : null}}
         </li>
      </ul>
 
@@ -149,13 +146,13 @@
           <td>
             <ul>
               <li *ngFor="let source of item.sourceMessageAttributes">
-                {{source.sourceMessageAttributeId}}
+                {{source.sourceMessageAttributeName}}
               </li>
             </ul>
           </td>
           <td>{{item.function}}</td>
           <td>{{item.clientFunction}}</td>
-          <td>{{item.targetMessageAttributeId}}</td>
+          <td>{{item.targetMessageAttributeName}}</td>
           <td>{{item.inactive}}</td>
           <td style="white-space: nowrap">
             <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;

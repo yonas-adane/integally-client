@@ -22,9 +22,26 @@ export class EventMessageService  extends ApiBaseService {
     return result;
   }
 
-  load(queueName: string, status: string): void {
+  load(status, keyword): void {
 
-    const url = `${this.apiResource}/list/0/${queueName}/${status}`;
+    let isStatusNull :boolean = (status != null && status.length == 0) || status == null ? true : false;
+    let isKeywordNull : boolean = (keyword != null && keyword.length == 0) || keyword == null ? true : false;
+
+    
+
+     let url = `${this.apiResource}/list/0/${status}/${keyword}`;
+
+    if(isStatusNull == true && isKeywordNull == false){
+      url = `${this.apiResource}/list/0/keyword/${keyword}`;
+    }
+
+    if(isStatusNull == false && isKeywordNull == true){
+      url = `${this.apiResource}/list/0/status/${status}`;
+    }
+
+    if(isStatusNull == true && isKeywordNull == true){
+      url = `${this.apiResource}/list/0`;
+    }
 
     this.http.get<Page<EventMessage>>(url, this.httpOptions).subscribe(result => {
 

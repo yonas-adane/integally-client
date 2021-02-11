@@ -8,6 +8,13 @@
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
 
+    <input type="text" class="form-control" id="txtStatus" [(ngModel)]="status" >
+    <input type="text" class="form-control" id="txtKeyword" [(ngModel)]="keyword" >
+
+    <button type="button" (click)="search()" class="btn btn-secondary">Search</button>&nbsp;
+    <button type="button" (click)="clearSearch()" class="btn btn-secondary">Clear</button>&nbsp;
+
+
     Total: {{eventMessagesPageable.totalElements}} Current:{{eventMessagesPageable.numberOfElements}}
 
     <form  [formGroup]="eventMessageForm" (ngSubmit)="onSubmit()">
@@ -95,7 +102,7 @@
         
           <td>{{item.id}}</td>
           <td>{{item.queueName}}</td>
-          <td>{{item.eventId}}</td>
+          <td>{{item.eventName}}</td>
           <td>{{item.message != null ? item.message.substring(0,50)+'...' : null}}</td>
           <td>{{item.size}}</td>
           <td>{{item.startDate}}</td>

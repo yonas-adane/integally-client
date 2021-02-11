@@ -92,12 +92,12 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.sourceMessageTemplateId}}</td>
-          <td>{{item.targetMessageTemplateId}}</td>
-          <td>{{item.clientScript}}</td>
+          <td>{{item.sourceMessageTemplateName}}</td>
+          <td>{{item.targetMessageTemplateName}}</td>
+          <td>{{item.clientScript != null ? item.clientScript.substring(0,40)+'...' : null}}</td>
 
           <td style="white-space: nowrap">
-            <a [routerLink]="['../messageattributemaps', item.id ]" class="btn btn-secondary">Attributes</a>&nbsp;
+            <a [routerLink]="['../messageattributemaps', item.id ]" class="btn btn-secondary">Maps</a>&nbsp;
             <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
             <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
           </td>
