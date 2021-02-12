@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventMessage } from 'src/app/models/event-message.model';
+import { EventMessage, StatusCountReport } from 'src/app/models/event-message.model';
 import { EventTemplate } from 'src/app/models/event-template.model';
 import { Page } from 'src/app/models/page.model';
 import { EventMessageService } from 'src/app/services/event-message.service';
@@ -19,6 +19,8 @@ export class EventMessageComponent implements OnInit, OnDestroy {
   selectedEventMessage: EventMessage;
   eventMessage: EventMessage;
   eventLookup: EventTemplate[];
+
+  statusCountReport: StatusCountReport[];
 
   subscriptionAutoLoad: Subscription;
 
@@ -85,11 +87,25 @@ ngOnDestroy() {
       }
     );
 
+
+
     this.load();
+
+    this.loadStatusCountReport();
+
   }
 
   load(): void {
     this.eventMessageService.load(this.status, this.keyword);
+  }
+
+  loadStatusCountReport(){
+    this.eventMessageService.loadStatusCountReport().subscribe(
+      result => {
+        this.statusCountReport = result;
+        console.log(result);
+      }
+    );
   }
 
   search(){

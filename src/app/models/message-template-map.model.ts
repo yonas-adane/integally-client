@@ -6,8 +6,16 @@ export class MessageTemplateMap extends Audit{
   description: string;
   sourceMessageTemplateId: string;
   sourceMessageTemplateName: string;
+  sourceMessageKeyAttributeId: string;
+  targetMessageRelationshipAttributeId: string;
+  sourceMessageKeyAttributeName;
+  targetMessageRelationshipAttributeName;
   targetMessageTemplateId: string;
   targetMessageTemplateName: string;
+  targetMessageKeyAttributeId: string;
+  sourceMessageRelationshipAttributeId: string;
+  targetMessageKeyAttributeName: string;
+  sourceMessageRelationshipAttributeName: string;
   clientScript: string;
 }
 

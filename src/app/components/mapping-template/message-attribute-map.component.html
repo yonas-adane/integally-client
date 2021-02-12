@@ -18,12 +18,20 @@
         </li>
         <li>
           sourceMessageTemplate: {{messageTemplateMap.sourceMessageTemplateName}}
+          <ul>
+            <li>Key attribute: {{messageTemplateMap.sourceMessageKeyAttributeName}}</li>
+            <li>Target relationship attribute: {{messageTemplateMap.targetMessageRelationshipAttributeName}}</li>
+          </ul>
         </li>
         <li>
           targetMessageTemplate: {{messageTemplateMap.targetMessageTemplateName}}
+          <ul>
+            <li>Key attribute: {{messageTemplateMap.targetMessageKeyAttributeName}}</li>
+            <li>Source relationship attribute: {{messageTemplateMap.sourceMessageRelationshipAttributeName}}</li>
+          </ul>
         </li>
         <li>
-          clientScript: {{messageTemplateMap.clientScript != null ? messageTemplateMap.clientScript.substring(0,40)+'...' : null}}
+          clientScript: {{messageTemplateMap.clientScript != null ? messageTemplateMap.clientScript.substring(0,60)+'...' : null}}
         </li>
      </ul>
 

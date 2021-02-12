@@ -51,7 +51,7 @@
           </td>
           <td>
             <div class="form-group">
-              <select formControlName="sourceMessageTemplateId" class="form-control">
+              <select formControlName="sourceMessageTemplateId" (change)="onSelectionSourceMessage($event)" class="form-control">
                 <option *ngFor="let template of messageTemplates" [ngValue]="template.id">{{template.name}}</option>
               </select>
               <div *ngIf="f.sourceMessageTemplateId.invalid && (f.sourceMessageTemplateId.dirty || f.sourceMessageTemplateId.touched)" class="alert alert-danger">
@@ -60,10 +60,19 @@
                 </div> 
               </div>
             </div>
+
+            <select formControlName="sourceMessageKeyAttributeId" (change)="onSelectionSourceMessage($event)" class="form-control">
+              <option *ngFor="let attribute of sourceMessageAttributes" [ngValue]="attribute.id">{{attribute.name}}</option>
+            </select>
+
+            <select formControlName="targetMessageRelationshipAttributeId" (change)="onSelectionSourceMessage($event)" class="form-control">
+              <option *ngFor="let attribute of sourceMessageAttributes" [ngValue]="attribute.id">{{attribute.name}}</option>
+            </select>
+
           </td>
           <td>
             <div class="form-group">
-              <select formControlName="targetMessageTemplateId" class="form-control">
+              <select formControlName="targetMessageTemplateId" (change)="onSelectionTargetMessage($event)" class="form-control">
                 <option *ngFor="let template of messageTemplates" [ngValue]="template.id">{{template.name}}</option>
               </select>
               <div *ngIf="f.targetMessageTemplateId.invalid && (f.targetMessageTemplateId.dirty || f.targetMessageTemplateId.touched)" class="alert alert-danger">
@@ -72,6 +81,15 @@
                 </div> 
               </div>
             </div>
+
+            <select formControlName="targetMessageKeyAttributeId" (change)="onSelectionSourceMessage($event)" class="form-control">
+              <option *ngFor="let attribute of targetMessageKAttributes" [ngValue]="attribute.id">{{attribute.name}}</option>
+            </select>
+
+            <select formControlName="sourceMessageRelationshipAttributeId" (change)="onSelectionSourceMessage($event)" class="form-control">
+              <option *ngFor="let attribute of targetMessageKAttributes" [ngValue]="attribute.id">{{attribute.name}}</option>
+            </select>
+
           </td>
           <td>
             <div class="form-group">
@@ -92,8 +110,20 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.sourceMessageTemplateName}}</td>
-          <td>{{item.targetMessageTemplateName}}</td>
+          <td>
+            {{item.sourceMessageTemplateName}}
+            <ul>
+              <li>K: {{item.sourceMessageKeyAttributeName}}</li>
+              <li>TK: {{item.targetMessageRelationshipAttributeName}}</li>
+            </ul>
+          </td>
+          <td>
+            {{item.targetMessageTemplateName}}
+            <ul>
+              <li>K: {{item.targetMessageKeyAttributeName}}</li>
+              <li>SK: {{item.sourceMessageRelationshipAttributeName}}</li>
+            </ul>
+          </td>
           <td>{{item.clientScript != null ? item.clientScript.substring(0,40)+'...' : null}}</td>
 
           <td style="white-space: nowrap">

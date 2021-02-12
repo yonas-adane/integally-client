@@ -1,0 +1,10 @@
+<div>
+
+  <ul *ngIf="appInfo != null">
+    <li>{{appInfo.id}}</li>
+    <li>{{appInfo.name}}</li>
+    <li *ngFor="let item of appInfo.settings"> {{item}}</li>
+    <li>{{appInfo.springProfile}}</li>
+  </ul>
+
+</div>

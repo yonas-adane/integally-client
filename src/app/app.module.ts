@@ -26,8 +26,8 @@ import { TraceListComponent } from './components/trace/trace-list.component';
 import { LookupGroupComponent } from './components/lookup/lookup-group.component';
 import { LookupGroupService } from './services/lookup-group.service';
 import { MessageTemplateService } from './services/message-template.service';
-import { AboutService } from './services/about.service';
-import { AboutComponent } from './components/about/about.component';
+import { AppInfoService } from './services/app-info.service';
+import { AppInfoComponent } from './components/about/app-info.component';
 import { ConnectorSettingComponent } from './components/connector/connector-setting.component';
 import { ConnectorSettingService } from './services/connector-setting.service';
 import { LookupComponent } from './components/lookup/lookup.component';
@@ -60,7 +60,7 @@ import { ConnectorLibraryService } from './services/connector-library.service';
     TraceListComponent,
     LookupGroupComponent, 
     MessageTemplateComponent,
-    AboutComponent,
+    AppInfoComponent,
     ConnectorSettingComponent,
     LookupComponent,
     MessageAttributeComponent,
@@ -87,7 +87,7 @@ import { ConnectorLibraryService } from './services/connector-library.service';
     TraceService,
     LookupGroupService,
     MessageTemplateService,
-    AboutService,
+    AppInfoService,
     ConnectorSettingService,
     LookupService,
     MessageAttributeService,

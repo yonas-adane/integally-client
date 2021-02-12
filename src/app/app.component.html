@@ -34,7 +34,7 @@
           <a class="nav-link" routerLink="/eventmessages">Messages</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">About</a>
+          <a class="nav-link" routerLink="/appinfo">App Info.</a>
         </li>
         </ul>
 
@@ -44,7 +44,7 @@
             </li>
             <li>
                 <!-- <button class="btn btn-outline-primary" *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">Login</button> -->
-                <!-- <button class="btn btn-outline-warning" *ngIf="isAuthenticated" (click)="oktaAuth.signOut()">Logout</button> -->
+                <button class="btn btn-outline-warning" *ngIf="isAuthenticated" (click)="oktaAuth.signOut()">Logout</button> 
             </li>
         </ul>
 

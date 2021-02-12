@@ -12,7 +12,7 @@ import { TraceComponent } from './components/trace/trace.component';
 import { TraceInstanceListComponent } from './components/trace/trace-instance-list.component';
 import { TraceListComponent } from './components/trace/trace-list.component';
 import { LookupGroupComponent } from './components/lookup/lookup-group.component';
-import { AboutComponent } from './components/about/about.component';
+import { AppInfoComponent } from './components/about/app-info.component';
 import { ConnectorSettingComponent } from './components/connector/connector-setting.component';
 import { LookupComponent } from './components/lookup/lookup.component';
 import { MessageAttributeComponent } from './components/message-template/message-attribute.component';
@@ -124,8 +124,8 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
-    path: 'about',
-    component: AboutComponent,
+    path: 'appinfo',
+    component: AppInfoComponent,
     canActivate: [OktaAuthGuard]
   }
   

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { ApiBaseService } from './api-base.service';
 import { Page } from '../models/page.model';
-import { EventMessage } from '../models/event-message.model';
+import { EventMessage, StatusCountReport } from '../models/event-message.model';
 
 
 @Injectable()
@@ -56,6 +56,13 @@ export class EventMessageService  extends ApiBaseService {
 
     const url = `${this.apiResource}/lookup`;
     return this.http.get<string[]>(url, this.httpOptions);
+
+  }
+
+  loadStatusCountReport(): Observable<StatusCountReport[]> {
+
+    const url = `${this.apiResource}/statuscount`;
+    return this.http.get<StatusCountReport[]>(url, this.httpOptions);
 
   }
 

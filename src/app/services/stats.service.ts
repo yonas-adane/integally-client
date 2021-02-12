@@ -2,26 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ApiBaseService } from './api-base.service';
+import { StatusCountReport } from '../models/event-message.model';
 
 @Injectable()
 export class StatsService  extends ApiBaseService {
-
-  stats: any;
-
+  
   private apiResource = this.apiURL.concat("stats");
 
-  load(): void {
-    this.find().subscribe(result => {
-        this.stats = result;
-      }
-    );
-  }
-
-  find(): Observable<any> {
+  load(): Observable<StatusCountReport[]> {
   
-    const url = `${this.apiResource}`;
+    const url = `${this.apiResource}/statuscountdaily`;
 
-    return this.http.get<any>(url, this.httpOptions);
+    return this.http.get<StatusCountReport[]>(url, this.httpOptions);
     
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatusCountReport } from 'src/app/models/event-message.model';
 import { StatsService } from 'src/app/services/stats.service';
 
 
@@ -10,16 +11,21 @@ import { StatsService } from 'src/app/services/stats.service';
 
 export class HomeComponent implements OnInit {
 
-graph: any;
-summary: any;
+  statusCountReport: StatusCountReport[];
 
   constructor(private statsService: StatsService) {
   }
 
-  async ngOnInit() {
-    
-    //this.summary = this.statsService.load();
+   ngOnInit() {
 
+    this.load();
     
+  }
+
+  load(): void {
+    this.statsService.load().subscribe(result => {
+        this.statusCountReport = result;
+      }
+    );
   }
 }

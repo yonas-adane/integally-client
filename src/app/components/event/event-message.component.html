@@ -8,6 +8,10 @@
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
 
+    <ul>
+      <li *ngFor="let item of statusCountReport" >{{item.status}}: {{item.statusCount}}</li>
+    </ul>
+
     <input type="text" class="form-control" id="txtStatus" [(ngModel)]="status" >
     <input type="text" class="form-control" id="txtKeyword" [(ngModel)]="keyword" >
 

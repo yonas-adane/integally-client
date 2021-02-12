@@ -16,3 +16,9 @@ export class EventMessage extends Audit {
   traceInstanceId: string;
 }
 
+export class StatusCountReport{
+  status: string;
+  statusCount: number;
+  reportDate: Date;
+}
+
