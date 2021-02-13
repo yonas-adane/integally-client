@@ -103,7 +103,6 @@ ngOnDestroy() {
     this.eventMessageService.loadStatusCountReport().subscribe(
       result => {
         this.statusCountReport = result;
-        console.log(result);
       }
     );
   }

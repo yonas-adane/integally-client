@@ -1,5 +1,14 @@
 <div>
 
-  <pre>{{statusCountReport | json}}</pre>
+  <table class="table table-centered table-hover mb-0"  >
+    <tr>
+      <td></td>
+      <th scope="col" *ngFor="let col of cols" >{{col}}</th>
+    </tr>
+    <tr *ngFor="let row of rows">
+      <td scope="row">{{row}}</td>
+      <td *ngFor="let col of cols" >{{findVal(row, col)}}</td>
+    </tr>
+  </table>
 
 </div>
