@@ -193,6 +193,7 @@
             <td>{{item.inactive }} </td>
           <td style="white-space: nowrap">
             <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
+            <a *ngIf="item.id" [routerLink]="['/eventtemplates/', item.id ]" class="btn btn-secondary">View</a>&nbsp;
             <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>&nbsp;
             <a [routerLink]="['../traces/event', item.id ]" class="btn btn-secondary">Trace</a>&nbsp;
             <button type="button" (click)="deleteTrace(item)" class="btn btn-danger">Delete Trace</button>

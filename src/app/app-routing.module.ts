@@ -23,6 +23,8 @@ import { EventTemplateComponent } from './components/event/event-template.compon
 import { JobComponent } from './components/job/job.component';
 import { EventMessageComponent } from './components/event/event-message.component';
 import { ConnectorLibraryComponent } from './components/connector/connector-library.component';
+import { EventMessageEditComponent } from './components/event/event-message-edit.component';
+import { EventTemplateEditComponent } from './components/event/event-template-edit.component';
 
 const oktaConfig = {
   issuer: environment.issuer,
@@ -94,8 +96,18 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
+    path: 'eventtemplates/:id',
+   component: EventTemplateEditComponent,
+   canActivate: [OktaAuthGuard]
+ },
+  {
     path: 'eventmessages',
     component: EventMessageComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'eventmessages/:id',
+    component: EventMessageEditComponent,
     canActivate: [OktaAuthGuard]
   },
   {

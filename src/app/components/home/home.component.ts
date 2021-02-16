@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, timer } from 'rxjs';
 import { StatusCountReport } from 'src/app/models/event-message.model';
 import { AlertService } from 'src/app/services/alert.service';
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy  {
 
   statusCountReport: StatusCountReport[];
 
@@ -27,6 +27,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private statsService: StatsService,
     private alertService: AlertService) {
+  }
+
+  ngOnDestroy() {
+    this.subscriptionAutoLoad.unsubscribe();
   }
 
    ngOnInit() {

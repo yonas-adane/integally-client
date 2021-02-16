@@ -46,6 +46,8 @@ import { EventMessageComponent } from './components/event/event-message.componen
 import { EventMessageService } from './services/event-message.service';
 import { ConnectorLibraryComponent } from './components/connector/connector-library.component';
 import { ConnectorLibraryService } from './services/connector-library.service';
+import { EventMessageEditComponent } from './components/event/event-message-edit.component';
+import { EventTemplateEditComponent } from './components/event/event-template-edit.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { ConnectorLibraryService } from './services/connector-library.service';
     EventTemplateComponent,
     JobComponent,
     EventMessageComponent,
-    ConnectorLibraryComponent
+    ConnectorLibraryComponent,
+    EventMessageEditComponent,
+    EventTemplateEditComponent
   ],
   imports: [
     BrowserModule,
