@@ -73,6 +73,7 @@ ngOnDestroy() {
 
     this.subscriptionAutoLoad = this.autoLoadInterval.subscribe(() => {
       this.load();
+      this.loadStatusCountReport();
     });
 
     this.eventMessageForm = this.formBuilder.group({
