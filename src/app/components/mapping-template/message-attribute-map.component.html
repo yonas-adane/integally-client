@@ -41,7 +41,7 @@
 
     <form  [formGroup]="messageAttributeMapForm" (ngSubmit)="onSubmit()">
 
-    <table class="table table-centered table-hover mb-0" id="datatable">
+    <table class="table table-centered table-hover mb-0 table-sm" id="datatable">
       <thead>
         <tr>
           <th class="border-top-0" scope="col">Id</th>
@@ -72,7 +72,7 @@
                         <option *ngFor="let attribute of sourceMessageAttributeLookup" [ngValue]="attribute.id">{{attribute.name}}</option>
                       </select>
 
-                  <button type="button" class="btn btn-danger" (click)="removeSourceMessageAttribute(sourceAttributeIndex)">X</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="removeSourceMessageAttribute(sourceAttributeIndex)">X</button>
                     </div>
 
                       <div
@@ -93,7 +93,7 @@
 
                 </div>
 
-                  <button type="button" class="btn btn-secondary" (click)="addSourceMessageAttribute()">Add</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="addSourceMessageAttribute()">Add</button>
 
 
               </div>
@@ -142,8 +142,8 @@
 
         </td>
             <td>
-      <button type="submit" class="btn btn-secondary" [disabled]="!messageAttributeMapForm.valid" >Save</button>&nbsp;
-      <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+      <button type="submit" class="btn btn-secondary btn-sm" [disabled]="!messageAttributeMapForm.valid" >Save</button>&nbsp;
+      <button type="button" class="btn btn-secondary btn-sm" (click)="clearForm()" >Clear</button>
 
           </td>
     </tr>
@@ -163,8 +163,8 @@
           <td>{{item.targetMessageAttributeName}}</td>
           <td>{{item.inactive}}</td>
           <td style="white-space: nowrap">
-            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
-            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary btn-sm">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger btn-sm">Delete</button>
           </td>
         </tr>
       </tbody>

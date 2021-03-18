@@ -9,7 +9,7 @@
   <div class="table-responsive">
     Total: {{tracePageable.totalElements}} Current:{{tracePageable.numberOfElements}}
 
-    <table class="table table-centered table-hover mb-0" id="datatable">
+    <table class="table table-centered table-hover mb-0 table-sm" id="datatable">
       <thead>
         <tr>
           <th class="border-top-0" scope="col">Instance Id</th>
@@ -31,8 +31,8 @@
           <td>{{item.count}}</td>
           <td>{{item.exitTag}}</td>
           <td style="white-space: nowrap">
-            <a [routerLink]="['/traces/instance', item.instanceId ]" class="btn btn-secondary">View</a>&nbsp;
-            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+            <a [routerLink]="['/traces/instance', item.instanceId ]" class="btn btn-secondary btn-sm">View</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger btn-sm">Delete</button>
           </td>
         </tr>
       </tbody>

@@ -69,7 +69,7 @@
                 <input type="checkbox" formControlName="primaryConnector" class="form-control">
               </div>
 
-              <button type="button" class="btn btn-danger"
+              <button type="button" class="btn btn-danger btn-sm"
                 (click)="removeEventTemplateConnector(connectorIndex)">X</button>
             </div>
 
@@ -85,7 +85,7 @@
 
         </div>
 
-        <button type="button" class="btn btn-secondary" (click)="addEventTemplateConnector()">Add</button>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="addEventTemplateConnector()">Add</button>
 
 
       </div>
@@ -135,8 +135,8 @@
       </div>
 
 
-      <button type="submit" class="btn btn-secondary" [disabled]="!eventTemplateForm.valid">Save</button>&nbsp;
-      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      <button type="submit" class="btn btn-secondary btn-sm" [disabled]="!eventTemplateForm.valid">Save</button>&nbsp;
+      <button type="button" class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
 
     </form>
 

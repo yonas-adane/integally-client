@@ -24,7 +24,7 @@
 
     <form  [formGroup]="lookupForm" (ngSubmit)="onSubmit()">
 
-    <table class="table table-centered table-hover mb-0" id="datatable">
+    <table class="table table-centered table-hover mb-0 table-sm" id="datatable">
       <thead>
         <tr>
           <th class="border-top-0" scope="col">Id</th>
@@ -85,8 +85,8 @@
 
           </td>
           <td>
-      <button type="submit" class="btn btn-secondary" [disabled]="!lookupForm.valid" >Save</button>&nbsp;
-      <button type="button" class="btn btn-secondary" (click)="clearForm()" >Clear</button>
+      <button type="submit" class="btn btn-secondary btn-sm" [disabled]="!lookupForm.valid" >Save</button>&nbsp;
+      <button type="button" class="btn btn-secondary btn-sm" (click)="clearForm()" >Clear</button>
 
           </td>
 
@@ -101,8 +101,8 @@
           <td>{{item.altKey}}</td>
           <td></td>
           <td style="white-space: nowrap">
-            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary">Edit</button>&nbsp;
-            <button type="button" (click)="delete(item)" class="btn btn-danger">Delete</button>
+            <button type="button" (click)="setForEdit(item)" class="btn btn-secondary btn-sm">Edit</button>&nbsp;
+            <button type="button" (click)="delete(item)" class="btn btn-danger btn-sm">Delete</button>
           </td>
         </tr>
       </tbody>
