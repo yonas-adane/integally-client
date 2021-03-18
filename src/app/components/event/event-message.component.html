@@ -14,8 +14,8 @@
     <input type="text" class="form-control" id="txtStatus" placeholder="Search by status" [(ngModel)]="status">
     <input type="text" class="form-control" id="txtKeyword" placeholder="Search by keyword" [(ngModel)]="keyword">
 
-    <button type="button" (click)="search()" class="btn btn-secondary">Search</button>&nbsp;
-    <button type="button" (click)="clearSearch()" class="btn btn-secondary">Clear</button>&nbsp;
+    <button type="button" (click)="search()" class="btn btn-secondary btn-sm">Search</button>&nbsp;
+    <button type="button" (click)="clearSearch()" class="btn btn-secondary btn-sm">Clear</button>&nbsp;
 
     Total: {{eventMessagesPageable.totalElements}} Current:{{eventMessagesPageable.numberOfElements}}
 
