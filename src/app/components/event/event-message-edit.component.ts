@@ -92,7 +92,7 @@ export class EventMessageEditComponent implements OnInit {
 
     if (confirm('Are you sure? This will put the message back to queue as new message.')) {
 
-    const id = this.eventMessageForm.get('id').value;
+    const id = this.f['id'].value;
 
     const isCreate = id == null || id.length == 0 ? true : false;
     
@@ -100,10 +100,11 @@ export class EventMessageEditComponent implements OnInit {
         result => {
             this.eventMessage = result;
           this.feedback = {type: 'success', message: 'Save was successful!'};
-          this.eventMessageForm.reset();
-          this.load();
+          //this.eventMessageForm.reset();
+          //this.load();
           setTimeout(() => {
             this.feedback = null;
+            this.router.navigate(['/eventmessages']);
           }, 1000);
         }
       );

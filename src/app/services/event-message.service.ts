@@ -73,8 +73,10 @@ export class EventMessageService  extends ApiBaseService {
 
     let url = `${this.apiResource}`;
 
-    if (isCreate)
+    if (isCreate){
+      entity.id = null;
       return this.http.post<EventMessage>(url, entity);
+    }
     else
       return this.http.put<EventMessage>(url, entity);
 

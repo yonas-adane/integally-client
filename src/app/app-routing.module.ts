@@ -20,9 +20,7 @@ import { MessageTemplateMapComponent } from './components/mapping-template/messa
 import { MessageTemplateComponent } from './components/message-template/message-template.component';
 import { MessageAttributeMapComponent } from './components/mapping-template/message-attribute-map.component';
 import { EventTemplateComponent } from './components/event/event-template.component';
-import { JobComponent } from './components/job/job.component';
 import { EventMessageComponent } from './components/event/event-message.component';
-import { ConnectorLibraryComponent } from './components/connector/connector-library.component';
 import { EventMessageEditComponent } from './components/event/event-message-edit.component';
 import { EventTemplateEditComponent } from './components/event/event-template-edit.component';
 
@@ -48,11 +46,6 @@ const routes: Routes = [
   {
     path: 'connectors',
     component: ConnectorListComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
-    path: 'connectorlibraries',
-    component: ConnectorLibraryComponent,
     canActivate: [OktaAuthGuard]
   },
   {
@@ -108,11 +101,6 @@ const routes: Routes = [
   {
     path: 'eventmessages/:id',
     component: EventMessageEditComponent,
-    canActivate: [OktaAuthGuard]
-  },
-  {
-    path: 'jobs',
-    component: JobComponent,
     canActivate: [OktaAuthGuard]
   },
    {

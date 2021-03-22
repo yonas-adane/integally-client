@@ -127,9 +127,8 @@
             <td style="white-space: nowrap">
               <a *ngIf="item.traceInstanceId" [routerLink]="['/traces/instance', item.traceInstanceId ]"
                 class="btn btn-secondary btn-sm">Trace</a>&nbsp;
-              <button [disabled]="item.status == 'QUEUED' " type="button" (click)="setForEdit(item)" class="btn btn-secondary btn-sm">Edit</button>&nbsp;
               <a *ngIf="item.traceInstanceId" [routerLink]="['/eventmessages/', item.id ]"
-                class="btn btn-secondary btn-sm">View</a>&nbsp;
+                class="btn btn-secondary btn-sm">Edit</a>&nbsp;
               <button  [disabled]="item.status == 'QUEUED' " type="button" (click)="delete(item)" class="btn btn-danger btn-sm">Delete</button>
             </td>
           </tr>

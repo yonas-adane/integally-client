@@ -17,7 +17,6 @@
           <th class="border-top-0" scope="col">Id</th>
           <th class="border-top-0" scope="col">Name</th>
           <th class="border-top-0" scope="col">Description</th>
-          <th class="border-top-0" scope="col">Library</th>
           <th class="border-top-0" scope="col" style="width:120px">
             
           </th>
@@ -53,25 +52,11 @@
           </div>
 
           </td>
-          <td>
-            
-              <div class="form-group">
-                <select formControlName="connectorLibraryId" class="form-control">
-                  <option *ngFor="let library of connectorLibraryLookup" [ngValue]="library.id">{{library.name}}</option>
-                </select>
-                <div *ngIf="f.connectorLibraryId.invalid && (f.connectorLibraryId.dirty || f.connectorLibraryId.touched)" class="alert alert-danger">
-                  <div *ngIf="f.connectorLibraryId.errors.required">
-                    Connector library is required.
-                  </div>
-                </div>
-              </div>
-
-          </td>
+    
          
           <td>
             <button type="submit" class="btn btn-secondary btn-sm" [disabled]="!connectorForm.valid" >Save</button>&nbsp;
             <button type="button" class="btn btn-secondary btn-sm" (click)="clearForm()" >Clear</button>&nbsp;
-            <a [routerLink]="['../connectorlibraries']" class="btn btn-secondary btn-sm">Library</a>
           </td>
         </tr>
         <tr *ngFor="let item of connectorsPageable.content" [class.active]="item === selectedConnector">
@@ -79,7 +64,6 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.connectorLibraryName}} </td>
 
           <td style="white-space: nowrap">
             <a [routerLink]="['../connectorsettings', item.id ]" class="btn btn-secondary btn-sm">Settings</a>&nbsp;

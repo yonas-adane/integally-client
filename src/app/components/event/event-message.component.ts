@@ -131,17 +131,7 @@ ngOnDestroy() {
     }
   }
 
-  setForEdit(entity: EventMessage){
 
-    if (confirm('Are you sure?')) {
-
-      this.f['id'].setValue(entity.id);
-      this.f['eventId'].setValue(entity.eventId);
-      this.f['message'].setValue(entity.message);
-
-    }
-
-  }
 
   onSubmit(){
 

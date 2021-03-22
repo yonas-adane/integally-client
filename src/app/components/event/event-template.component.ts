@@ -4,7 +4,6 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { MessageAttributeMap, MessageTemplateMap } from 'src/app/models/message-template-map.model';
 import { Connector } from 'src/app/models/connector.model';
 import { EventTemplateService } from 'src/app/services/event-template.service';
 import { EventTemplate } from 'src/app/models/event-template.model';
@@ -173,39 +172,6 @@ export class EventTemplateComponent implements OnInit {
       }
       );
       
-    }
-  }
-
-
-  setForEdit(eventTemplate: EventTemplate){
-    if (confirm('Are you sure?')) {
-
-      this.f['id'].setValue(eventTemplate.id);
-      this.f['name'].setValue(eventTemplate.name);
-      this.f['description'].setValue(eventTemplate.description);
-
-      this.eventTemplateConnectors().clear();
-
-      eventTemplate.eventTemplateConnectors.forEach(element => {
-
-        let connector = this.formBuilder.group({
-          id: [element.id],
-          eventId: [element.eventId],
-          className: [element.className],
-          connectorId: [element.connectorId],
-          primaryConnector: [element.primaryConnector],
-        });
-
-        this.eventTemplateConnectors().push(connector);
-      });
-
-
-      this.f['message'].setValue(eventTemplate.message);
-      this.f['queueName'].setValue(eventTemplate.queueName);
-      this.f['traceEnabled'].setValue(eventTemplate.traceEnabled);
-      this.f['inactive'].setValue(eventTemplate.inactive);
-      this.f['routeDefinition'].setValue(eventTemplate.routeDefinition);
-
     }
   }
 

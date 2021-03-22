@@ -6,8 +6,6 @@ import { Connector } from 'src/app/models/connector.model';
 import { Page } from 'src/app/models/page.model';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConnectorLibraryService } from 'src/app/services/connector-library.service';
-import { ConnectorLibrary } from 'src/app/models/connector-library.model';
 
 @Component({
   selector: 'app-connector',
@@ -19,13 +17,10 @@ export class ConnectorListComponent implements OnInit {
   selectedConnector: Connector;
   feedback: any = {};
 
-  connectorLibraryLookup: ConnectorLibrary[];
-
   connectorForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl(''),
-    description: new FormControl(''),
-    connectorLibraryId: new FormControl('')
+    description: new FormControl('')
   });
 
   get connectorsPageable(): Page<Connector> {
@@ -35,8 +30,7 @@ export class ConnectorListComponent implements OnInit {
   constructor(  private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
     private router: Router,
-    private connectorService: ConnectorService,
-    private connectorLibraryService: ConnectorLibraryService) {
+    private connectorService: ConnectorService) {
   }
 
   ngOnInit() {
@@ -46,19 +40,13 @@ export class ConnectorListComponent implements OnInit {
     this.connectorForm = this.formBuilder.group({
       id: [''],
       name: ['',[Validators.required]],
-      description: [''],
-      connectorLibraryId: [null, [Validators.required]]
+      description: ['']
     });
     
     this.load();
   }
 
   load(): void {
-    this.connectorLibraryService.lookup().subscribe(result => { 
-
-      this.connectorLibraryLookup = result;
-
-    });
 
     this.connectorService.load();
   }
@@ -82,7 +70,6 @@ export class ConnectorListComponent implements OnInit {
       this.f['id'].setValue(connector.id);
       this.f['name'].setValue(connector.name);
       this.f['description'].setValue(connector.description);
-      this.f['connectorLibraryId'].setValue(connector.connectorLibraryId);
 
     }
 

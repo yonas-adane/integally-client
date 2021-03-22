@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FileService } from './services/file.service';
-import { FileListComponent } from './components/file/file-list.component';
-import { FileEditComponent } from './components/file/file-edit.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoaderService } from './services/loader.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -41,19 +39,14 @@ import { MessageAttributeMapComponent } from './components/mapping-template/mess
 import { MessageAttributeMapService } from './services/message-attribute-map.service';
 import { EventTemplateComponent } from './components/event/event-template.component';
 import { EventTemplateService } from './services/event-template.service';
-import { JobComponent } from './components/job/job.component';
 import { EventMessageComponent } from './components/event/event-message.component';
 import { EventMessageService } from './services/event-message.service';
-import { ConnectorLibraryComponent } from './components/connector/connector-library.component';
-import { ConnectorLibraryService } from './services/connector-library.service';
 import { EventMessageEditComponent } from './components/event/event-message-edit.component';
 import { EventTemplateEditComponent } from './components/event/event-template-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileListComponent,
-    FileEditComponent,
     HomeComponent,
     AlertComponent,
     ConnectorListComponent,
@@ -69,9 +62,7 @@ import { EventTemplateEditComponent } from './components/event/event-template-ed
     MessageTemplateMapComponent,
     MessageAttributeMapComponent,
     EventTemplateComponent,
-    JobComponent,
     EventMessageComponent,
-    ConnectorLibraryComponent,
     EventMessageEditComponent,
     EventTemplateEditComponent
   ],
@@ -100,7 +91,6 @@ import { EventTemplateEditComponent } from './components/event/event-template-ed
     EventTemplateService,
     JobService,
     EventMessageService,
-    ConnectorLibraryService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService}],
