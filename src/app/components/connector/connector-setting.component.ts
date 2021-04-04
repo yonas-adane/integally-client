@@ -19,7 +19,7 @@ export class ConnectorSettingComponent implements OnInit {
   connector: Connector;
   selectedConnectorSetting: ConnectorSetting;
   connectorSetting: ConnectorSetting;
-  feedback: any = {};
+  feedback: any = null;
   connectorId: string ;
   profiles: String[] = ['ALL', 'LOCAL', 'DEV', 'PROD'];
 

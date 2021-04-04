@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TraceComponent implements OnInit {
 
-  feedback: any = {};
+  feedback: any = null;
 
   traceId: string;
 

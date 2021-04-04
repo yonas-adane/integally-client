@@ -1,8 +1,5 @@
-<div class="card">
-  <div class="header">
     <h2 class="title">{{formHeader}}</h2>
-  </div>
-  <div class="card" *ngIf="eventMessage != null">
+  <div  *ngIf="eventMessage != null">
     <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
     <div class="table-responsive">
 

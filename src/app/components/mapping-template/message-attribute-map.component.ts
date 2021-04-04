@@ -23,7 +23,7 @@ export class MessageAttributeMapComponent implements OnInit {
   sourceMessageAttributeLookup: MessageAttribute[];
   targetMessageAttributeLookup: MessageAttribute[];
 
-  feedback: any = {};
+  feedback: any = null;
 
   messageAttributeMapForm: FormGroup;
 

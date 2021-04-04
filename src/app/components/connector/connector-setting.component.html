@@ -1,9 +1,5 @@
-<div class="card">
-  <div class="header">
     <h2 class="title">Connector Settings</h2>
-  </div>
-</div>
-<div class="card" *ngIf="connectorSettingsPageable != null">
+<div *ngIf="connectorSettingsPageable != null">
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
 
@@ -27,7 +23,7 @@
 
     <form  [formGroup]="connectorSettingForm" (ngSubmit)="onSubmit()">
 
-    <table class="table table-centered table-hover mb-0 table-sm" id="datatable">
+      <table class="table table-striped table-sm">
       <thead>
         <tr>
           <th class="border-top-0" scope="col">Id</th>

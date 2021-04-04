@@ -1,13 +1,7 @@
-<div class="card">
-  <div class="header">
     <h2 class="title">{{formHeader}}</h2>
-  </div>
-
-  <div class="card" *ngIf="eventTemplate != null">
+  <div  *ngIf="eventTemplate != null">
     <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
-
     <form [formGroup]="eventTemplateForm" (ngSubmit)="onSubmit()">
-
       <ul>
         <li>name: {{eventTemplate.name }} </li>
         <li>description: {{eventTemplate.description }} </li>

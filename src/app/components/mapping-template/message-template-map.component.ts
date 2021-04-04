@@ -21,7 +21,7 @@ export class MessageTemplateMapComponent implements OnInit {
   sourceMessageAttributes: MessageAttribute[];
   targetMessageKAttributes: MessageAttribute[];
 
-  feedback: any = {};
+  feedback: any = null;
 
   get messageTemplateMapsPageable(): Page<MessageTemplateMap> {
     return this.messageTemplateMapService.messageTemplateMapPageable;

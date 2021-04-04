@@ -35,7 +35,7 @@ ngOnDestroy() {
   this.subscriptionAutoLoad.unsubscribe();
 }
 
-  feedback: any = {};
+  feedback: any = null;
 
   get eventMessagesPageable(): Page<EventMessage> {
     return this.eventMessageService.eventMessagePageable;

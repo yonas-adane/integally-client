@@ -1,56 +1,92 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/">
-        <div *ngIf="isLoading | async; else loading">
-            <img src="/assets/loading.gif" width="32" height="32" class="d-inline-block align-top" alt="">
-        </div>
-        <ng-template #loading>
-            <img src="/assets/brand/favicon-32x32.png" width="32" height="32" class="d-inline-block align-top" alt="">
-        </ng-template>
-    </a>
-    <a class="navbar-brand" routerLink="/">
-        {{ title }} 
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/connectors">Connectors</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/lookupgroups">Lookups</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/messagetemplates">Message Templates</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/messagetemplatemaps">Mapping Templates</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/eventtemplates">Event Templates</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/eventmessages">Messages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/appinfo">App Info.</a>
-        </li>
-        </ul>
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+    <div *ngIf="isLoading | async; else loading">
+      <img src="/assets/loading.gif" width="32" height="32" class="d-inline-block align-top" alt="">
+  </div>
+  <ng-template #loading>
+      <img src="/assets/brand/favicon-32x32.png" width="32" height="32" class="d-inline-block align-top" alt="">
+  </ng-template>
+    {{ title }} 
+  </a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#"> {{name|| ''}} </a>
-            </li>
-            <li>
-                <!-- <button class="btn btn-outline-primary" *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">Login</button> -->
-                <button class="btn btn-outline-warning" *ngIf="isAuthenticated" (click)="oktaAuth.signOut()">Logout</button> 
-            </li>
-        </ul>
+  <app-alert class="w-100"></app-alert>
 
-
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{name|| ''}} </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem *ngIf="isAuthenticated" (click)="oktaAuth.signOut()" >Sign out</button>
     </div>
-  </nav>
+  </div>
 
-<app-alert></app-alert>
-<router-outlet></router-outlet>
+</header>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/connectors">
+              <span data-feather="home"></span>
+              Connectors
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/lookupgroups">
+              <span data-feather="file"></span>
+              Lookups
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/messagetemplates">
+              <span data-feather="shopping-cart"></span>
+              Message Templates
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/messagetemplatemaps">
+              <span data-feather="users"></span>
+              Mapping Templates
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/eventtemplates">
+              <span data-feather="bar-chart-2"></span>
+              Event Templates
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/eventmessages">
+              <span data-feather="layers"></span>
+              Messages
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/appinfo">
+              <span data-feather="layers"></span>
+              App Info.
+            </a>
+          </li>
+        </ul>
+        
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+
+
+
+
+
+      <router-outlet></router-outlet>
+  
+    </main>
+  </div>
+</div>
+

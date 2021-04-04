@@ -28,7 +28,7 @@ export class EventTemplateEditComponent implements OnInit {
 
   formHeader: String;
 
-  feedback: any = {};
+  feedback: any = null;
 
   eventTemplateForm: FormGroup;
 
@@ -123,7 +123,7 @@ export class EventTemplateEditComponent implements OnInit {
       .subscribe(message => {
         this.eventTemplate = message;
 
-        this.feedback = {};
+        this.feedback = null;
 
         this.f['id'].setValue(this.eventTemplate.id);
         this.f['name'].setValue(this.eventTemplate.name);

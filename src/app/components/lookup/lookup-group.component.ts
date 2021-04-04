@@ -14,7 +14,7 @@ export class LookupGroupComponent implements OnInit {
   selectedLookupGroup: LookupGroup;
   lookupGroup: LookupGroup;
 
-  feedback: any = {};
+  feedback: any = null;
 
   get lookupGroupsPageable(): Page<LookupGroup> {
     return this.lookupGroupService.lookupGroupPageable;

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FileService } from '../../services/file.service';
-import { File } from 'src/app/models/file.model';
 import { ConnectorService } from 'src/app/services/connector.service';
 import { Connector } from 'src/app/models/connector.model';
 import { Page } from 'src/app/models/page.model';
@@ -15,7 +13,9 @@ export class ConnectorListComponent implements OnInit {
 
   connector: Connector;
   selectedConnector: Connector;
-  feedback: any = {};
+  feedback: any = null;
+
+  currentPage = 1;
 
   connectorForm = new FormGroup({
     id: new FormControl(''),
@@ -47,7 +47,6 @@ export class ConnectorListComponent implements OnInit {
   }
 
   load(): void {
-
     this.connectorService.load();
   }
 

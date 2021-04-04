@@ -22,7 +22,7 @@ export class MessageAttributeComponent implements OnInit {
   messageTemplate: MessageTemplate;
 
   messageAttribute: MessageAttribute;
-  feedback: any = {};
+  feedback: any = null;
 
   dataTypes: String[] = ['String', 'Boolean', 'Number', 'Object', 'Array'];
 

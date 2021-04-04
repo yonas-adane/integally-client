@@ -17,7 +17,7 @@ export class LookupComponent implements OnInit {
   lookupGroup: LookupGroup;
   selectedLookup: Lookup;
   lookup: Lookup;
-  feedback: any = {};
+  feedback: any = null;
   lookupGroupId: string ;
 
   lookupForm = new FormGroup({

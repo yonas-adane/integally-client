@@ -15,7 +15,7 @@ export class MessageTemplateComponent implements OnInit {
 
   messageTemplate: MessageTemplate;
 
-  feedback: any = {};
+  feedback: any = null;
 
   get messageTemplatesPageable(): Page<MessageTemplate> {
     return this.messageTemplateService.messageTemplatePageable;

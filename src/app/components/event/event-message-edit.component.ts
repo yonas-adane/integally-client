@@ -17,7 +17,7 @@ import { EventTemplate } from 'src/app/models/event-template.model';
 export class EventMessageEditComponent implements OnInit {
 
   id: string;
-  feedback: any = {};
+  feedback: any = null;
   eventMessage: EventMessage;
   eventLookup: EventTemplate[];
   formHeader: string;
@@ -73,7 +73,7 @@ export class EventMessageEditComponent implements OnInit {
       )
       .subscribe(message => {
           this.eventMessage = message;
-          this.feedback = {};
+          this.feedback = null;
 
           this.f['id'].setValue(this.eventMessage.id);
           this.f['eventId'].setValue(this.eventMessage.eventId);

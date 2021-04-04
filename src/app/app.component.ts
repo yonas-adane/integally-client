@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
+
 import { Subject } from 'rxjs';
 import { LoaderService } from './services/loader.service';
 
@@ -12,6 +13,8 @@ export class AppComponent implements OnInit {
   isAuthenticated: boolean;
   name: string;
   preferred_username: string;
+
+  myChart: any;
 
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
@@ -37,6 +40,8 @@ export class AppComponent implements OnInit {
       this.preferred_username = (await userInfo).preferred_username;
 
     }
+
+ 
 
   }
 

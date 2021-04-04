@@ -24,7 +24,7 @@ export class EventTemplateComponent implements OnInit {
   connectorLookup: Connector[];
   queueNameLookup: String[];
 
-  feedback: any = {};
+  feedback: any = null;
 
   eventTemplateForm: FormGroup;
 

@@ -11,7 +11,7 @@ import { Page } from 'src/app/models/page.model';
 export class TraceListComponent implements OnInit {
 
   selectedTrace: Trace;
-  feedback: any = {};
+  feedback: any = null;
   tagId: string;
   instanceId: string;
 

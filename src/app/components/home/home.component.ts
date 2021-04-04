@@ -4,7 +4,8 @@ import { StatusCountReport } from 'src/app/models/event-message.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { StatsService } from 'src/app/services/stats.service';
 import { environment } from 'src/environments/environment';
-
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Color,Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-home',
@@ -20,8 +21,32 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
   subscriptionAlertService: Subscription;
 
+  chartOptions: ChartOptions = {
+    responsive: true,
+  };
+  chartLabels: Label[] = [];
+  chartType: ChartType = 'line';
+  chartLegend = true;
+  chartPlugins = [];
+
+  chartData: ChartDataSets[] = [];
+
+  chartColors: Color[] = [
+    {
+      backgroundColor: 'transparent',
+      borderColor: 'black',
+    },
+    {
+      backgroundColor: 'transparent',
+      borderColor: '#ff1e00',
+      borderWidth: 4,
+      pointBackgroundColor: '#ff1e00'
+    },
+    
+  ];
+
   rows: string[]=[];
-  cols: String[]=[];
+  cols: string[]=[];
 
   autoLoadInterval: Observable<number> = timer(0, environment.autoLoadInterval);
 
@@ -55,6 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
     this.statsService.load().subscribe(result => {
         this.statusCountReport = result;
 
+
         for (var item of result) {
 
           this.rows.push(item.status);
@@ -62,8 +88,33 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
         }
 
+
+
         this.rows = this.dedupe(this.rows);
         this.cols = this.dedupe(this.cols);
+
+        this.chartData = [];
+        this.chartLabels = [];
+
+        for(var col of this.cols){
+          this.chartLabels.push(col);
+        }
+        
+
+        for(var row of this.rows){
+
+          let data = [];
+          let label = row;
+
+          for(var col of this.cols){
+            data.push(this.findVal(row, col));
+          }
+
+          let dataSet = { data: data, label: label, fill: false};
+
+          this.chartData.push( dataSet);
+
+        }
 
       }
     );
