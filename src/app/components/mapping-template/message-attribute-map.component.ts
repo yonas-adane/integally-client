@@ -25,10 +25,17 @@ export class MessageAttributeMapComponent implements OnInit {
 
   feedback: any = null;
 
+  currentPage = 0;
+
+
   messageAttributeMapForm: FormGroup;
 
   get messageAttributeMapsPageable(): Page<MessageAttributeMap> {
     return this.messageAttributeMapService.messageAttributeMapPageable;
+  }
+
+  loadPage(page: number) {
+    this.load(this.messageTemplateMapId, this.currentPage);
   }
 
   constructor(private formBuilder: FormBuilder, 
@@ -84,7 +91,6 @@ export class MessageAttributeMapComponent implements OnInit {
 
   ngOnInit() {
 
-
     this
     .route
     .params
@@ -116,7 +122,7 @@ export class MessageAttributeMapComponent implements OnInit {
           }
         );
          
-        this.load(this.messageTemplateMapId);
+        this.load(this.messageTemplateMapId, 0);
 
         
 
@@ -133,8 +139,8 @@ export class MessageAttributeMapComponent implements OnInit {
 
  }
 
-  load(lookupGroupId: String): void {
-    this.messageAttributeMapService.load(lookupGroupId);
+  load(lookupGroupId: string, page: number): void {
+    this.messageAttributeMapService.load(lookupGroupId, page);
   }
 
 
@@ -148,13 +154,11 @@ export class MessageAttributeMapComponent implements OnInit {
         this.feedback = {type: 'success', message: 'Save was successful!'};
         this.messageAttributeMapForm.reset();
         setTimeout(() => {
-          this.load(this.messageTemplateMapId);
+          this.load(this.messageTemplateMapId, this.currentPage);
           this.feedback = null;
         }, 1000);
       }
     );
-
-
 
 }
 
@@ -163,7 +167,7 @@ export class MessageAttributeMapComponent implements OnInit {
       this.messageAttributeMapService.delete(entity).subscribe(() => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
-            this.load(this.messageTemplateMapId);
+            this.load(this.messageTemplateMapId, this.currentPage);
             this.feedback = null;
           }, 1000);
          }

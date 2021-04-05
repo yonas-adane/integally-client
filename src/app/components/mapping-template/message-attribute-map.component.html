@@ -33,6 +33,18 @@
 
   </div>
 
+  <ngb-pagination [(collectionSize)]="messageAttributeMapsPageable.totalElements" 
+  [(page)]="currentPage" 
+  [pageSize]=messageAttributeMapsPageable.size
+  [maxSize]="messageAttributeMapsPageable.numberOfElements" 
+  [rotate]="true" 
+  [ellipses]="false" 
+  [boundaryLinks]="true" 
+  (pageChange)="loadPage($event)"
+  size="sm" 
+  [disabled]='messageAttributeMapsPageable.totalElements < messageAttributeMapsPageable.numberOfElements'>
+</ngb-pagination>
+
     Total: {{messageAttributeMapsPageable.totalElements}} Current:{{messageAttributeMapsPageable.numberOfElements}}
 
     <form  [formGroup]="messageAttributeMapForm" (ngSubmit)="onSubmit()">
