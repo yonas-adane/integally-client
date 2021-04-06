@@ -21,9 +21,17 @@ export class MessageAttributeService  extends ApiBaseService {
     return result;
   }
 
-  load(templateId: String): void {
+  load(templateId: string, page: number): void {
 
-    const url = `${this.apiResource}/list/${templateId}/0`;
+    if(page == null || page <= 0){
+      page = 0;
+    }
+    else{
+      page = page - 1;
+    }
+
+
+    const url = `${this.apiResource}/list/${templateId}/${page}`;
 
     this.http.get<Page<MessageAttribute>>(url, this.httpOptions).subscribe(result => {
 

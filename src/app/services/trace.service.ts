@@ -27,9 +27,16 @@ export class TraceService  extends ApiBaseService {
   }
   
 
-  loadByEvent(eventId: string): void {
+  loadByEvent(eventId: string, page: number): void {
 
-    const url = `${this.apiResource}/list/event/${eventId}/0`;
+    if(page == null || page <= 0){
+      page = 0;
+    }
+    else{
+      page = page - 1;
+    }
+
+    const url = `${this.apiResource}/list/event/${eventId}/${page}`;
 
     this.http.get<Page<Trace>>(url, this.httpOptions).subscribe(result => {
       this.tracePageable = result;

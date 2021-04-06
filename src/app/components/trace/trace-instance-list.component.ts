@@ -14,6 +14,8 @@ export class TraceInstanceListComponent implements OnInit {
   feedback: any = null;
   eventId: string;
 
+  currentPage: number = 1;
+
   header: string;
 
   get tracePageable(): Page<Trace> {
@@ -46,12 +48,16 @@ export class TraceInstanceListComponent implements OnInit {
 
     }
 
-      this.load(this.eventId);
+      this.load(this.eventId,this.currentPage);
     
   }
 
-  load(tagId: string): void {
-    this.traceService.loadByEvent(tagId);
+  loadPage(page: number) {
+    this.load(this.eventId, page);
+  }
+
+  load(tagId: string, page: number): void {
+    this.traceService.loadByEvent(tagId, page);
   }
 
   select(selected: Trace): void {
@@ -69,7 +75,7 @@ export class TraceInstanceListComponent implements OnInit {
       this.traceService.deleteByInstance(entity.instanceId).subscribe(() => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
-            this.load(this.eventId);
+            this.load(this.eventId, this.currentPage);
             this.feedback = null;
           }, 1000);
          }

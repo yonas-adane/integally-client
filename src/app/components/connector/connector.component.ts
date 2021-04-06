@@ -15,8 +15,6 @@ export class ConnectorListComponent implements OnInit {
   selectedConnector: Connector;
   feedback: any = null;
 
-  currentPage = 1;
-
   connectorForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl(''),

@@ -3,6 +3,19 @@
 <div *ngIf="tracePageable != null">
   <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
   <div class="table-responsive">
+
+    <ngb-pagination [(collectionSize)]="tracePageable.totalElements" 
+    [(page)]="currentPage" 
+    [pageSize]=tracePageable.size
+    [maxSize]="tracePageable.numberOfElements" 
+    [rotate]="true" 
+    [ellipses]="false" 
+    [boundaryLinks]="true" 
+    (pageChange)="loadPage($event)"
+    size="sm" 
+    [disabled]='tracePageable.totalElements < tracePageable.numberOfElements'>
+  </ngb-pagination>
+
     Total: {{tracePageable.totalElements}} Current:{{tracePageable.numberOfElements}}
 
     <table class="table table-striped  table-sm">

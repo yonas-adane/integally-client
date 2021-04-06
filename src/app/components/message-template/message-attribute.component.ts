@@ -24,6 +24,8 @@ export class MessageAttributeComponent implements OnInit {
   messageAttribute: MessageAttribute;
   feedback: any = null;
 
+  currentPage: number = 1;
+
   dataTypes: String[] = ['String', 'Boolean', 'Number', 'Object', 'Array'];
 
   messageAttributeForm = new FormGroup({
@@ -34,6 +36,10 @@ export class MessageAttributeComponent implements OnInit {
     defaultValue: new FormControl(''),
     depth: new FormControl('')
   });
+
+  loadPage(page: number) {
+    this.load(this.messageTemplateId, this.currentPage);
+  }
 
   get messageAttributesPageable(): Page<MessageAttribute> {
     return this.messageAttributeService.messageAttributePageable;
@@ -84,7 +90,7 @@ export class MessageAttributeComponent implements OnInit {
           }
         );
          
-        this.load(this.messageTemplateId);
+        this.load(this.messageTemplateId, this.currentPage);
 
         return of(new MessageAttribute());
 
@@ -99,8 +105,8 @@ export class MessageAttributeComponent implements OnInit {
 
  }
 
-  load(lookupGroupId: String): void {
-    this.messageAttributeService.load(lookupGroupId);
+  load(lookupGroupId: string, page: number): void {
+    this.messageAttributeService.load(lookupGroupId, page);
   }
 
 
@@ -114,7 +120,7 @@ export class MessageAttributeComponent implements OnInit {
         this.feedback = {type: 'success', message: 'Save was successful!'};
         this.messageAttributeForm.reset();
         setTimeout(() => {
-          this.load(this.messageTemplateId);
+          this.load(this.messageTemplateId, this.currentPage);
           this.feedback = null;
         }, 1000);
       }
@@ -129,7 +135,7 @@ export class MessageAttributeComponent implements OnInit {
       this.messageAttributeService.delete(entity).subscribe(() => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {
-            this.load(this.messageTemplateId);
+            this.load(this.messageTemplateId, this.currentPage);
             this.feedback = null;
           }, 1000);
          }
