@@ -1,25 +1,41 @@
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+
+  
+
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+
+    <div class="d-inline-block">
     <div *ngIf="isLoading | async; else loading">
       <img src="/assets/loading.gif" width="32" height="32" class="d-inline-block align-top" alt="">
   </div>
   <ng-template #loading>
       <img src="/assets/brand/favicon-32x32.png" width="32" height="32" class="d-inline-block align-top" alt="">
   </ng-template>
+
+</div>
+
+  <div class="d-inline-block pl-2">
     {{ title }} 
+  </div>
+
   </a>
+
+
+
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <app-alert class="w-100"></app-alert>
 
-  <div ngbDropdown class="d-inline-block">
+  <div class="d-inline-block col-md-3 col-lg-2 ">
+  <div ngbDropdown class="d-inline-block ">
     <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{name|| ''}} </button>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <button ngbDropdownItem *ngIf="isAuthenticated" (click)="oktaAuth.signOut()" >Sign out</button>
     </div>
   </div>
+</div>
 
 </header>
 
