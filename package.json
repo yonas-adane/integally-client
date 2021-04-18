@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --development && npm install -g http-server-spa"
+    "heroku-postbuild": "ng build --prod --environment=dev && npm install -g http-server-spa"
   },
   "private": true,
   "dependencies": {
