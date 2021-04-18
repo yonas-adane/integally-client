@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "http-server-spa dist/integally-client index.html $PORT",
-    "build": "ng build --configuration=dev",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa"
+    "heroku-postbuild": "ng build --prod --configuration=dev && npm install -g http-server-spa"
   },
   "private": true,
   "dependencies": {
