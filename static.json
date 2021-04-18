@@ -11,7 +11,7 @@
     }
   },
   "https_only": true,
-  "root": "dist/integally-client",
+  "root": "dist/integally-client/",
   "routes": {
     "/**": "index.html"
   }
