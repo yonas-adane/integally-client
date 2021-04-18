@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
-    "build": "ng build --prod",
+    "start": "http-server-spa dist/unity3-stage index.html $PORT",
+    "build": "ng build --dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod --env=${PROFILE_ACTIVE}"
+    "postinstall": "ng build --aot --dev --env=${PROFILE_ACTIVE}",
+    "heroku-postbuild": "ng build --dev && npm install -g http-server-spa"
   },
   "private": true,
   "dependencies": {
