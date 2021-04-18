@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "http-server-spa dist/unity3-stage index.html $PORT",
-    "build": "ng build --dev",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --dev && npm install -g http-server-spa"
+    "heroku-postbuild": "ng build --development && npm install -g http-server-spa"
   },
   "private": true,
   "dependencies": {
