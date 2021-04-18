@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "http-server-spa dist/notes index.html $PORT",
-    "build": "ng build --configuration=development",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
