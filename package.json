@@ -8,7 +8,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --dev --env=${PROFILE_ACTIVE}",
     "heroku-postbuild": "ng build --dev && npm install -g http-server-spa"
   },
   "private": true,
