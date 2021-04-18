@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "http-server-spa dist/unity3-stage index.html $PORT",
+    "start": "http-server-spa dist/integally-client index.html $PORT",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
