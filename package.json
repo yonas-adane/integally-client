@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "config": "ts-node set-env.ts",
     "start": "http-server-spa dist/$APP_SOURCE index.html $PORT",
     "build": "ng build",
     "test": "ng test",
@@ -31,7 +32,9 @@
     "path": "^0.12.7",
     "rxjs": "~6.6.3",
     "tslib": "^2.1.0",
-    "zone.js": "~0.11.3"
+    "zone.js": "~0.11.3",
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1101.2",
