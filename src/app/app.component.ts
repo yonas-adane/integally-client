@@ -9,6 +9,14 @@ import { LoaderService } from './services/loader.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
+
+  collapsed = true;
+
+  toggleCollapsed(): void {
+    this.collapsed = !this.collapsed;
+  }
+
+
   title = 'integally';
   isAuthenticated: boolean;
   name: string;
